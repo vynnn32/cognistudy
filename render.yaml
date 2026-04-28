@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: cognistudy
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run app.py --server.port=$PORT --server.address=0.0.0.0
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: COGNISTUDY_DB_HOST
+        sync: false
+      - key: COGNISTUDY_DB_PORT
+        value: "3306"
+      - key: COGNISTUDY_DB_USER
+        sync: false
+      - key: COGNISTUDY_DB_PASSWORD
+        sync: false
+      - key: COGNISTUDY_DB_NAME
+        sync: false
+      - key: COGNISTUDY_API_KEY
+        sync: false
+      - key: COGNISTUDY_GMAIL_SENDER_EMAIL
+        sync: false
+      - key: COGNISTUDY_GMAIL_APP_PASSWORD
+        sync: false
+      - key: COGNISTUDY_ADMIN_FULLNAME
+        value: CogniStudy Admin
+      - key: COGNISTUDY_ADMIN_EMAIL
+        sync: false
+      - key: COGNISTUDY_ADMIN_PASSWORD
+        sync: false
+      - key: COGNISTUDY_ALLOW_INSECURE_SECRET_STORAGE
+        value: "false"

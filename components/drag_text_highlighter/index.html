@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Drag Text Highlighter</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: transparent;
+      color: #334155;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: transparent;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .status {
+      font-size: 12px;
+      font-weight: 700;
+      color: #64748b;
+      line-height: 1.4;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .clear-button {
+      appearance: none;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.62);
+      color: #475569;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 12px;
+    }
+
+    .clear-button:hover {
+      border-color: rgba(255, 107, 53, 0.45);
+      color: #c2410c;
+    }
+
+    .selector {
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      background: rgba(255, 255, 255, 0.65);
+      color: #334155;
+      cursor: text;
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.75;
+      min-height: 92px;
+      padding: 16px 18px;
+      user-select: text;
+      -webkit-user-select: text;
+      white-space: normal;
+      word-break: break-word;
+    }
+
+    .selector.disabled {
+      cursor: not-allowed;
+      opacity: 0.72;
+    }
+
+    .selector mark {
+      background: rgba(255, 107, 53, 0.24);
+      border-radius: 8px;
+      color: #0f172a;
+      padding: 2px 4px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    const Streamlit = {
+      RENDER_EVENT: "streamlit:render",
+      setComponentReady() {
+        window.parent.postMessage(
+          { isStreamlitMessage: true, type: "streamlit:componentReady", apiVersion: 1 },
+          "*"
+        );
+      },
+      setFrameHeight(height) {
+        const nextHeight = height || document.documentElement.scrollHeight || document.body.scrollHeight || 0;
+        window.parent.postMessage(
+          { isStreamlitMessage: true, type: "streamlit:setFrameHeight", height: nextHeight },
+          "*"
+        );
+      },
+      setComponentValue(value) {
+        window.parent.postMessage(
+          { isStreamlitMessage: true, type: "streamlit:setComponentValue", value: value },
+          "*"
+        );
+      },
+    };
+
+    const state = {
+      statement: "",
+      value: "",
+      disabled: false,
+    };
+
+    const appRoot = document.getElementById("app");
+
+    function normalizeText(value) {
+      return String(value || "").replace(/\s+/g, " ").trim();
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function findSelectionRange(statement, selectedPhrase) {
+      const normalizedPhrase = normalizeText(selectedPhrase);
+      if (!normalizedPhrase) {
+        return null;
+      }
+
+      const lowerStatement = statement.toLowerCase();
+      const lowerPhrase = normalizedPhrase.toLowerCase();
+      const index = lowerStatement.indexOf(lowerPhrase);
+      if (index === -1) {
+        return null;
+      }
+
+      return [index, index + normalizedPhrase.length];
+    }
+
+    function buildHighlightedMarkup(statement, selectedPhrase) {
+      const range = findSelectionRange(statement, selectedPhrase);
+      if (!range) {
+        return escapeHtml(statement);
+      }
+
+      const before = escapeHtml(statement.slice(0, range[0]));
+      const middle = escapeHtml(statement.slice(range[0], range[1]));
+      const after = escapeHtml(statement.slice(range[1]));
+      return `${before}<mark>${middle}</mark>${after}`;
+    }
+
+    function selectionBelongsToNode(node, selection) {
+      if (!node || !selection || selection.rangeCount < 1) {
+        return false;
+      }
+      const range = selection.getRangeAt(0);
+      return node.contains(range.startContainer) && node.contains(range.endContainer);
+    }
+
+    function pushValue(nextValue) {
+      const normalized = normalizeText(nextValue);
+      state.value = normalized;
+      render();
+      Streamlit.setComponentValue(normalized);
+    }
+
+    function captureSelection() {
+      if (state.disabled) {
+        return;
+      }
+
+      const selector = document.getElementById("selector");
+      const selection = window.getSelection();
+      if (!selectionBelongsToNode(selector, selection)) {
+        return;
+      }
+
+      const rawSelection = normalizeText(selection.toString());
+      if (!rawSelection) {
+        return;
+      }
+
+      if (state.statement.toLowerCase().indexOf(rawSelection.toLowerCase()) === -1) {
+        return;
+      }
+
+      pushValue(rawSelection);
+      if (selection && selection.removeAllRanges) {
+        selection.removeAllRanges();
+      }
+    }
+
+    function render() {
+      const selectedPhrase = normalizeText(state.value);
+      const statusText = selectedPhrase
+        ? `Selected phrase: ${escapeHtml(selectedPhrase)}`
+        : "Drag across the incorrect word or phrase in the statement below.";
+
+      appRoot.innerHTML = `
+        <div class="wrapper">
+          <div class="toolbar">
+            <div class="status">${statusText}</div>
+            ${selectedPhrase ? '<button type="button" class="clear-button" id="clearSelection">Clear</button>' : '<span></span>'}
+          </div>
+          <div class="selector ${state.disabled ? "disabled" : ""}" id="selector">${buildHighlightedMarkup(state.statement, selectedPhrase)}</div>
+        </div>
+      `;
+
+      const selector = document.getElementById("selector");
+      if (selector) {
+        selector.addEventListener("mouseup", captureSelection);
+        selector.addEventListener("keyup", captureSelection);
+        selector.addEventListener("touchend", () => window.setTimeout(captureSelection, 0));
+      }
+
+      const clearButton = document.getElementById("clearSelection");
+      if (clearButton) {
+        clearButton.addEventListener("click", () => pushValue(""));
+      }
+
+      window.setTimeout(() => Streamlit.setFrameHeight(), 0);
+    }
+
+    function handleRender(event) {
+      const payload = event.data || {};
+      const args = payload.args || {};
+      state.statement = String(args.statement || "");
+      state.value = normalizeText(args.value || "");
+      state.disabled = Boolean(args.disabled || payload.disabled);
+      render();
+    }
+
+    window.addEventListener("message", (event) => {
+      if (event.data && event.data.type === Streamlit.RENDER_EVENT) {
+        handleRender(event);
+      }
+    });
+
+    Streamlit.setComponentReady();
+    Streamlit.setFrameHeight(1);
+  </script>
+</body>
+</html>
