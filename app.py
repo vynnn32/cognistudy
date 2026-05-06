@@ -5128,14 +5128,6 @@ def inject_signin_transition_mask() -> None:
                 mask.style.opacity = "1";
                 mask.style.transition = "opacity 0.22s ease";
                 doc.body.appendChild(mask);
-
-                // Fallback cleanup so failed sign-in attempts do not leave the page covered.
-                setTimeout(() => {
-                    mask.style.opacity = "0";
-                }, 1600);
-                setTimeout(() => {
-                    mask.remove();
-                }, 2000);
             }, { once: true });
         };
 
@@ -5152,12 +5144,6 @@ def inject_post_login_dashboard_mask() -> None:
         """
         <script>
         const doc = window.parent.document;
-        const signinMask = doc.getElementById("cognistudy-auth-transition-mask");
-        if (signinMask) {
-            signinMask.style.opacity = "0";
-            setTimeout(() => signinMask.remove(), 220);
-        }
-
         const existing = doc.getElementById("cognistudy-dashboard-boot-mask");
         if (existing) {
             existing.remove();
@@ -5173,6 +5159,12 @@ def inject_post_login_dashboard_mask() -> None:
         mask.style.opacity = "1";
         mask.style.transition = "opacity 0.22s ease";
         doc.body.appendChild(mask);
+
+        const signinMask = doc.getElementById("cognistudy-auth-transition-mask");
+        if (signinMask) {
+            signinMask.style.opacity = "0";
+            setTimeout(() => signinMask.remove(), 220);
+        }
 
         setTimeout(() => {
             mask.style.opacity = "0";
