@@ -107,6 +107,198 @@ st.set_page_config(
 )
 
 
+def inject_fixed_dark_theme_css() -> None:
+    st.markdown(
+        """
+        <style id="cognistudy-fixed-dark-theme">
+        :root {
+            color-scheme: dark !important;
+            --app-fixed-bg: #0d1325;
+            --app-fixed-surface: #18233b;
+            --app-fixed-surface-soft: rgba(24, 35, 59, 0.88);
+            --app-fixed-sidebar: #112240;
+            --app-fixed-text: #f5f7fb;
+            --app-fixed-muted: #9db0d1;
+            --app-fixed-border: rgba(255, 255, 255, 0.10);
+            --app-fixed-accent: #ff6b35;
+            --app-font-stack: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+        }
+        html,
+        body,
+        .stApp,
+        [data-testid="stAppViewContainer"],
+        [data-testid="stMain"],
+        [data-testid="block-container"],
+        [data-testid="stSidebar"] {
+            color-scheme: dark !important;
+            color: var(--app-fixed-text) !important;
+            background-color: var(--app-fixed-bg) !important;
+        }
+        [data-testid="stSidebar"] {
+            background-color: var(--app-fixed-sidebar) !important;
+        }
+        header[data-testid="stHeader"] {
+            background: transparent !important;
+        }
+        [data-testid="stDecoration"],
+        [data-testid="stStatusWidget"],
+        [data-testid="stStatusWidget"] *,
+        .stDeployButton,
+        #MainMenu,
+        footer,
+        button[title="Stop"],
+        button[aria-label="Stop"],
+        [aria-label="Stop"] {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+        [data-testid="stSidebarCollapsedControl"] {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            z-index: 1000 !important;
+        }
+        [data-testid="stSidebarCollapsedControl"],
+        [data-testid="stSidebarCollapsedControl"] > button {
+            min-width: 46px !important;
+            min-height: 46px !important;
+        }
+        [data-testid="stSidebarCollapsedControl"] > button {
+            font-size: 0 !important;
+            color: transparent !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+        [data-testid="stSidebarCollapsedControl"] > button::after {
+            content: ">>";
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--app-fixed-accent) !important;
+            font-family: var(--app-font-stack) !important;
+            font-size: 18px !important;
+            font-weight: 800 !important;
+            letter-spacing: -1px;
+            line-height: 1;
+        }
+        body,
+        button,
+        input,
+        textarea,
+        select,
+        option,
+        p,
+        li,
+        dt,
+        dd,
+        small,
+        label,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        [data-testid="stMarkdownContainer"],
+        [data-testid="stMarkdownContainer"] *,
+        [data-testid="stText"],
+        [data-testid="stWidgetLabel"],
+        [data-testid="stCaptionContainer"],
+        [data-testid="stAlertContent"],
+        [data-baseweb="input"] input,
+        [data-baseweb="textarea"] textarea,
+        div.stButton > button {
+            font-family: var(--app-font-stack) !important;
+        }
+        [class^="material-symbols"],
+        [class*=" material-symbols"],
+        .material-icons,
+        .material-icons-round,
+        .material-icons-outlined,
+        .material-icons-sharp {
+            font-family: "Material Symbols Rounded", "Material Symbols Outlined", "Material Icons", sans-serif !important;
+            font-weight: normal !important;
+            font-style: normal !important;
+            letter-spacing: normal !important;
+            text-transform: none !important;
+            white-space: nowrap !important;
+        }
+        body,
+        p,
+        li,
+        dt,
+        dd,
+        small,
+        label,
+        [data-testid="stText"],
+        [data-testid="stMarkdownContainer"] p,
+        [data-testid="stMarkdownContainer"] li,
+        [data-testid="stMarkdownContainer"] label,
+        [data-testid="stAlertContent"],
+        [data-testid="stWidgetLabel"],
+        label[data-testid="stWidgetLabel"] {
+            color: var(--app-fixed-text) !important;
+        }
+        [data-testid="stCaptionContainer"],
+        [data-testid="InputInstructions"],
+        [data-testid="stFileUploaderDropzoneInstructions"],
+        [data-testid="stFileUploaderDropzoneInstructions"] * {
+            color: var(--app-fixed-muted) !important;
+        }
+        [data-baseweb="input"],
+        [data-baseweb="input"] > div,
+        [data-baseweb="base-input"],
+        [data-baseweb="base-input"] > div,
+        [data-baseweb="select"] > div,
+        [data-baseweb="textarea"],
+        .stTextInput > div > div,
+        .stTextArea > div > div,
+        .stSelectbox > div > div,
+        .stDateInput > div > div,
+        .stTimeInput > div > div,
+        .stNumberInput > div > div,
+        .stMultiSelect > div > div {
+            background-color: var(--app-fixed-surface) !important;
+            color: var(--app-fixed-text) !important;
+            border-color: var(--app-fixed-border) !important;
+        }
+        input,
+        textarea,
+        select {
+            color: var(--app-fixed-text) !important;
+            caret-color: var(--app-fixed-text) !important;
+        }
+        input::placeholder,
+        textarea::placeholder {
+            color: var(--app-fixed-muted) !important;
+            opacity: 1 !important;
+        }
+        [data-testid="stTextInputPasswordVisibility"],
+        [data-baseweb="select"] svg {
+            color: var(--app-fixed-muted) !important;
+        }
+        div[data-baseweb="popover"],
+        div[data-baseweb="menu"] {
+            color-scheme: dark !important;
+            background: var(--app-fixed-surface-soft) !important;
+            color: var(--app-fixed-text) !important;
+            border: 1px solid var(--app-fixed-border) !important;
+        }
+        div[data-baseweb="popover"] *,
+        div[data-baseweb="menu"] * {
+            color: var(--app-fixed-text) !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 def render_drag_text_highlighter(statement: str, selected_phrase: str, key: str, disabled: bool = False) -> str:
     value = drag_text_highlighter_component(
         statement=statement,
@@ -118,6 +310,13 @@ def render_drag_text_highlighter(statement: str, selected_phrase: str, key: str,
     return str(value or "").strip()
 
 
+QUIZ_NAV_FILTER_CURRENT_TYPE = "current_type"
+QUIZ_NAV_FILTER_FLAGGED = "flagged"
+QUIZ_NAV_FILTER_ALL = "all"
+QUIZ_NAV_JUMP_PLACEHOLDER = "Enter question number"
+
+
+@st.cache_data(show_spinner=False)
 def get_base64(path: Path) -> str:
     if path.exists():
         return base64.b64encode(path.read_bytes()).decode("utf-8")
@@ -194,13 +393,13 @@ def load_db_config() -> dict[str, object]:
 def render_sidebar_brand(title_html: str) -> None:
     logo_b64 = get_base64(LOGO_FILE)
     logo_markup = (
-        f'<img src="data:image/png;base64,{logo_b64}" style="width:72px; height:72px; margin:0 auto 10px auto; display:block;">'
+        f'<img src="data:image/png;base64,{logo_b64}" style="width:72px; height:72px; margin:-6px auto 10px auto; display:block;">'
         if logo_b64
         else ""
     )
     st.markdown(
         f"""
-        <div style="text-align:center; margin-bottom:18px;">
+        <div style="text-align:center; margin:-6px 0 18px 0;">
             {logo_markup}
             {title_html}
         </div>
@@ -418,28 +617,58 @@ def initialize_database() -> None:
         connection.close()
 
 
-def fetch_all(query: str, params: tuple | None = None) -> list[dict]:
+def clear_runtime_caches() -> None:
+    fetch_all_cached.clear()
+    fetch_one_cached.clear()
+    get_actual_usage.clear()
+    load_user_documents.clear()
+    get_total_document_count.clear()
+    load_latest_generated_reviewer.clear()
+    load_generated_reviewer_by_id.clear()
+    load_generated_reviewers_for_user.clear()
+    load_quiz_attempts.clear()
+    build_user_insight_cards.clear()
+
+
+@st.cache_resource(show_spinner=False)
+def ensure_runtime_ready() -> bool:
+    initialize_database()
+    clear_runtime_caches()
+    return True
+
+
+@st.cache_data(show_spinner=False, ttl=30)
+def fetch_all_cached(query: str, params: tuple = ()) -> list[dict]:
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
 
     try:
-        cursor.execute(query, params or ())
+        cursor.execute(query, params)
         return cursor.fetchall()
     finally:
         cursor.close()
         connection.close()
 
 
-def fetch_one(query: str, params: tuple | None = None) -> dict | None:
+@st.cache_data(show_spinner=False, ttl=30)
+def fetch_one_cached(query: str, params: tuple = ()) -> dict | None:
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
 
     try:
-        cursor.execute(query, params or ())
+        cursor.execute(query, params)
         return cursor.fetchone()
     finally:
         cursor.close()
         connection.close()
+
+
+def fetch_all(query: str, params: tuple | None = None) -> list[dict]:
+    return fetch_all_cached(query, params or ())
+
+
+def fetch_one(query: str, params: tuple | None = None) -> dict | None:
+    return fetch_one_cached(query, params or ())
 
 
 def execute_query(query: str, params: tuple | None = None) -> int:
@@ -449,6 +678,7 @@ def execute_query(query: str, params: tuple | None = None) -> int:
     try:
         cursor.execute(query, params or ())
         connection.commit()
+        clear_runtime_caches()
         return cursor.lastrowid
     except Exception:
         connection.rollback()
@@ -1248,8 +1478,6 @@ def load_key_permanently() -> str:
     env_value = os.getenv(API_KEY_ENV, "").strip()
     if env_value:
         return env_value
-    if not insecure_secret_storage_allowed():
-        return ""
 
     setting_row = fetch_one(
         "SELECT setting_value FROM app_settings WHERE setting_key = 'api_key' LIMIT 1"
@@ -1260,7 +1488,8 @@ def load_key_permanently() -> str:
 
     legacy_value = read_legacy_text(LEGACY_API_KEY_FILE)
     if legacy_value:
-        save_key_permanently(legacy_value)
+        if insecure_secret_storage_allowed():
+            save_key_permanently(legacy_value)
         return legacy_value
     return ""
 
@@ -1369,13 +1598,15 @@ def persist_system_prompt() -> None:
         )
 
 
-def sync_system_prompt_state() -> str:
-    active_prompt = load_system_prompt_permanently()
+def sync_system_prompt_state(active_prompt: str | None = None) -> str:
+    if active_prompt is None:
+        active_prompt = load_system_prompt_permanently()
     st.session_state.saved_system_prompt = active_prompt
     st.session_state.system_prompt_field = active_prompt
     return active_prompt
 
 
+@st.cache_data(show_spinner=False, ttl=30)
 def get_actual_usage() -> pd.DataFrame:
     usage_rows = fetch_all(
         """
@@ -1424,6 +1655,7 @@ def record_user_document(user_id: int, file_name: str, subject: str = "General")
     )
 
 
+@st.cache_data(show_spinner=False, ttl=30)
 def load_user_documents(user_id: int) -> list[dict]:
     return fetch_all(
         """
@@ -1436,6 +1668,7 @@ def load_user_documents(user_id: int) -> list[dict]:
     )
 
 
+@st.cache_data(show_spinner=False, ttl=30)
 def get_total_document_count() -> int:
     document_row = fetch_one("SELECT COUNT(*) AS total_documents FROM user_documents")
     return int(document_row["total_documents"]) if document_row else 0
@@ -1464,12 +1697,46 @@ def normalize_system_prompt(system_prompt: str | None) -> str:
     return compact_prompt or DEFAULT_SYSTEM_PROMPT
 
 
-def clean_extracted_text(raw_text: str, limit: int = 12000) -> str:
+def resolve_module_text_limit(cleaned_length: int, summary_preference: str = "Short Summary") -> int:
+    normalized_preference = normalize_summary_preference_label(summary_preference)
+
+    if normalized_preference == "Detailed Summary":
+        if cleaned_length <= 12000:
+            return 12000
+        if cleaned_length <= 24000:
+            return 22000
+        if cleaned_length <= 48000:
+            return 34000
+        if cleaned_length <= 80000:
+            return 46000
+        return 60000
+
+    if cleaned_length <= 12000:
+        return 12000
+    if cleaned_length <= 24000:
+        return 18000
+    if cleaned_length <= 48000:
+        return 28000
+    if cleaned_length <= 80000:
+        return 36000
+    return 48000
+
+
+def clean_extracted_text(
+    raw_text: str,
+    limit: int | None = None,
+    summary_preference: str = "Short Summary",
+) -> str:
     cleaned_text = raw_text.replace("\x00", " ")
     cleaned_text = re.sub(r"\r\n?", "\n", cleaned_text)
     cleaned_text = re.sub(r"[ \t]+", " ", cleaned_text)
     cleaned_text = re.sub(r"\n{3,}", "\n\n", cleaned_text).strip()
-    return cleaned_text[:limit].strip()
+    effective_limit = (
+        int(limit)
+        if limit is not None
+        else resolve_module_text_limit(len(cleaned_text), summary_preference=summary_preference)
+    )
+    return cleaned_text[:effective_limit].strip()
 
 
 def extract_xml_text_chunks(xml_bytes: bytes) -> list[str]:
@@ -1491,16 +1758,16 @@ def extract_xml_text_chunks(xml_bytes: bytes) -> list[str]:
     return text_chunks
 
 
-def extract_text_from_docx(file_bytes: bytes) -> str:
+def extract_text_from_docx(file_bytes: bytes, summary_preference: str = "Short Summary") -> str:
     with zipfile.ZipFile(io.BytesIO(file_bytes)) as archive:
         document_xml = archive.read("word/document.xml")
     root = ET.fromstring(document_xml)
     namespace = {"w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
     text_chunks = [node.text for node in root.findall(".//w:t", namespace) if node.text]
-    return clean_extracted_text("\n".join(text_chunks))
+    return clean_extracted_text("\n".join(text_chunks), summary_preference=summary_preference)
 
 
-def extract_text_from_pptx(file_bytes: bytes) -> str:
+def extract_text_from_pptx(file_bytes: bytes, summary_preference: str = "Short Summary") -> str:
     slides_text: list[str] = []
     with zipfile.ZipFile(io.BytesIO(file_bytes)) as archive:
         slide_files = sorted(
@@ -1524,28 +1791,38 @@ def extract_text_from_pptx(file_bytes: bytes) -> str:
                 text_chunks = extract_xml_text_chunks(archive.read(xml_file))
                 if text_chunks:
                     slides_text.append(" ".join(text_chunks))
-    return clean_extracted_text("\n\n".join(slides_text))
+    return clean_extracted_text("\n\n".join(slides_text), summary_preference=summary_preference)
 
 
-def extract_text_from_pdf(file_bytes: bytes) -> str:
+def extract_text_from_pdf(file_bytes: bytes, summary_preference: str = "Short Summary") -> str:
     try:
         from pypdf import PdfReader  # type: ignore
     except ImportError:
         try:
             from PyPDF2 import PdfReader  # type: ignore
-        except ImportError:
-            return ""
+        except ImportError as error:
+            raise RuntimeError(
+                "PDF reading is not installed on this server yet. Add pypdf to the deployment and redeploy."
+            ) from error
 
-    reader = PdfReader(io.BytesIO(file_bytes))
+    try:
+        reader = PdfReader(io.BytesIO(file_bytes))
+    except Exception as error:
+        raise RuntimeError("This PDF could not be opened for text extraction.") from error
+
     text_chunks = []
-    for page in reader.pages:
-        page_text = page.extract_text() or ""
-        if page_text.strip():
-            text_chunks.append(page_text)
-    return clean_extracted_text("\n\n".join(text_chunks))
+    try:
+        for page in reader.pages:
+            page_text = page.extract_text() or ""
+            if page_text.strip():
+                text_chunks.append(page_text)
+    except Exception as error:
+        raise RuntimeError("This PDF could not be parsed for text extraction.") from error
+
+    return clean_extracted_text("\n\n".join(text_chunks), summary_preference=summary_preference)
 
 
-def extract_uploaded_file_text(uploaded_file) -> str:
+def extract_uploaded_file_text(uploaded_file, summary_preference: str = "Short Summary") -> str:
     if not uploaded_file:
         return ""
 
@@ -1554,15 +1831,21 @@ def extract_uploaded_file_text(uploaded_file) -> str:
 
     try:
         if suffix in {".txt", ".md", ".csv", ".json", ".py"}:
-            return clean_extracted_text(file_bytes.decode("utf-8", errors="ignore"))
+            return clean_extracted_text(
+                file_bytes.decode("utf-8", errors="ignore"),
+                summary_preference=summary_preference,
+            )
         if suffix == ".docx":
-            return extract_text_from_docx(file_bytes)
+            return extract_text_from_docx(file_bytes, summary_preference=summary_preference)
         if suffix == ".pptx":
-            return extract_text_from_pptx(file_bytes)
+            return extract_text_from_pptx(file_bytes, summary_preference=summary_preference)
         if suffix == ".pdf":
-            return extract_text_from_pdf(file_bytes)
-    except Exception:
-        return ""
+            return extract_text_from_pdf(file_bytes, summary_preference=summary_preference)
+    except RuntimeError:
+        raise
+    except Exception as error:
+        file_label = suffix.upper().lstrip(".") if suffix else "file"
+        raise RuntimeError(f"The uploaded {file_label} file could not be read.") from error
 
     return ""
 
@@ -1579,6 +1862,37 @@ def normalize_summary_preference_label(summary_preference: str) -> str:
     if "detailed" in normalized_preference:
         return "Detailed Summary"
     return "Short Summary"
+
+
+def build_reviewer_length_guidance(module_text: str, summary_preference: str) -> str:
+    normalized_preference = normalize_summary_preference_label(summary_preference)
+    module_length = len((module_text or "").strip())
+
+    if normalized_preference == "Detailed Summary":
+        if module_length >= 28000:
+            return (
+                "This is a long module. reviewer_body may be long too. Cover every major topic, subtopic, "
+                "definition, rule, example, and process needed for study. Use as many headings and bullet groups "
+                "as needed instead of compressing everything into a short recap."
+            )
+        if module_length >= 12000:
+            return (
+                "This module is moderately long. Provide a fuller reviewer_body with multiple headings, study bullets, "
+                "and enough detail for a student to review each major lesson section."
+            )
+        return "Keep reviewer_body complete and well structured, with enough detail for independent review."
+
+    if module_length >= 28000:
+        return (
+            "This is a long module. Keep reviewer_body concise where possible, but still cover every major topic with "
+            "enough bullets or short subsections so important lesson content is not skipped."
+        )
+    if module_length >= 12000:
+        return (
+            "This module is moderately long. Keep reviewer_body concise, but allow extra bullets or mini-sections so "
+            "all major topics are represented."
+        )
+    return "Keep reviewer_body concise while still covering the essential lesson points."
 
 
 def get_quiz_configuration(quiz_preference: str) -> dict:
@@ -1636,14 +1950,63 @@ def get_quiz_question_description(question_type: str) -> str:
     return descriptions.get(question_type, "Answer the question carefully using the information from the reviewer.")
 
 
+def get_quiz_layout_variant(question_type: str) -> str:
+    normalized_type = str(question_type or "multiple_choice").strip().lower()
+    if normalized_type == "multiple_choice":
+        return "multiple-choice"
+    if normalized_type == "true_false":
+        return "buttons"
+    if normalized_type == "modified_true_false":
+        return "annotated"
+    if normalized_type == "enumeration":
+        return "stacked"
+    return "field"
+
+
 def apply_quiz_type_distribution(normalized_payload: list[dict], quiz_config: dict) -> list[dict]:
+    difficulty = str(quiz_config.get("difficulty") or "").strip().lower()
     distribution = quiz_config.get("type_distribution", [])
     if not distribution:
         return normalized_payload[: int(quiz_config["item_count"])]
 
+    items_by_type = {
+        question_type: [item for item in normalized_payload if item.get("type") == question_type]
+        for question_type, _question_count in distribution
+    }
+
+    if difficulty == "easy":
+        multiple_choice_items = items_by_type.get("multiple_choice", [])
+        if len(multiple_choice_items) < 15:
+            raise ValueError("Beginner quiz must contain 15 multiple choice items.")
+        return multiple_choice_items[:15]
+
+    if difficulty == "medium":
+        true_false_items = items_by_type.get("true_false", [])
+        matching_items = items_by_type.get("matching", [])
+        if len(true_false_items) < 10:
+            raise ValueError("Intermediate quiz must contain 10 true/false items.")
+        return true_false_items[:10] + matching_items[:20]
+
+    if difficulty == "hard":
+        modified_true_false_items = items_by_type.get("modified_true_false", [])
+        identification_items = items_by_type.get("identification", [])
+        enumeration_items = items_by_type.get("enumeration", [])[:20]
+        if len(modified_true_false_items) < 20:
+            raise ValueError("Advanced quiz must contain 20 modified true or false items.")
+        required_identification_count = 40 - len(enumeration_items)
+        if len(identification_items) < required_identification_count:
+            raise ValueError(
+                "Advanced quiz did not include enough identification items to replace missing enumeration items."
+            )
+        return (
+            modified_true_false_items[:20]
+            + identification_items[:required_identification_count]
+            + enumeration_items
+        )
+
     distributed_payload: list[dict] = []
     for question_type, question_count in distribution:
-        matching_items = [item for item in normalized_payload if item.get("type") == question_type]
+        matching_items = items_by_type.get(question_type, [])
         if len(matching_items) < int(question_count):
             raise ValueError(f"Generated quiz did not include enough {question_type} items.")
         distributed_payload.extend(matching_items[: int(question_count)])
@@ -2183,15 +2546,21 @@ def normalize_generated_quiz_payload(raw_payload: list[dict], quiz_preference: s
                     }
                 )
 
-    if len(normalized_payload) < quiz_config["item_count"]:
-        raise ValueError("Generated quiz payload did not include enough valid items.")
-
     normalized_payload = apply_quiz_type_distribution(normalized_payload, quiz_config)
+
+    if quiz_config["difficulty"] == "easy":
+        if len(normalized_payload) != 15 or [item["type"] for item in normalized_payload] != ["multiple_choice"] * 15:
+            raise ValueError("Beginner quiz must contain 15 multiple choice items.")
 
     if quiz_config["difficulty"] == "medium":
         type_distribution = [item["type"] for item in normalized_payload]
-        if type_distribution[:10] != ["true_false"] * 10 or type_distribution[10:] != ["matching"] * 20:
-            raise ValueError("Intermediate quiz must contain 10 true/false items followed by 20 matching items.")
+        matching_count = len(type_distribution) - 10
+        if len(normalized_payload) < 10:
+            raise ValueError("Intermediate quiz must contain 10 true/false items.")
+        if type_distribution[:10] != ["true_false"] * 10 or any(item_type != "matching" for item_type in type_distribution[10:]):
+            raise ValueError("Intermediate quiz must contain 10 true/false items followed by up to 20 matching items.")
+        if matching_count > 20:
+            raise ValueError("Intermediate quiz cannot contain more than 20 matching items.")
         matching_answers = [item["correct_answer"] for item in normalized_payload if item["type"] == "matching"]
         if len(set(matching_answers)) != len(matching_answers):
             raise ValueError("Matching answers must be unique.")
@@ -2202,13 +2571,24 @@ def normalize_generated_quiz_payload(raw_payload: list[dict], quiz_preference: s
 
     if quiz_config["difficulty"] == "hard":
         type_distribution = [item["type"] for item in normalized_payload]
-        expected_distribution = (
-            ["modified_true_false"] * 20
-            + ["identification"] * 20
-            + ["enumeration"] * 20
-        )
-        if type_distribution != expected_distribution:
-            raise ValueError("Advanced quiz must contain 20 modified true or false, 20 identification, and 20 enumeration items.")
+        enumeration_count = sum(1 for item_type in type_distribution if item_type == "enumeration")
+        identification_count = sum(1 for item_type in type_distribution if item_type == "identification")
+        if len(normalized_payload) != 60:
+            raise ValueError("Advanced quiz must contain 60 items after replacing any missing enumeration items.")
+        if type_distribution[:20] != ["modified_true_false"] * 20:
+            raise ValueError("Advanced quiz must start with 20 modified true or false items.")
+        if enumeration_count > 20:
+            raise ValueError("Advanced quiz cannot contain more than 20 enumeration items.")
+        if identification_count != 40 - enumeration_count:
+            raise ValueError("Advanced quiz must replace each missing enumeration item with an identification item.")
+        identification_end = 20 + identification_count
+        if (
+            any(item_type != "identification" for item_type in type_distribution[20:identification_end])
+            or any(item_type != "enumeration" for item_type in type_distribution[identification_end:])
+        ):
+            raise ValueError(
+                "Advanced quiz must contain 20 modified true or false items, then identification items, then the available enumeration items."
+            )
 
     return normalized_payload
 
@@ -2217,6 +2597,7 @@ def normalize_generated_quiz_batch(
     raw_payload: list[dict],
     question_type: str,
     expected_count: int,
+    minimum_count: int | None = None,
 ) -> list[dict]:
     normalized_items: list[dict] = []
     for raw_item in raw_payload:
@@ -2326,7 +2707,8 @@ def normalize_generated_quiz_batch(
             unique_matching_items.append(item)
         normalized_items = unique_matching_items
 
-    if len(normalized_items) < expected_count:
+    minimum_valid_count = expected_count if minimum_count is None else max(int(minimum_count), 0)
+    if len(normalized_items) < minimum_valid_count:
         raise ValueError(f"Generated {question_type} batch did not include enough valid items.")
 
     return normalized_items[:expected_count]
@@ -2480,7 +2862,7 @@ def split_reviewer_sentences(source_text: str, limit: int = 8) -> list[str]:
     return sentences[:limit]
 
 
-def reviewer_text_blocks(reviewer_body: str) -> list[str]:
+def reviewer_text_blocks(reviewer_body: str, fallback_sentence_limit: int = 8) -> list[str]:
     cleaned_text = reviewer_body.replace("\r\n", "\n")
     cleaned_text = re.sub(r"```.*?```", " ", cleaned_text, flags=re.S)
     cleaned_text = re.sub(r"^#{1,6}\s*", "", cleaned_text, flags=re.M)
@@ -2503,7 +2885,7 @@ def reviewer_text_blocks(reviewer_body: str) -> list[str]:
 
     if blocks:
         return blocks
-    return split_reviewer_sentences(cleaned_text, limit=8)
+    return split_reviewer_sentences(cleaned_text, limit=fallback_sentence_limit)
 
 
 def reviewer_body_has_structured_sections(reviewer_body: str) -> bool:
@@ -2545,6 +2927,23 @@ def emphasize_quoted_reviewer_phrases(reviewer_text: str) -> str:
     return re.sub(r'(["“”])\s*([^"\n“”]{2,160}?)\s*(["“”])', replace_match, reviewer_text)
 
 
+def get_reviewer_section_limits(summary_preference: str, source_length: int) -> tuple[int, int]:
+    normalized_preference = normalize_summary_preference_label(summary_preference)
+
+    if normalized_preference == "Detailed Summary":
+        if source_length >= 8000:
+            return 8, 10
+        if source_length >= 4000:
+            return 6, 8
+        return 4, 6
+
+    if source_length >= 7000:
+        return 6, 8
+    if source_length >= 3500:
+        return 5, 7
+    return 4, 6
+
+
 def ensure_preferred_reviewer_format(
     reviewer_body: str,
     file_name: str,
@@ -2557,22 +2956,23 @@ def ensure_preferred_reviewer_format(
     if reviewer_body_has_structured_sections(normalized_body):
         return emphasize_quoted_reviewer_phrases(normalized_body)
 
-    blocks = reviewer_text_blocks(normalized_body)
-    summary_points = blocks[:4]
-    focus_points = blocks[4:10]
+    quick_limit, focus_limit = get_reviewer_section_limits(summary_preference, len(normalized_body))
+    blocks = reviewer_text_blocks(normalized_body, fallback_sentence_limit=max(quick_limit + focus_limit, 8))
+    summary_points = blocks[:quick_limit]
+    focus_points = blocks[quick_limit : quick_limit + focus_limit]
 
     if not summary_points:
-        summary_points = split_reviewer_sentences(normalized_body, limit=4)
+        summary_points = split_reviewer_sentences(normalized_body, limit=quick_limit)
     if not summary_points:
         summary_points = [f"This reviewer highlights the key ideas from the {subject} module."]
 
     if not focus_points:
-        focus_points = split_reviewer_sentences(" ".join(blocks), limit=4)
+        focus_points = split_reviewer_sentences(" ".join(blocks), limit=focus_limit)
     if not focus_points:
-        focus_terms = extract_focus_terms(normalized_body or file_name, subject, limit=4)
+        focus_terms = extract_focus_terms(normalized_body or file_name, subject, limit=focus_limit)
         focus_points = [
             f"Review how {term} connects to the main lesson."
-            for term in focus_terms[:4]
+            for term in focus_terms[:focus_limit]
         ]
     if not focus_points:
         focus_points = [
@@ -2581,9 +2981,9 @@ def ensure_preferred_reviewer_format(
             "Review weak quiz areas before the next attempt.",
         ]
 
-    quick_reviewer_markdown = "\n".join(f"- {point}" for point in summary_points[:4])
+    quick_reviewer_markdown = "\n".join(f"- {point}" for point in summary_points[:quick_limit])
     review_focus_markdown = "\n".join(
-        f"{index}. {point}" for index, point in enumerate(focus_points[:6], start=1)
+        f"{index}. {point}" for index, point in enumerate(focus_points[:focus_limit], start=1)
     )
     quiz_mode_label = quiz_preference or "Not generated yet"
 
@@ -2610,6 +3010,12 @@ def salvage_reviewer_body(raw_response: str) -> str:
         return ""
     if cleaned_response.startswith("{") and cleaned_response.endswith("}"):
         return ""
+    heading_match = re.search(
+        r"(?im)^(#{1,6}\s+\S+|(?:lesson snapshot|quick reviewer|review focus)\s*:|[-*]\s+\S+|\d+\.\s+\S+)",
+        cleaned_response,
+    )
+    if heading_match and 0 < heading_match.start() <= 240:
+        cleaned_response = cleaned_response[heading_match.start():].lstrip()
     if len(cleaned_response) < 80:
         return ""
     return cleaned_response
@@ -2684,6 +3090,7 @@ def build_generation_prompt(
     summary_preference: str,
     module_text: str,
 ) -> str:
+    length_guidance = build_reviewer_length_guidance(module_text, summary_preference)
     return f"""
 Generate only the reviewer from the uploaded learning module.
 
@@ -2693,6 +3100,7 @@ Requirements:
 - Produce a real reviewer, not a system-status summary.
 - Do not inject quiz content, fallback notes, admin prompt notes, system status text, or generation status into reviewer_body.
 - Generate reviewer_body only for the selected summary preference: {summary_preference}.
+- Length guidance: {length_guidance}
 - reviewer_title should be a clean human-readable lesson title.
 - Return JSON only, with this shape:
   {{
@@ -2721,6 +3129,7 @@ def build_generation_repair_prompt(
     previous_excerpt = strip_json_fences(previous_response).strip()
     if len(previous_excerpt) > 3000:
         previous_excerpt = previous_excerpt[:3000].rstrip() + "\n...[truncated]"
+    length_guidance = build_reviewer_length_guidance(module_text, summary_preference)
 
     return f"""
 The previous response could not be used by the application.
@@ -2736,6 +3145,7 @@ Required context:
 - File name: {file_name}
 - Subject: {subject}
 - Summary preference: {summary_preference}
+- Length guidance: {length_guidance}
 
 Previous invalid response:
 {previous_excerpt or "[empty response]"}
@@ -2768,12 +3178,13 @@ def build_quiz_generation_prompt(reviewer_text: str, quiz_preference: str) -> st
                 "- Generate exactly 30 items total",
                 "- Distribution:",
                 "  - 10 true_false items",
-                "  - 20 matching items",
+                "  - up to 20 matching items",
                 "- true_false items must include: type, statement, answer_bool, hint",
                 "- matching items must include: type, prompt, correct_answer, match_options, hint",
                 "- matching prompts must be clear clue, definition, description, or sentence-based cues from the reviewer",
                 "- correct_answer values must be unique across matching items",
                 "- match_options must be the shared answer pool for the matching set",
+                "- If the reviewer cannot support 20 unique matching clues, return fewer matching items instead of inventing content",
             ]
         )
     else:
@@ -2783,12 +3194,15 @@ def build_quiz_generation_prompt(reviewer_text: str, quiz_preference: str) -> st
                 "- Generate exactly 60 items total",
                 "- Distribution:",
                 "  - 20 modified_true_false items",
-                "  - 20 identification items",
-                "  - 20 enumeration items",
+                "  - at least 20 identification items",
+                "  - up to 20 enumeration items",
                 "- modified_true_false items must include: type, statement, answer_bool, incorrect_phrase, replacement_answer, hint",
                 "- identification items must include: type, prompt, accepted_answers, hint",
                 "- enumeration items must include: type, prompt, accepted_answers, hint",
                 "- For false modified_true_false items, include only ONE incorrect concept and the exact incorrect phrase",
+                "- Use enumeration only when the reviewer clearly supports list-like answers",
+                "- If enumeration cannot reach 20 items, the missing slots must be replaced by additional identification items",
+                "- If the reviewer is thin, identification may reuse the same core concept tested in modified_true_false, but the wording must be rephrased so the overlap is not obvious",
             ]
         )
 
@@ -2890,57 +3304,95 @@ Return valid JSON only.
 """.strip()
 
 
+def get_quiz_generation_batch_rule_lines(
+    question_type: str,
+    question_count: int,
+    flexible_count: bool = False,
+    extra_guidance: list[str] | None = None,
+) -> list[str]:
+    count_rule = (
+        f"- Generate up to {question_count} items"
+        if flexible_count
+        else f"- Generate exactly {question_count} items"
+    )
+    rule_lines = {
+        "multiple_choice": [
+            count_rule,
+            '- Use type = "multiple_choice" only',
+            "- Each item must include: prompt, options, answer_index, hint",
+            "- options must contain exactly 4 items",
+            "- Include 1 correct answer and 3 realistic distractors",
+        ],
+        "true_false": [
+            count_rule,
+            '- Use type = "true_false" only',
+            "- Each item must include: statement, answer_bool, hint",
+            "- Mix true and false statements",
+            "- False items must change only one key detail and still sound realistic",
+        ],
+        "matching": [
+            count_rule,
+            '- Use type = "matching" only',
+            "- Each item must include: prompt, correct_answer, match_options, hint",
+            "- Each prompt must be a clear clue, definition, description, or sentence-based cue from the reviewer",
+            "- correct_answer values must be unique across all items in this batch",
+            "- match_options must contain the shared answer pool for the entire matching batch",
+        ],
+        "modified_true_false": [
+            count_rule,
+            '- Use type = "modified_true_false" only',
+            "- Each item must include: statement, answer_bool, incorrect_phrase, replacement_answer, hint",
+            '- If answer_bool is true: incorrect_phrase must be "" and replacement_answer must be "TRUE"',
+            "- If answer_bool is false: include exactly one wrong phrase and the correct replacement",
+        ],
+        "identification": [
+            count_rule,
+            '- Use type = "identification" only',
+            "- Each item must include: prompt, accepted_answers, hint",
+            "- accepted_answers must contain reviewer-supported short-answer terms only",
+        ],
+        "enumeration": [
+            count_rule,
+            '- Use type = "enumeration" only',
+            "- Each item must include: prompt, accepted_answers, hint",
+            "- accepted_answers must contain reviewer-supported list answers only",
+            "- Use enumeration only when the reviewer clearly supports list-like answers",
+        ],
+    }.get(question_type, [count_rule])
+
+    if flexible_count:
+        flexible_rules = {
+            "matching": f"- If the reviewer cannot support {question_count} unique matching clues and answers, return fewer matching items instead of inventing content.",
+            "identification": f"- If the reviewer cannot support {question_count} clearly distinct identification items, return as many valid items as possible without inventing facts.",
+            "enumeration": f"- If the reviewer cannot support {question_count} valid list-style items, return only the supported enumeration items instead of guessing.",
+        }
+        flexible_rule = flexible_rules.get(question_type)
+        if flexible_rule:
+            rule_lines.append(flexible_rule)
+
+    if extra_guidance:
+        rule_lines.extend(
+            f"- {guidance.strip()}" for guidance in extra_guidance if str(guidance).strip()
+        )
+
+    return rule_lines
+
+
 def build_quiz_generation_batch_prompt(
     reviewer_text: str,
     quiz_preference: str,
     question_type: str,
     question_count: int,
+    flexible_count: bool = False,
+    extra_guidance: list[str] | None = None,
 ) -> str:
     difficulty_name = get_quiz_configuration(quiz_preference)["display_name"]
-    batch_rules = {
-        "multiple_choice": """
-- Generate exactly {question_count} items
-- Use type = "multiple_choice" only
-- Each item must include: prompt, options, answer_index, hint
-- options must contain exactly 4 items
-- Include 1 correct answer and 3 realistic distractors
-""",
-        "true_false": """
-- Generate exactly {question_count} items
-- Use type = "true_false" only
-- Each item must include: statement, answer_bool, hint
-- Mix true and false statements
-- False items must change only one key detail and still sound realistic
-""",
-        "matching": """
-- Generate exactly {question_count} items
-- Use type = "matching" only
-- Each item must include: prompt, correct_answer, match_options, hint
-- Each prompt must be a clear clue, definition, description, or sentence-based cue from the reviewer
-- correct_answer values must be unique across all items in this batch
-- match_options must contain the shared answer pool for the entire matching batch
-""",
-        "modified_true_false": """
-- Generate exactly {question_count} items
-- Use type = "modified_true_false" only
-- Each item must include: statement, answer_bool, incorrect_phrase, replacement_answer, hint
-- If answer_bool is true: incorrect_phrase must be "" and replacement_answer must be "TRUE"
-- If answer_bool is false: include exactly one wrong phrase and the correct replacement
-""",
-        "identification": """
-- Generate exactly {question_count} items
-- Use type = "identification" only
-- Each item must include: prompt, accepted_answers, hint
-- accepted_answers must contain reviewer-supported short-answer terms only
-""",
-        "enumeration": """
-- Generate exactly {question_count} items
-- Use type = "enumeration" only
-- Each item must include: prompt, accepted_answers, hint
-- accepted_answers must contain reviewer-supported list answers only
-- Use enumeration only when the reviewer clearly supports list-like answers
-""",
-    }
+    batch_rule_lines = get_quiz_generation_batch_rule_lines(
+        question_type=question_type,
+        question_count=question_count,
+        flexible_count=flexible_count,
+        extra_guidance=extra_guidance,
+    )
 
     return f"""
 You are an expert academic quiz generator.
@@ -2973,7 +3425,7 @@ Rules:
 - Do not include any other question types in this response.
 - Keep wording clear, specific, and reviewer-based.
 - Avoid vague statements and generic filler phrasing.
-{batch_rules[question_type].format(question_count=question_count).strip()}
+{chr(10).join(batch_rule_lines)}
 
 Return JSON only in this shape:
 {{
@@ -3037,10 +3489,18 @@ def build_quiz_generation_batch_repair_prompt(
     question_count: int,
     validation_error: str,
     previous_response: str,
+    flexible_count: bool = False,
+    extra_guidance: list[str] | None = None,
 ) -> str:
     previous_excerpt = strip_json_fences(previous_response).strip()
     if len(previous_excerpt) > 3000:
         previous_excerpt = previous_excerpt[:3000].rstrip() + "\n...[truncated]"
+    batch_rule_lines = get_quiz_generation_batch_rule_lines(
+        question_type=question_type,
+        question_count=question_count,
+        flexible_count=flexible_count,
+        extra_guidance=extra_guidance,
+    )
 
     return f"""
 The previous quiz batch response could not be used by the application.
@@ -3061,6 +3521,9 @@ QUIZ_BATCH_TYPE:
 BATCH_ITEM_COUNT:
 {question_count}
 
+Required batch rules:
+{chr(10).join(batch_rule_lines)}
+
 Previous invalid response:
 {previous_excerpt or "[empty response]"}
 
@@ -3069,6 +3532,71 @@ REVIEWER:
 {reviewer_text}
 \"\"\"
 """.strip()
+
+
+def generate_quiz_batch_payload(
+    reviewer_body: str,
+    quiz_preference: str,
+    api_key: str,
+    question_type: str,
+    question_count: int,
+    minimum_count: int | None = None,
+    flexible_count: bool = False,
+    extra_guidance: list[str] | None = None,
+) -> tuple[list[dict], bool]:
+    normalized_api_key = api_key.strip()
+    quiz_raw_response = ""
+    quiz_repair_used = False
+    last_quiz_error = f"{question_type} batch generation failed."
+    quiz_prompts_to_try = [
+        build_quiz_generation_batch_prompt(
+            reviewer_text=reviewer_body,
+            quiz_preference=quiz_preference,
+            question_type=question_type,
+            question_count=int(question_count),
+            flexible_count=flexible_count,
+            extra_guidance=extra_guidance,
+        )
+    ]
+
+    for attempt_index in range(2):
+        current_prompt = quiz_prompts_to_try[attempt_index]
+        try:
+            quiz_raw_response = call_generation_model(
+                normalized_api_key,
+                QUIZ_GENERATION_SYSTEM_PROMPT,
+                current_prompt,
+            )
+            quiz_payload = parse_generation_json(quiz_raw_response).get("quiz_payload", [])
+            if not isinstance(quiz_payload, list):
+                raise ValueError("Generated quiz payload was incomplete.")
+            batch_payload = normalize_generated_quiz_batch(
+                quiz_payload,
+                question_type=question_type,
+                expected_count=int(question_count),
+                minimum_count=minimum_count,
+            )
+            return batch_payload, quiz_repair_used
+        except Exception as error:
+            last_quiz_error = str(error)
+            if attempt_index == 0:
+                quiz_repair_used = True
+                quiz_prompts_to_try.append(
+                    build_quiz_generation_batch_repair_prompt(
+                        reviewer_text=reviewer_body,
+                        quiz_preference=quiz_preference,
+                        question_type=question_type,
+                        question_count=int(question_count),
+                        validation_error=last_quiz_error,
+                        previous_response=quiz_raw_response,
+                        flexible_count=flexible_count,
+                        extra_guidance=extra_guidance,
+                    )
+                )
+                continue
+            raise RuntimeError(
+                f"Quiz generation failed for {question_type} after one repair attempt: {last_quiz_error}"
+            ) from error
 
 
 def generate_reviewer_package(
@@ -3094,6 +3622,7 @@ def generate_reviewer_package(
 
     reviewer_raw_response = ""
     reviewer_repair_used = False
+    reviewer_salvage_used = False
     reviewer_title = f"{subject} Reviewer"
     reviewer_body = ""
 
@@ -3112,6 +3641,11 @@ def generate_reviewer_package(
             break
         except Exception as error:
             last_reviewer_error = str(error)
+            salvaged_reviewer_body = salvage_reviewer_body(reviewer_raw_response)
+            if salvaged_reviewer_body:
+                reviewer_body = salvaged_reviewer_body
+                reviewer_salvage_used = True
+                break
             if attempt_index == 0:
                 reviewer_repair_used = True
                 reviewer_prompts_to_try.append(
@@ -3141,6 +3675,8 @@ def generate_reviewer_package(
     repair_notes: list[str] = []
     if reviewer_repair_used:
         repair_notes.append("Reviewer output was repaired automatically after the first AI response failed validation.")
+    if reviewer_salvage_used:
+        repair_notes.append("Reviewer text was salvaged from a non-JSON AI response so usable study content was preserved.")
 
     return reviewer_title, reviewer_body, "ai", " ".join(repair_notes).strip()
 
@@ -3159,64 +3695,95 @@ def generate_quiz_payload_for_reviewer(
     quiz_config = get_quiz_configuration(quiz_preference)
     combined_quiz_payload: list[dict] = []
     quiz_repair_used = False
+    generation_notes: list[str] = []
 
-    for question_type, question_count in quiz_config["type_distribution"]:
-        quiz_raw_response = ""
-        last_quiz_error = f"{question_type} batch generation failed."
-        quiz_prompts_to_try = [
-            build_quiz_generation_batch_prompt(
-                reviewer_text=reviewer_body,
-                quiz_preference=quiz_preference,
-                question_type=question_type,
-                question_count=int(question_count),
-            )
-        ]
-
-        batch_payload: list[dict] = []
-        for attempt_index in range(2):
-            current_prompt = quiz_prompts_to_try[attempt_index]
-            try:
-                quiz_raw_response = call_generation_model(
-                    normalized_api_key,
-                    QUIZ_GENERATION_SYSTEM_PROMPT,
-                    current_prompt,
-                )
-                quiz_payload = parse_generation_json(quiz_raw_response).get("quiz_payload", [])
-                if not isinstance(quiz_payload, list):
-                    raise ValueError("Generated quiz payload was incomplete.")
-                batch_payload = normalize_generated_quiz_batch(
-                    quiz_payload,
-                    question_type=question_type,
-                    expected_count=int(question_count),
-                )
-                break
-            except Exception as error:
-                last_quiz_error = str(error)
-                if attempt_index == 0:
-                    quiz_repair_used = True
-                    quiz_prompts_to_try.append(
-                        build_quiz_generation_batch_repair_prompt(
-                            reviewer_text=reviewer_body,
-                            quiz_preference=quiz_preference,
-                            question_type=question_type,
-                            question_count=int(question_count),
-                            validation_error=last_quiz_error,
-                            previous_response=quiz_raw_response,
-                        )
-                    )
-                    continue
-                raise RuntimeError(
-                    f"Quiz generation failed for {question_type} after one repair attempt: {last_quiz_error}"
-                ) from error
-
+    def append_batch(
+        question_type: str,
+        question_count: int,
+        minimum_count: int | None = None,
+        flexible_count: bool = False,
+        extra_guidance: list[str] | None = None,
+    ) -> list[dict]:
+        nonlocal quiz_repair_used
+        batch_payload, batch_repair_used = generate_quiz_batch_payload(
+            reviewer_body=reviewer_body,
+            quiz_preference=quiz_preference,
+            api_key=normalized_api_key,
+            question_type=question_type,
+            question_count=question_count,
+            minimum_count=minimum_count,
+            flexible_count=flexible_count,
+            extra_guidance=extra_guidance,
+        )
+        quiz_repair_used = quiz_repair_used or batch_repair_used
         combined_quiz_payload.extend(batch_payload)
+        return batch_payload
+
+    difficulty = quiz_config["difficulty"]
+    if difficulty == "easy":
+        append_batch("multiple_choice", 15)
+    elif difficulty == "medium":
+        append_batch("true_false", 10)
+        matching_batch = append_batch(
+            "matching",
+            20,
+            minimum_count=0,
+            flexible_count=True,
+            extra_guidance=[
+                "Target the full 20 items first, but never force extra matching pairs when the reviewer does not support them.",
+            ],
+        )
+        if len(matching_batch) < 20:
+            generation_notes.append(
+                f"Matching items were reduced to {len(matching_batch)} because the reviewer did not support 20 unique matching clues."
+            )
+    else:
+        append_batch("modified_true_false", 20)
+        append_batch(
+            "identification",
+            20,
+            extra_guidance=[
+                "Prioritize distinct reviewer ideas first.",
+                "If the reviewer is thin, you may reuse the same core concept already tested in modified true or false, but rewrite it into a different short-answer prompt so the overlap is not obvious.",
+            ],
+        )
+        enumeration_batch = append_batch(
+            "enumeration",
+            20,
+            minimum_count=0,
+            flexible_count=True,
+            extra_guidance=[
+                "Return only the enumeration items that are clearly supported by list-like reviewer content.",
+                "If the reviewer does not support enumeration at all, return an empty quiz_payload instead of inventing lists.",
+            ],
+        )
+        missing_enumeration_count = 20 - len(enumeration_batch)
+        if missing_enumeration_count > 0:
+            append_batch(
+                "identification",
+                missing_enumeration_count,
+                extra_guidance=[
+                    "These identification items will replace missing enumeration slots.",
+                    "Prioritize reviewer-supported terms, steps, categories, parts, or components.",
+                    "If the reviewer is thin, you may reuse a concept already tested in modified true or false, but rephrase it into a different short-answer clue so the overlap is not obvious.",
+                ],
+            )
+            if enumeration_batch:
+                generation_notes.append(
+                    f"Enumeration items were reduced to {len(enumeration_batch)} and the remaining {missing_enumeration_count} items were replaced with identification questions because the reviewer had limited list-style content."
+                )
+            else:
+                generation_notes.append(
+                    "Enumeration items were skipped and replaced with identification questions because the reviewer did not contain enough list-style content."
+                )
 
     normalized_quiz = normalize_generated_quiz_payload(combined_quiz_payload, quiz_preference)
-    generation_reason = (
-        "Quiz output was repaired automatically after the first AI response failed validation."
-        if quiz_repair_used
-        else ""
-    )
+    if quiz_repair_used:
+        generation_notes.insert(
+            0,
+            "Quiz output was repaired automatically after the first AI response failed validation.",
+        )
+    generation_reason = " ".join(generation_notes).strip()
     return normalized_quiz, generation_reason
 
 
@@ -3329,6 +3896,7 @@ def generate_quiz_for_reviewer(
     return refreshed_reviewer, "ai", generation_reason
 
 
+@st.cache_data(show_spinner=False, ttl=30)
 def load_latest_generated_reviewer(user_id: int) -> dict | None:
     reviewer = fetch_one(
         """
@@ -3346,6 +3914,7 @@ def load_latest_generated_reviewer(user_id: int) -> dict | None:
     return reviewer
 
 
+@st.cache_data(show_spinner=False, ttl=30)
 def load_generated_reviewer_by_id(reviewer_id: int) -> dict | None:
     reviewer = fetch_one(
         """
@@ -3362,6 +3931,7 @@ def load_generated_reviewer_by_id(reviewer_id: int) -> dict | None:
     return reviewer
 
 
+@st.cache_data(show_spinner=False, ttl=30)
 def load_generated_reviewers_for_user(user_id: int) -> list[dict]:
     reviewers = fetch_all(
         """
@@ -3661,6 +4231,7 @@ def save_quiz_attempt(
     )
 
 
+@st.cache_data(show_spinner=False, ttl=30)
 def load_quiz_attempts(user_id: int) -> list[dict]:
     return fetch_all(
         """
@@ -3675,7 +4246,8 @@ def load_quiz_attempts(user_id: int) -> list[dict]:
     )
 
 
-def build_user_insight_cards(user_id: int, latest_reviewer: dict | None) -> list[dict]:
+@st.cache_data(show_spinner=False, ttl=30)
+def build_user_insight_cards(user_id: int, latest_reviewer_file_name: str | None) -> list[dict]:
     attempts = load_quiz_attempts(user_id)
     if attempts:
         latest_attempt = attempts[0]
@@ -3698,12 +4270,12 @@ def build_user_insight_cards(user_id: int, latest_reviewer: dict | None) -> list
             },
         ]
 
-    if latest_reviewer:
+    if latest_reviewer_file_name:
         return [
             {
                 "label": "INSIGHT",
                 "color": "#2DD4BF",
-                "message": f"{latest_reviewer['file_name']} is ready for review. Open the reviewer when you want to study it.",
+                "message": f"{latest_reviewer_file_name} is ready for review. Open the reviewer when you want to study it.",
             },
             {
                 "label": "REMINDER",
@@ -3901,18 +4473,22 @@ def is_blocked_upload(uploaded_file) -> bool:
 
 
 def init_session() -> None:
+    saved_api_key = load_key_permanently()
+    saved_gmail_sender_email = load_gmail_sender_email_permanently()
+    saved_system_prompt = load_system_prompt_permanently() or DEFAULT_SYSTEM_PROMPT
+
     defaults = {
         "route": "signin",
         "current_user": None,
         "user_page": "Overview",
         "admin_nav": "System Overview",
         "flash_message": None,
-        "saved_api_key": load_key_permanently(),
-        "saved_gmail_sender_email": load_gmail_sender_email_permanently(),
-        "saved_system_prompt": load_system_prompt_permanently(),
-        "gmail_sender_email_field": load_gmail_sender_email_permanently(),
+        "saved_api_key": saved_api_key,
+        "saved_gmail_sender_email": saved_gmail_sender_email,
+        "saved_system_prompt": saved_system_prompt,
+        "gmail_sender_email_field": saved_gmail_sender_email,
         "gmail_app_password_field": "",
-        "system_prompt_field": load_system_prompt_permanently(),
+        "system_prompt_field": saved_system_prompt,
         "signin_identifier": "",
         "password_reset_open": False,
         "password_reset_step": "request",
@@ -3933,18 +4509,26 @@ def init_session() -> None:
         "quiz_started_at": None,
         "quiz_total_seconds": 0,
         "quiz_answers": {},
+        "quiz_flagged_questions": {},
+        "quiz_nav_filter": QUIZ_NAV_FILTER_CURRENT_TYPE,
+        "quiz_nav_jump_target": QUIZ_NAV_JUMP_PLACEHOLDER,
         "quiz_result_saved": False,
         "quiz_last_result": None,
         "quiz_exit_target": None,
         "quiz_exit_label": "",
         "reviewer_quiz_confirm_reviewer_id": None,
         "reviewer_quiz_pending_difficulty": "",
+        "reviewer_quiz_generating_reviewer_id": None,
+        "reviewer_quiz_generating_difficulty": "",
         "admin_selected_user_activity_id": None,
+        "post_login_mask_pending": False,
     }
     for key, value in defaults.items():
         if key not in st.session_state:
             st.session_state[key] = value
-    sync_system_prompt_state()
+    if saved_api_key and not st.session_state.get("saved_api_key"):
+        st.session_state.saved_api_key = saved_api_key
+    sync_system_prompt_state(st.session_state.get("saved_system_prompt", saved_system_prompt))
 
 
 def set_flash(message_type: str, message: str) -> None:
@@ -4004,6 +4588,9 @@ def logout_user() -> None:
     st.session_state.quiz_started_at = None
     st.session_state.quiz_total_seconds = 0
     st.session_state.quiz_answers = {}
+    st.session_state.quiz_flagged_questions = {}
+    st.session_state.quiz_nav_filter = QUIZ_NAV_FILTER_CURRENT_TYPE
+    st.session_state.quiz_nav_jump_target = QUIZ_NAV_JUMP_PLACEHOLDER
     st.session_state.quiz_result_saved = False
     st.session_state.quiz_last_result = None
     st.session_state.admin_selected_user_activity_id = None
@@ -4016,6 +4603,7 @@ def open_reviewer_page(reviewer_id: int) -> None:
     clear_quiz_exit_request()
     st.session_state.active_reviewer_id = reviewer_id
     clear_reviewer_quiz_request()
+    clear_reviewer_quiz_generation_state()
     st.session_state.user_page = "Reviewer"
     st.rerun()
 
@@ -4033,6 +4621,7 @@ def open_quiz_page(reviewer_id: int) -> None:
     clear_quiz_exit_request()
     st.session_state.active_reviewer_id = reviewer_id
     clear_reviewer_quiz_request()
+    clear_reviewer_quiz_generation_state()
     st.session_state.user_page = "Quiz"
     reset_quiz_state()
     st.rerun()
@@ -4046,6 +4635,11 @@ def clear_quiz_exit_request() -> None:
 def clear_reviewer_quiz_request() -> None:
     st.session_state.reviewer_quiz_confirm_reviewer_id = None
     st.session_state.reviewer_quiz_pending_difficulty = ""
+
+
+def clear_reviewer_quiz_generation_state() -> None:
+    st.session_state.reviewer_quiz_generating_reviewer_id = None
+    st.session_state.reviewer_quiz_generating_difficulty = ""
 
 
 def request_quiz_exit(target_page: str, target_label: str) -> None:
@@ -4062,12 +4656,19 @@ def reset_quiz_state() -> None:
     st.session_state.quiz_started_at = None
     st.session_state.quiz_total_seconds = 0
     st.session_state.quiz_answers = {}
+    st.session_state.quiz_flagged_questions = {}
+    st.session_state.quiz_nav_filter = QUIZ_NAV_FILTER_CURRENT_TYPE
+    st.session_state.quiz_nav_jump_target = QUIZ_NAV_JUMP_PLACEHOLDER
     st.session_state.quiz_result_saved = False
     st.session_state.quiz_last_result = None
     clear_quiz_exit_request()
 
 
 def get_quiz_answer_key(question_index: int) -> str:
+    return str(question_index)
+
+
+def get_quiz_flag_key(question_index: int) -> str:
     return str(question_index)
 
 
@@ -4079,8 +4680,40 @@ def set_quiz_answer(question_index: int, answer) -> None:
     st.session_state.quiz_answers[get_quiz_answer_key(question_index)] = answer
 
 
+def is_quiz_question_flagged(question_index: int) -> bool:
+    return bool(st.session_state.get("quiz_flagged_questions", {}).get(get_quiz_flag_key(question_index)))
+
+
+def set_quiz_question_flag(question_index: int, flagged: bool) -> None:
+    flagged_questions = dict(st.session_state.get("quiz_flagged_questions", {}))
+    question_key = get_quiz_flag_key(question_index)
+    if flagged:
+        flagged_questions[question_key] = True
+    else:
+        flagged_questions.pop(question_key, None)
+    st.session_state.quiz_flagged_questions = flagged_questions
+
+
+def toggle_quiz_question_flag(question_index: int) -> bool:
+    next_state = not is_quiz_question_flagged(question_index)
+    set_quiz_question_flag(question_index, next_state)
+    return next_state
+
+
 def normalize_answer_text(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", str(text).lower()).strip()
+
+
+def get_quiz_question_type_label(question_type: str) -> str:
+    labels = {
+        "multiple_choice": "Multiple Choice",
+        "true_false": "True or False",
+        "matching": "Matching",
+        "modified_true_false": "Modified True or False",
+        "identification": "Identification",
+        "enumeration": "Enumeration",
+    }
+    return labels.get(str(question_type or "").strip().lower(), "Question")
 
 
 def statement_word_tokens(statement: str) -> list[str]:
@@ -4117,6 +4750,44 @@ def get_modified_true_false_response(question_index: int) -> str:
     if not isinstance(answer_state, dict):
         return ""
     return str(answer_state.get("response", "")).strip()
+
+
+def is_quiz_question_answered(question_index: int, question: dict) -> bool:
+    answer_state = get_quiz_answer(question_index)
+    question_type = str(question.get("type", "multiple_choice")).strip().lower()
+
+    if question_type == "multiple_choice":
+        return isinstance(answer_state, int)
+
+    if question_type == "true_false":
+        return answer_state is not None
+
+    if question_type == "matching":
+        return bool(str(answer_state or "").strip())
+
+    if question_type == "modified_true_false":
+        if not isinstance(answer_state, dict):
+            return False
+        response = str(answer_state.get("response", "")).strip()
+        selected_phrase = str(selected_modified_phrase(answer_state, question)).strip()
+        return bool(response or selected_phrase)
+
+    if question_type == "identification":
+        return bool(str(answer_state or "").strip())
+
+    if question_type == "enumeration":
+        if isinstance(answer_state, list):
+            return any(str(entry).strip() for entry in answer_state)
+        return bool(str(answer_state or "").strip())
+
+    return bool(answer_state)
+
+
+def get_answered_question_count(questions: list[dict]) -> int:
+    return sum(
+        1 for question_index, question in enumerate(questions)
+        if is_quiz_question_answered(question_index, question)
+    )
 
 
 def score_question(question_index: int, question: dict) -> int:
@@ -4182,8 +4853,87 @@ def calculate_quiz_score(reviewer: dict) -> int:
     return sum(score_question(index, question) for index, question in enumerate(reviewer["quiz_payload"]))
 
 
+def set_quiz_index(question_index: int, total_questions: int) -> None:
+    st.session_state.quiz_index = max(0, min(total_questions - 1, int(question_index)))
+
+
 def move_quiz_index(step: int, total_questions: int) -> None:
-    st.session_state.quiz_index = max(0, min(total_questions - 1, st.session_state.quiz_index + step))
+    set_quiz_index(st.session_state.quiz_index + step, total_questions)
+
+
+def get_question_indices_for_type(questions: list[dict], question_type: str) -> list[int]:
+    normalized_type = str(question_type or "").strip().lower()
+    return [
+        index for index, question in enumerate(questions)
+        if str(question.get("type", "")).strip().lower() == normalized_type
+    ]
+
+
+def get_flagged_question_indices(questions: list[dict]) -> list[int]:
+    return [index for index, _question in enumerate(questions) if is_quiz_question_flagged(index)]
+
+
+def get_quiz_navigation_filter(questions: list[dict]) -> str:
+    active_filter = str(st.session_state.get("quiz_nav_filter", QUIZ_NAV_FILTER_CURRENT_TYPE)).strip().lower()
+    if active_filter == QUIZ_NAV_FILTER_FLAGGED and not get_flagged_question_indices(questions):
+        st.session_state.quiz_nav_filter = QUIZ_NAV_FILTER_CURRENT_TYPE
+        return QUIZ_NAV_FILTER_CURRENT_TYPE
+    if active_filter not in {QUIZ_NAV_FILTER_CURRENT_TYPE, QUIZ_NAV_FILTER_FLAGGED, QUIZ_NAV_FILTER_ALL}:
+        st.session_state.quiz_nav_filter = QUIZ_NAV_FILTER_CURRENT_TYPE
+        return QUIZ_NAV_FILTER_CURRENT_TYPE
+    return active_filter
+
+
+def get_quiz_navigation_indices(questions: list[dict], current_index: int) -> list[int]:
+    active_filter = get_quiz_navigation_filter(questions)
+    if active_filter == QUIZ_NAV_FILTER_ALL:
+        return list(range(len(questions)))
+    if active_filter == QUIZ_NAV_FILTER_FLAGGED:
+        return get_flagged_question_indices(questions)
+    current_type = str(questions[current_index].get("type", "multiple_choice")).strip().lower()
+    return get_question_indices_for_type(questions, current_type)
+
+
+def get_quiz_navigation_scope_label(questions: list[dict], current_index: int) -> str:
+    active_filter = get_quiz_navigation_filter(questions)
+    if active_filter == QUIZ_NAV_FILTER_ALL:
+        return "All Questions"
+    if active_filter == QUIZ_NAV_FILTER_FLAGGED:
+        return f"Flagged {len(get_flagged_question_indices(questions))}"
+    current_type = str(questions[current_index].get("type", "multiple_choice")).strip().lower()
+    type_indices = get_question_indices_for_type(questions, current_type)
+    type_label = get_quiz_question_type_label(current_type)
+    if not type_indices:
+        return type_label
+    return f"{type_label} {type_indices[0] + 1}-{type_indices[-1] + 1}"
+
+
+def get_quiz_flag_helper_text(flagged_count: int, current_flagged: bool) -> str:
+    if flagged_count <= 0:
+        return "Mark this question to review before submitting."
+
+    question_label = "question" if flagged_count == 1 else "questions"
+    if current_flagged:
+        return f"{flagged_count} {question_label} in your review list. Click again to remove this one."
+    return f"{flagged_count} {question_label} in your review list. Use View Flagged to focus on them."
+
+
+def build_quiz_item_label_markup(question_index: int) -> str:
+    flag_badge_markup = ""
+    if is_quiz_question_flagged(question_index):
+        flag_badge_markup = (
+            "<span class='quiz-item-flag-badge'>"
+            "<span class='quiz-item-flag-badge-icon' aria-hidden='true'>&#x1F6A9;</span>"
+            "Review later"
+            "</span>"
+        )
+
+    return (
+        "<div class='quiz-item-label-row'>"
+        f"<div class='quiz-item-label'>Item {question_index + 1}</div>"
+        f"{flag_badge_markup}"
+        "</div>"
+    )
 
 
 def get_matching_available_options(questions: list[dict], question_index: int) -> list[str]:
@@ -4220,6 +4970,9 @@ def start_quiz_attempt(reviewer: dict) -> None:
     st.session_state.quiz_started_at = time.time()
     st.session_state.quiz_total_seconds = len(reviewer["quiz_payload"]) * 60
     st.session_state.quiz_answers = {}
+    st.session_state.quiz_flagged_questions = {}
+    st.session_state.quiz_nav_filter = QUIZ_NAV_FILTER_CURRENT_TYPE
+    st.session_state.quiz_nav_jump_target = QUIZ_NAV_JUMP_PLACEHOLDER
     st.session_state.quiz_result_saved = False
     st.session_state.quiz_last_result = None
 
@@ -4284,10 +5037,265 @@ def render_quiz_timer_fragment(reviewer: dict) -> None:
     )
     if remaining <= 0:
         finish_quiz_attempt(reviewer)
-        st.rerun()
 
 
-def render_auth_shell(title: str, subtitle: str, allow_vertical_scroll: bool = False) -> None:
+@st.fragment
+def render_user_display_controls_fragment() -> None:
+    st.write("###")
+    st.markdown(
+        "<p style='font-size:11px; color:#94A3B8; font-weight:700; margin-bottom:10px; letter-spacing:1px;'>SYSTEM</p>",
+        unsafe_allow_html=True,
+    )
+    brightness = st.slider("Adjust Brightness", 10, 100, 100, key="brightness")
+    eye_protection = st.toggle("Eye Protection Mode", key="eye_protection")
+
+    brightness_opacity = (100 - brightness) / 100 * 0.8
+    eye_display = "block" if eye_protection else "none"
+    eye_opacity = 0.15 if eye_protection else 0
+
+    st.markdown(
+        f"""
+        <div style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:black; pointer-events:none; z-index:9999999; opacity:{brightness_opacity};"></div>
+        <div style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:#ff9100; pointer-events:none; z-index:9999998; display:{eye_display}; opacity:{eye_opacity};"></div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.write("###")
+    if st.button("Log out", use_container_width=True, key="user_logout"):
+        logout_user()
+
+
+def ensure_dashboard_sidebar_open() -> None:
+    components.html(
+        """
+        <script>
+        const reopenSidebar = () => {
+            const doc = window.parent.document;
+            const sidebar = doc.querySelector('section[data-testid="stSidebar"]');
+            const toggle =
+                doc.querySelector('[data-testid="stSidebarCollapsedControl"] button') ||
+                doc.querySelector('[data-testid="stSidebarCollapsedControl"]');
+
+            if (!toggle) {
+                return;
+            }
+
+            const sidebarStyle = sidebar ? window.parent.getComputedStyle(sidebar) : null;
+            const sidebarHidden = !sidebar || sidebar.offsetWidth < 40 || sidebarStyle?.display === "none";
+
+            if (sidebarHidden) {
+                toggle.click();
+            }
+        };
+
+        setTimeout(reopenSidebar, 0);
+        setTimeout(reopenSidebar, 180);
+        setTimeout(reopenSidebar, 800);
+        </script>
+        """,
+        height=0,
+    )
+
+
+def inject_signin_transition_mask() -> None:
+    components.html(
+        """
+        <script>
+        const attachSigninMask = () => {
+            const doc = window.parent.document;
+            const button = doc.querySelector('.st-key-signin_submit button');
+            if (!button || button.dataset.cognistudyMaskBound === "1") {
+                return;
+            }
+
+            button.dataset.cognistudyMaskBound = "1";
+            button.addEventListener("click", () => {
+                if (doc.getElementById("cognistudy-auth-transition-mask")) {
+                    return;
+                }
+                const mask = doc.createElement("div");
+                mask.id = "cognistudy-auth-transition-mask";
+                mask.style.position = "fixed";
+                mask.style.inset = "0";
+                mask.style.background = "#0d1325";
+                mask.style.zIndex = "2147483646";
+                mask.style.pointerEvents = "none";
+                mask.style.opacity = "1";
+                doc.body.appendChild(mask);
+            }, { once: true });
+        };
+
+        setTimeout(attachSigninMask, 0);
+        setTimeout(attachSigninMask, 250);
+        </script>
+        """,
+        height=0,
+    )
+
+
+def inject_post_login_dashboard_mask() -> None:
+    components.html(
+        """
+        <script>
+        const doc = window.parent.document;
+        const existing = doc.getElementById("cognistudy-dashboard-boot-mask");
+        if (existing) {
+            existing.remove();
+        }
+
+        const mask = doc.createElement("div");
+        mask.id = "cognistudy-dashboard-boot-mask";
+        mask.style.position = "fixed";
+        mask.style.inset = "0";
+        mask.style.background = "#0d1325";
+        mask.style.zIndex = "2147483645";
+        mask.style.pointerEvents = "none";
+        mask.style.opacity = "1";
+        mask.style.transition = "opacity 0.22s ease";
+        doc.body.appendChild(mask);
+
+        setTimeout(() => {
+            mask.style.opacity = "0";
+        }, 420);
+        setTimeout(() => {
+            mask.remove();
+        }, 760);
+        </script>
+        """,
+        height=0,
+    )
+
+
+@st.fragment
+def render_user_module_input_fragment(
+    user_id: int,
+    user_fullname: str,
+    user_role: str,
+    current_reviewer_id: int | None,
+) -> None:
+    selected_subject = get_selected_module_subject()
+    summary_options = ["Short Summary", "Detailed Summary"]
+    if st.session_state.summary_preference not in summary_options:
+        st.session_state.summary_preference = "Short Summary"
+
+    st.markdown("<div class='bento-card' style='height:100%;'>", unsafe_allow_html=True)
+    st.markdown(
+        "<p style='color:#94A3B8; font-size:11px; font-weight:800; margin:0 0 14px 0;'>MODULE INPUT</p>",
+        unsafe_allow_html=True,
+    )
+    subject_left, subject_right = st.columns([1.2, 1])
+    with subject_left:
+        st.selectbox(
+            "Module Subject",
+            MODULE_SUBJECT_OPTIONS,
+            key="module_subject",
+        )
+    with subject_right:
+        if st.session_state.module_subject == "Custom":
+            st.text_input(
+                "Custom Subject",
+                key="custom_module_subject",
+                placeholder="Enter subject name",
+            )
+        else:
+            st.markdown(
+                f"<p style='color:#94A3B8; font-size:13px; font-weight:600; margin-top:34px;'>{'Subject ready for upload' if selected_subject else 'Choose a subject to unlock file browsing'}</p>",
+                unsafe_allow_html=True,
+            )
+    uploaded_file = st.file_uploader(
+        "Browse Module",
+        key="user_upload",
+        disabled=not bool(selected_subject),
+    )
+    if not selected_subject:
+        st.caption("Select the module subject first. After that, you can browse and upload the file.")
+
+    selected_summary_preference = st.selectbox(
+        "Summary Preference",
+        summary_options,
+        key="summary_preference",
+    )
+    if uploaded_file:
+        if is_blocked_upload(uploaded_file):
+            st.error("MP4 files are not allowed. Please upload any other file type.")
+        else:
+            st.info(f"File ready: {uploaded_file.name}")
+            if st.button("Generate Module >>", key="synthesis", use_container_width=True):
+                try:
+                    extracted_module_text = extract_uploaded_file_text(
+                        uploaded_file,
+                        summary_preference=selected_summary_preference,
+                    )
+                except RuntimeError as error:
+                    set_flash("error", f"Synthesis failed for {uploaded_file.name}. {error}")
+                    st.rerun()
+
+                if not extracted_module_text:
+                    set_flash(
+                        "error",
+                        (
+                            f"Synthesis failed for {uploaded_file.name}. No readable text was found in the upload. "
+                            "If this is a scanned PDF, run OCR first or export it as a text-based PDF."
+                        ),
+                    )
+                    st.rerun()
+
+                detected_subject = selected_subject or infer_subject_from_filename(uploaded_file.name)
+                document_id = record_user_document(
+                    user_id,
+                    uploaded_file.name,
+                    detected_subject,
+                )
+                try:
+                    reviewer_id, generation_mode, generation_reason = create_generated_reviewer(
+                        user_id=user_id,
+                        document_id=document_id,
+                        file_name=uploaded_file.name,
+                        subject=detected_subject,
+                        summary_preference=selected_summary_preference,
+                        module_text=extracted_module_text,
+                    )
+                except Exception as error:
+                    log_system_activity(
+                        actor_name=user_fullname,
+                        actor_role=user_role,
+                        actor_id=user_id,
+                        activity="Generation failed",
+                        details=f"Live AI generation failed for {uploaded_file.name} under {detected_subject}. Reason: {error}",
+                    )
+                    set_flash("error", f"Synthesis failed for {uploaded_file.name}. {error}")
+                    st.rerun()
+
+                append_usage(1200)
+                st.session_state.active_reviewer_id = reviewer_id
+                set_flash(
+                    "success",
+                    (
+                        f"Synthesis complete. AI reviewer is ready for {uploaded_file.name}."
+                        if not generation_reason
+                        else f"Synthesis complete for {uploaded_file.name}. {generation_reason}"
+                    ),
+                )
+                st.rerun()
+
+    if current_reviewer_id:
+        st.markdown(
+            "<p style='color:#2DD4BF; font-size:12px; font-weight:700; margin:18px 0 10px 0;'>Latest reviewer is ready.</p>",
+            unsafe_allow_html=True,
+        )
+        if st.button("View Reviewer >>", key="view_reviewer_action", use_container_width=True):
+            open_reviewer_page(current_reviewer_id)
+    st.markdown("</div>", unsafe_allow_html=True)
+
+
+def render_auth_shell(
+    title: str,
+    subtitle: str,
+    allow_vertical_scroll: bool = False,
+    stage_lift_px: int = 104,
+    mobile_stage_lift_px: int = 80,
+) -> None:
     logo_b64 = get_base64(LOGO_FILE)
     logo_markup = (
         f'<img src="data:image/png;base64,{logo_b64}" class="logo-img">'
@@ -4298,70 +5306,52 @@ def render_auth_shell(title: str, subtitle: str, allow_vertical_scroll: bool = F
     st.markdown(
         """
         <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
         :root {
             --primary-orange: #ff6b35;
             --glow-navy: #1e293b;
             --bg-obsidian: #020617;
             --input-bg: rgba(38, 50, 69, 0.6);
             --border-glass: rgba(255, 255, 255, 0.10);
-            --auth-stage-lift: 34px;
+            --auth-stage-lift: 104px;
         }
-        * { font-family: 'Plus Jakarta Sans', sans-serif; }
-        html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"], [data-testid="stMainBlockContainer"] {
-            height: 100dvh !important;
-            max-height: 100dvh !important;
-            overflow: hidden !important;
-            overscroll-behavior: none !important;
+        .stApp {
+            background: radial-gradient(circle at 0% 100%, var(--glow-navy) 0%, var(--bg-obsidian) 100%);
         }
-        body { margin: 0 !important; }
-        .stApp { background: radial-gradient(circle at 0% 100%, var(--glow-navy) 0%, var(--bg-obsidian) 100%); }
-        header, footer, .stDeployButton, [data-testid="stSidebarCollapsedControl"] { display: none !important; }
-        section[data-testid="stSidebar"] {
-            display: none !important;
-            width: 0 !important;
-            min-width: 0 !important;
-            max-width: 0 !important;
-            flex: 0 0 0 !important;
-            margin: 0 !important;
-            padding: 0 !important;
+        .auth-header {
+            width: 100%;
+            text-align: center;
+            padding-top: 0;
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            transform: translateY(-9px);
         }
-        [data-testid="stSidebarUserContent"] {
-            display: none !important;
-        }
-        [data-testid="stAppViewContainer"] > section[data-testid="stMain"] {
-            width: 100% !important;
-            min-width: 100% !important;
-            max-width: 100% !important;
-        }
-        section[data-testid="stMain"] {
-            overflow: hidden !important;
-        }
-        [data-testid="block-container"] {
-            padding: 0 !important;
-            max-width: none !important;
-            height: 100dvh !important;
-            max-height: 100dvh !important;
-            overflow: hidden !important;
-        }
-        html::-webkit-scrollbar, body::-webkit-scrollbar, [data-testid="stMain"]::-webkit-scrollbar { display: none !important; }
-        .auth-header { width: 100%; text-align: center; padding-top: 6px; }
-        .logo-img, .logo-fallback { width: 78px; height: 78px; margin: 0 auto 4px auto; }
+        .logo-img, .logo-fallback { width: 70px; height: 70px; margin: 0 auto 4px auto; display: block; }
         .logo-fallback {
             display: flex; align-items: center; justify-content: center;
             background: white; color: var(--primary-orange); border-radius: 18px;
             font-weight: 800; letter-spacing: 1px;
         }
-        .brand-tag { font-size: 10px; color: white; letter-spacing: 4px; font-weight: 600; text-transform: uppercase; }
+        .brand-tag {
+            font-size: 10px;
+            color: white;
+            letter-spacing: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            line-height: 1;
+            margin: 0;
+        }
         .auth-stage-lift {
-            margin-top: calc(var(--auth-stage-lift) * -1);
+            margin-top: calc(var(--auth-stage-lift, 104px) * -1);
         }
         .orange-line-divider {
             width: 100vw;
             max-width: 100vw;
             height: 2px;
             background-color: var(--primary-orange);
-            margin: 10px calc(50% - 50vw) 24px calc(50% - 50vw);
+            margin: 16px calc(50% - 50vw) 14px calc(50% - 50vw);
             position: relative;
         }
         .auth-heading {
@@ -4399,10 +5389,12 @@ def render_auth_shell(title: str, subtitle: str, allow_vertical_scroll: bool = F
             color: rgba(255, 255, 255, 0.9) !important;
             background: transparent !important;
         }
-        div.stButton {
+        div.stButton,
+        div[data-testid="stFormSubmitButton"] {
             margin: 0 !important;
         }
-        div.stButton > button[kind="secondary"] {
+        div.stButton > button[kind="secondary"],
+        div[data-testid="stFormSubmitButton"] > button[kind="secondary"] {
             background: transparent !important;
             color: #8ea0c4 !important;
             border: none !important;
@@ -4425,24 +5417,31 @@ def render_auth_shell(title: str, subtitle: str, allow_vertical_scroll: bool = F
         }
         div.stButton > button[kind="secondary"] p,
         div.stButton > button[kind="secondary"] span,
-        div.stButton > button[kind="secondary"] div {
+        div.stButton > button[kind="secondary"] div,
+        div[data-testid="stFormSubmitButton"] > button[kind="secondary"] p,
+        div[data-testid="stFormSubmitButton"] > button[kind="secondary"] span,
+        div[data-testid="stFormSubmitButton"] > button[kind="secondary"] div {
             font-size: 13px !important;
             line-height: 1.2 !important;
             font-weight: 500 !important;
             color: inherit !important;
         }
-        div.stButton > button[kind="secondary"]:hover {
+        div.stButton > button[kind="secondary"]:hover,
+        div[data-testid="stFormSubmitButton"] > button[kind="secondary"]:hover {
             background: transparent !important;
             color: #ff6b35 !important;
             border: none !important;
             transform: translateY(-1px) !important;
         }
         div.stButton > button[kind="secondary"]:focus,
-        div.stButton > button[kind="secondary"]:focus-visible {
+        div.stButton > button[kind="secondary"]:focus-visible,
+        div[data-testid="stFormSubmitButton"] > button[kind="secondary"]:focus,
+        div[data-testid="stFormSubmitButton"] > button[kind="secondary"]:focus-visible {
             outline: none !important;
             box-shadow: none !important;
         }
-        div.stButton > button[kind="primary"] {
+        div.stButton > button[kind="primary"],
+        div[data-testid="stFormSubmitButton"] > button[kind="primary"] {
             background: linear-gradient(90deg, #ff6b35, #f97316) !important;
             color: white !important;
             border: none !important;
@@ -4460,7 +5459,8 @@ def render_auth_shell(title: str, subtitle: str, allow_vertical_scroll: bool = F
             cursor: pointer !important;
             transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease !important;
         }
-        div.stButton > button[kind="primary"]:hover {
+        div.stButton > button[kind="primary"]:hover,
+        div[data-testid="stFormSubmitButton"] > button[kind="primary"]:hover {
             color: white !important;
             background: linear-gradient(90deg, #ff6b35, #f97316) !important;
             transform: translateY(-2px) !important;
@@ -4512,15 +5512,244 @@ def render_auth_shell(title: str, subtitle: str, allow_vertical_scroll: bool = F
             margin: 0 0 14px 0;
             font-weight: 600;
         }
-        .st-key-reset_request_actions div.stButton > button[kind="primary"] {
+        .st-key-signin_actions div.stButton > button[kind="primary"],
+        .st-key-signin_actions div[data-testid="stFormSubmitButton"] > button[kind="primary"],
+        .st-key-signup_actions div.stButton > button[kind="primary"],
+        .st-key-signup_actions div[data-testid="stFormSubmitButton"] > button[kind="primary"],
+        .st-key-reset_request_actions div.stButton > button[kind="primary"],
+        .st-key-reset_request_actions div[data-testid="stFormSubmitButton"] > button[kind="primary"] {
             width: 100% !important;
             min-width: 0 !important;
             margin-left: 0 !important;
         }
-        .st-key-reset_verify_actions div.stButton > button[kind="primary"] {
+        .st-key-reset_verify_actions div.stButton > button[kind="primary"],
+        .st-key-reset_verify_actions div[data-testid="stFormSubmitButton"] > button[kind="primary"] {
             width: 100% !important;
             min-width: 0 !important;
             margin-left: 0 !important;
+        }
+        .st-key-signin_actions [data-testid="stHorizontalBlock"],
+        .st-key-signup_actions [data-testid="stHorizontalBlock"],
+        .st-key-reset_request_actions [data-testid="stHorizontalBlock"],
+        .st-key-reset_verify_actions [data-testid="stHorizontalBlock"] {
+            align-items: stretch !important;
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+        .st-key-signin_actions [data-testid="column"],
+        .st-key-signup_actions [data-testid="column"],
+        .st-key-reset_request_actions [data-testid="column"],
+        .st-key-reset_verify_actions [data-testid="column"] {
+            display: flex !important;
+            flex-direction: column !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+        .st-key-signin_actions [data-testid="column"]:first-child {
+            justify-content: space-between !important;
+            height: 44px !important;
+        }
+        .st-key-forgot_password_toggle {
+            position: relative !important;
+            top: -8px !important;
+        }
+        .st-key-go_signup {
+            position: relative !important;
+            top: -24px !important;
+        }
+        .st-key-back_to_signin {
+            position: relative !important;
+            top: -8px !important;
+        }
+        .st-key-cancel_reset_request_page,
+        .st-key-cancel_reset_verify_page {
+            position: relative !important;
+            top: -12px !important;
+        }
+        .st-key-forgot_password_toggle button,
+        .st-key-go_signup button,
+        .st-key-back_to_signin button,
+        .st-key-cancel_reset_request_page button,
+        .st-key-cancel_reset_verify_page button,
+        .st-key-resend_reset_code_page button {
+            background: transparent !important;
+            color: #8ea0c4 !important;
+            border: none !important;
+            padding: 0 !important;
+            min-height: auto !important;
+            height: auto !important;
+            line-height: 1.2 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            font-weight: 500 !important;
+            font-size: 13px !important;
+            text-decoration: none !important;
+            justify-content: flex-start !important;
+            width: fit-content !important;
+            min-width: 0 !important;
+            max-width: none !important;
+            white-space: nowrap !important;
+        }
+        .st-key-forgot_password_toggle button p,
+        .st-key-forgot_password_toggle button span,
+        .st-key-forgot_password_toggle button div,
+        .st-key-go_signup button p,
+        .st-key-go_signup button span,
+        .st-key-go_signup button div,
+        .st-key-back_to_signin button p,
+        .st-key-back_to_signin button span,
+        .st-key-back_to_signin button div,
+        .st-key-cancel_reset_request_page button p,
+        .st-key-cancel_reset_request_page button span,
+        .st-key-cancel_reset_request_page button div,
+        .st-key-cancel_reset_verify_page button p,
+        .st-key-cancel_reset_verify_page button span,
+        .st-key-cancel_reset_verify_page button div,
+        .st-key-resend_reset_code_page button p,
+        .st-key-resend_reset_code_page button span,
+        .st-key-resend_reset_code_page button div {
+            color: inherit !important;
+            font-size: 13px !important;
+            line-height: 1.2 !important;
+            font-weight: 500 !important;
+        }
+        .st-key-forgot_password_toggle button:hover,
+        .st-key-go_signup button:hover,
+        .st-key-back_to_signin button:hover,
+        .st-key-cancel_reset_request_page button:hover,
+        .st-key-cancel_reset_verify_page button:hover,
+        .st-key-resend_reset_code_page button:hover {
+            background: transparent !important;
+            color: #ff6b35 !important;
+            border: none !important;
+            box-shadow: none !important;
+            transform: translateY(-1px) !important;
+        }
+        .st-key-forgot_password_toggle button:focus,
+        .st-key-forgot_password_toggle button:focus-visible,
+        .st-key-go_signup button:focus,
+        .st-key-go_signup button:focus-visible,
+        .st-key-back_to_signin button:focus,
+        .st-key-back_to_signin button:focus-visible,
+        .st-key-cancel_reset_request_page button:focus,
+        .st-key-cancel_reset_request_page button:focus-visible,
+        .st-key-cancel_reset_verify_page button:focus,
+        .st-key-cancel_reset_verify_page button:focus-visible,
+        .st-key-resend_reset_code_page button:focus,
+        .st-key-resend_reset_code_page button:focus-visible {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+        .st-key-signup_actions [data-testid="column"]:first-child {
+            justify-content: flex-start !important;
+            height: 44px !important;
+        }
+        .st-key-reset_request_actions [data-testid="column"]:first-child,
+        .st-key-reset_verify_actions [data-testid="column"]:first-child {
+            justify-content: flex-start !important;
+            height: 44px !important;
+        }
+        .st-key-signin_actions [data-testid="column"]:last-child,
+        .st-key-signup_actions [data-testid="column"]:last-child,
+        .st-key-reset_request_actions [data-testid="column"]:last-child,
+        .st-key-reset_verify_actions [data-testid="column"]:last-child {
+            justify-content: flex-start !important;
+            align-items: flex-end !important;
+        }
+        .st-key-signin_actions [data-testid="column"]:last-child > div,
+        .st-key-signup_actions [data-testid="column"]:last-child > div,
+        .st-key-reset_request_actions [data-testid="column"]:last-child > div,
+        .st-key-reset_verify_actions [data-testid="column"]:last-child > div {
+            width: 100% !important;
+            margin-left: auto !important;
+            margin-right: 0 !important;
+        }
+        .st-key-signin_actions [data-testid="column"]:last-child div.stButton,
+        .st-key-signup_actions [data-testid="column"]:last-child div.stButton,
+        .st-key-reset_request_actions [data-testid="column"]:last-child div.stButton,
+        .st-key-reset_verify_actions [data-testid="column"]:last-child div.stButton {
+            width: 100% !important;
+        }
+        .st-key-signin_submit,
+        .st-key-signup_submit,
+        .st-key-send_reset_code_page,
+        .st-key-confirm_password_reset_page {
+            width: 100% !important;
+        }
+        .st-key-signin_actions div.stButton > button[kind="primary"],
+        .st-key-signin_actions div[data-testid="stFormSubmitButton"] > button[kind="primary"],
+        .st-key-signup_actions div.stButton > button[kind="primary"],
+        .st-key-signup_actions div[data-testid="stFormSubmitButton"] > button[kind="primary"],
+        .st-key-reset_request_actions div.stButton > button[kind="primary"],
+        .st-key-reset_request_actions div[data-testid="stFormSubmitButton"] > button[kind="primary"],
+        .st-key-reset_verify_actions div.stButton > button[kind="primary"],
+        .st-key-reset_verify_actions div[data-testid="stFormSubmitButton"] > button[kind="primary"] {
+            margin-left: auto !important;
+            margin-right: 0 !important;
+        }
+        .st-key-signin_actions div.stButton > button[kind="secondary"],
+        .st-key-signin_actions div[data-testid="stFormSubmitButton"] > button[kind="secondary"],
+        .st-key-signup_actions div.stButton > button[kind="secondary"],
+        .st-key-signup_actions div[data-testid="stFormSubmitButton"] > button[kind="secondary"],
+        .st-key-reset_request_actions div.stButton > button[kind="secondary"],
+        .st-key-reset_request_actions div[data-testid="stFormSubmitButton"] > button[kind="secondary"],
+        .st-key-reset_verify_actions div.stButton > button[kind="secondary"],
+        .st-key-reset_verify_actions div[data-testid="stFormSubmitButton"] > button[kind="secondary"] {
+            align-self: flex-start !important;
+        }
+        @media (max-width: 900px) {
+            [data-testid="stHorizontalBlock"] {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 0.75rem !important;
+            }
+            [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+                width: 100% !important;
+                min-width: 0 !important;
+                flex: 1 1 100% !important;
+            }
+            .auth-stage-lift {
+                margin-top: calc(var(--auth-stage-lift-mobile, 80px) * -1);
+            }
+            .orange-line-divider {
+                margin-bottom: 10px;
+            }
+            .logo-img, .logo-fallback {
+                width: 58px;
+                height: 58px;
+            }
+            .auth-header {
+                margin-top: 8px;
+                gap: 5px;
+            }
+            .brand-tag {
+                letter-spacing: 3px;
+            }
+            .title-main {
+                font-size: 40px;
+                letter-spacing: -1.5px;
+            }
+            .title-sub {
+                font-size: 24px;
+            }
+            .auth-reset-panel {
+                padding: 16px;
+            }
+            div.stButton > button[kind="primary"],
+            div[data-testid="stFormSubmitButton"] > button[kind="primary"] {
+                width: 100% !important;
+                min-width: 0 !important;
+                margin-left: 0 !important;
+            }
+            div.stButton > button[kind="secondary"],
+            div[data-testid="stFormSubmitButton"] > button[kind="secondary"] {
+                width: 100% !important;
+                white-space: normal !important;
+            }
+            .st-key-signin_actions [data-testid="column"],
+            .st-key-signup_actions [data-testid="column"] {
+                height: auto !important;
+            }
         }
         </style>
         """,
@@ -4531,22 +5760,15 @@ def render_auth_shell(title: str, subtitle: str, allow_vertical_scroll: bool = F
         st.markdown(
             """
             <style>
-            html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMainBlockContainer"] {
-                min-height: 100dvh !important;
-                height: auto !important;
-                max-height: none !important;
-                overflow-x: hidden !important;
-                overflow-y: auto !important;
-            }
             section[data-testid="stMain"] {
                 height: 100dvh !important;
                 max-height: 100dvh !important;
                 overflow-x: hidden !important;
-                overflow-y: scroll !important;
+                overflow-y: auto !important;
                 overscroll-behavior-y: contain !important;
             }
             [data-testid="block-container"] {
-                min-height: calc(100dvh + 96px) !important;
+                min-height: 100dvh !important;
                 height: auto !important;
                 max-height: none !important;
                 overflow-y: visible !important;
@@ -4559,7 +5781,7 @@ def render_auth_shell(title: str, subtitle: str, allow_vertical_scroll: bool = F
 
     st.markdown(
         f"""
-        <div class="auth-stage-lift">
+        <div class="auth-stage-lift" style="--auth-stage-lift: {stage_lift_px}px; --auth-stage-lift-mobile: {mobile_stage_lift_px}px;">
             <div class="auth-header">
                 {logo_markup}
                 <div class="brand-tag">CyberNauts</div>
@@ -4586,6 +5808,7 @@ def render_auth_shell(title: str, subtitle: str, allow_vertical_scroll: bool = F
 
 def render_signin() -> None:
     render_auth_shell("Sign in", "")
+    inject_signin_transition_mask()
 
     _, center_col, _ = st.columns([1.65, 0.95, 1.65])
     with center_col:
@@ -4606,37 +5829,39 @@ def render_signin() -> None:
             key="signin_password_input",
         )
 
-        footer_top_left, footer_top_right = st.columns([1.7, 1])
-        with footer_top_left:
-            if st.button("Forgot password", key="forgot_password_toggle", type="secondary"):
-                open_password_reset_page(identifier)
-            if st.button("Don't have an account? Sign up", key="go_signup", type="secondary"):
-                clear_password_reset_state()
-                go_to("signup")
-        with footer_top_right:
-            if st.button("Sign in", key="signin_submit", type="primary"):
-                st.session_state.signin_identifier = identifier
-                user, auth_error = authenticate_user(identifier, password)
-                if user:
+        with st.container(key="signin_actions"):
+            footer_top_left, footer_top_right = st.columns([1.7, 1])
+            with footer_top_left:
+                if st.button("Forgot password", key="forgot_password_toggle", type="secondary"):
+                    open_password_reset_page(identifier)
+                if st.button("Don't have an account? Sign up", key="go_signup", type="secondary"):
                     clear_password_reset_state()
-                    st.session_state.current_user = user
-                    st.session_state.user_page = "Overview"
-                    st.session_state.admin_nav = "System Overview"
-                    log_system_activity(
-                        actor_name=user["fullname"],
-                        actor_role=user["role"],
-                        actor_id=int(user["id"]),
-                        activity="Signed in",
-                        details=f"Signed in through the main authentication screen as {user['role']}.",
-                    )
-                    set_flash("success", f"Welcome back, {user['fullname']}.")
-                    append_usage(250)
-                    if user["role"] == "admin":
-                        go_to("admin_dashboard")
+                    go_to("signup")
+            with footer_top_right:
+                if st.button("Sign in", key="signin_submit", type="primary"):
+                    st.session_state.signin_identifier = identifier
+                    user, auth_error = authenticate_user(identifier, password)
+                    if user:
+                        clear_password_reset_state()
+                        st.session_state.current_user = user
+                        st.session_state.user_page = "Overview"
+                        st.session_state.admin_nav = "System Overview"
+                        st.session_state.post_login_mask_pending = True
+                        log_system_activity(
+                            actor_name=user["fullname"],
+                            actor_role=user["role"],
+                            actor_id=int(user["id"]),
+                            activity="Signed in",
+                            details=f"Signed in through the main authentication screen as {user['role']}.",
+                        )
+                        set_flash("success", f"Welcome back, {user['fullname']}.")
+                        append_usage(250)
+                        if user["role"] == "admin":
+                            go_to("admin_dashboard")
+                        else:
+                            go_to("user_dashboard")
                     else:
-                        go_to("user_dashboard")
-                else:
-                    st.error(auth_error or "Invalid credentials. Check your full name or email and password.")
+                        st.error(auth_error or "Invalid credentials. Check your full name or email and password.")
         st.markdown('</div>', unsafe_allow_html=True)
 
 
@@ -4679,30 +5904,37 @@ def render_signup() -> None:
             key="signup_confirm_password_input",
         )
 
-        footer_left, footer_right = st.columns([1.55, 1])
-        with footer_left:
-            if st.button("Already have an account? Sign in", key="back_to_signin", type="secondary"):
-                clear_password_reset_state()
-                go_to("signin")
-        with footer_right:
-            if st.button("Sign up", key="signup_submit", type="primary"):
-                if password != confirm_password:
-                    st.error("Passwords do not match.")
-                else:
-                    success, message = register_user(fullname, email, password)
-                    if success:
-                        st.session_state.signin_identifier = fullname
-                        clear_password_reset_state()
-                        set_flash("success", message)
-                        append_usage(100)
-                        go_to("signin")
+        with st.container(key="signup_actions"):
+            footer_left, footer_right = st.columns([1.55, 1])
+            with footer_left:
+                if st.button("Already have an account? Sign in", key="back_to_signin", type="secondary"):
+                    clear_password_reset_state()
+                    go_to("signin")
+            with footer_right:
+                if st.button("Sign up", key="signup_submit", type="primary"):
+                    if password != confirm_password:
+                        st.error("Passwords do not match.")
                     else:
-                        st.error(message)
+                        success, message = register_user(fullname, email, password)
+                        if success:
+                            st.session_state.signin_identifier = fullname
+                            clear_password_reset_state()
+                            set_flash("success", message)
+                            append_usage(100)
+                            go_to("signin")
+                        else:
+                            st.error(message)
         st.markdown('</div>', unsafe_allow_html=True)
 
 
 def render_reset_password() -> None:
-    render_auth_shell("Reset password", "", allow_vertical_scroll=True)
+    render_auth_shell(
+        "Reset password",
+        "",
+        allow_vertical_scroll=True,
+        stage_lift_px=122,
+        mobile_stage_lift_px=94,
+    )
 
     _, center_col, _ = st.columns([1.65, 0.95, 1.65])
     with center_col:
@@ -4818,7 +6050,6 @@ def inject_user_dashboard_css() -> None:
     st.markdown(
         """
         <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
         :root {
             --primary-orange: #ff6b35;
             --bg-obsidian: #020617;
@@ -4827,10 +6058,11 @@ def inject_user_dashboard_css() -> None:
             --text-white: #f8fafc;
             --border-glass: rgba(255, 255, 255, 0.08);
         }
-        * { font-family: 'Plus Jakarta Sans', sans-serif; }
         .stApp { background: radial-gradient(circle at 0% 100%, #1e293b, #020617); color: var(--text-white); }
-        header[data-testid="stHeader"],
-        [data-testid="stToolbar"],
+        header[data-testid="stHeader"] {
+            background: transparent !important;
+        }
+        [data-testid="stStatusWidget"],
         [data-testid="stDecoration"],
         .stDeployButton,
         #MainMenu,
@@ -4860,9 +6092,12 @@ def inject_user_dashboard_css() -> None:
             border-radius: 0 10px 10px 0 !important;
             top: 10px !important;
         }
-        [data-testid="stSidebar"] {
+        section[data-testid="stSidebar"] {
             background-color: var(--sidebar-navy) !important;
             border-right: 1px solid var(--border-glass);
+        }
+        [data-testid="stSidebarUserContent"] {
+            background-color: var(--sidebar-navy) !important;
         }
         .user-identity {
             background: linear-gradient(135deg, #ff6b35 0%, #f97316 100%);
@@ -4892,6 +6127,83 @@ def inject_user_dashboard_css() -> None:
             border-color: rgba(255, 140, 92, 0.20);
             box-shadow: 0 16px 30px rgba(2, 6, 23, 0.18);
             background: rgba(30, 41, 59, 0.48);
+        }
+        .quiz-generation-loader-card {
+            background: linear-gradient(180deg, rgba(17,34,64,0.92) 0%, rgba(15,23,42,0.94) 100%);
+            border: 1px solid rgba(255, 140, 92, 0.22);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 18px 38px rgba(2, 6, 23, 0.22);
+            overflow: hidden;
+        }
+        .quiz-generation-loader-kicker {
+            color: #2DD4BF;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin: 0 0 10px 0;
+        }
+        .quiz-generation-loader-title {
+            color: white;
+            font-size: 26px;
+            line-height: 1.15;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+        }
+        .quiz-generation-loader-copy {
+            color: #CBD5E1;
+            font-size: 15px;
+            line-height: 1.65;
+            margin: 0;
+        }
+        .quiz-generation-loader-track {
+            position: relative;
+            height: 12px;
+            border-radius: 999px;
+            margin-top: 18px;
+            background: rgba(255,255,255,0.08);
+            overflow: hidden;
+        }
+        .quiz-generation-loader-track-fill {
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: 38%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #ff6b35 0%, #f97316 55%, #fb923c 100%);
+            animation: quizLoaderSlide 1.15s ease-in-out infinite;
+        }
+        .quiz-generation-loader-dots {
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 16px;
+        }
+        .quiz-generation-loader-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.26);
+            animation: quizLoaderPulse 1s ease-in-out infinite;
+        }
+        .quiz-generation-loader-dots span:nth-child(2) {
+            animation-delay: 0.16s;
+        }
+        .quiz-generation-loader-dots span:nth-child(3) {
+            animation-delay: 0.32s;
+        }
+        @keyframes quizLoaderSlide {
+            0% { transform: translateX(-135%); }
+            100% { transform: translateX(330%); }
+        }
+        @keyframes quizLoaderPulse {
+            0%, 100% {
+                transform: translateY(0);
+                opacity: 0.35;
+            }
+            50% {
+                transform: translateY(-3px);
+                opacity: 1;
+            }
         }
         [data-testid="stSidebar"] .st-key-user_profile_wrap {
             position: relative;
@@ -4945,6 +6257,11 @@ def inject_user_dashboard_css() -> None:
             border-radius: 10px; box-shadow: 0 0 15px rgba(255, 107, 53, 0.4);
         }
         div.stButton > button { border-radius: 12px !important; font-weight: 600 !important; }
+        div[data-testid="stForm"] {
+            border: none !important;
+            padding: 0 !important;
+            background: transparent !important;
+        }
         [data-testid="stSidebar"] div.stButton > button[kind="secondary"] {
             background: rgba(255, 255, 255, 0.08) !important;
             color: white !important;
@@ -4998,6 +6315,67 @@ def inject_user_dashboard_css() -> None:
             box-shadow: none !important;
             color: transparent !important;
         }
+        @media (max-width: 900px) {
+            [data-testid="block-container"] {
+                padding: 0.75rem 0.9rem 4.5rem 0.9rem !important;
+            }
+            [data-testid="stSidebarCollapsedControl"] {
+                top: 12px !important;
+                min-width: 44px !important;
+                min-height: 44px !important;
+                border-radius: 12px !important;
+            }
+            [data-testid="stHorizontalBlock"] {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 0.85rem !important;
+            }
+            [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+                width: 100% !important;
+                min-width: 0 !important;
+                flex: 1 1 100% !important;
+            }
+            [data-testid="stMarkdownContainer"] h1 {
+                font-size: clamp(2rem, 8vw, 2.6rem) !important;
+                line-height: 1.05 !important;
+            }
+            [data-testid="stMarkdownContainer"] h2 {
+                font-size: clamp(1.4rem, 6vw, 1.9rem) !important;
+                line-height: 1.15 !important;
+            }
+            [data-testid="stMarkdownContainer"] h3 {
+                font-size: clamp(1.1rem, 5vw, 1.5rem) !important;
+                line-height: 1.2 !important;
+            }
+            .bento-card {
+                padding: 18px !important;
+                border-radius: 20px !important;
+                overflow-wrap: anywhere;
+            }
+            .quiz-generation-loader-card {
+                padding: 18px;
+                border-radius: 20px;
+            }
+            .quiz-generation-loader-title {
+                font-size: 22px;
+            }
+            .bento-card:hover {
+                transform: none;
+            }
+            .user-identity {
+                padding: 18px;
+                border-radius: 18px;
+            }
+            div.stButton > button {
+                min-height: 46px !important;
+            }
+            div.stButton > button[kind="primary"],
+            div.stButton > button[kind="secondary"] {
+                width: 100% !important;
+                min-width: 0 !important;
+                white-space: normal !important;
+            }
+        }
         </style>
         """,
         unsafe_allow_html=True,
@@ -5007,6 +6385,9 @@ def inject_user_dashboard_css() -> None:
 def render_user_dashboard() -> None:
     inject_user_dashboard_css()
     quiz_mode = st.session_state.user_page == "Quiz"
+    if st.session_state.get("post_login_mask_pending"):
+        inject_post_login_dashboard_mask()
+        st.session_state.post_login_mask_pending = False
     if quiz_mode:
         st.markdown(
             """
@@ -5018,12 +6399,28 @@ def render_user_dashboard() -> None:
             """,
             unsafe_allow_html=True,
         )
+    else:
+        ensure_dashboard_sidebar_open()
     user = st.session_state.current_user
+    active_user_page = st.session_state.user_page
     greeting_name = user["fullname"].split()[0] if user else "Scholar"
-    user_documents = load_user_documents(int(user["id"])) if user else []
-    latest_reviewer = load_latest_generated_reviewer(int(user["id"])) if user else None
-    current_reviewer = resolve_user_reviewer(int(user["id"]), latest_reviewer) if user else None
-    insight_cards = build_user_insight_cards(int(user["id"]), current_reviewer or latest_reviewer) if user else []
+    user_documents: list[dict] = []
+    latest_reviewer: dict | None = None
+    current_reviewer: dict | None = None
+    insight_cards: list[dict] = []
+
+    if user and active_user_page in {"Overview", "Reviewer", "Quiz"}:
+        latest_reviewer = load_latest_generated_reviewer(int(user["id"]))
+
+    if user and active_user_page == "Overview":
+        user_documents = load_user_documents(int(user["id"]))
+        current_reviewer = resolve_user_reviewer(int(user["id"]), latest_reviewer)
+        insight_cards = build_user_insight_cards(
+            int(user["id"]),
+            str((current_reviewer or latest_reviewer or {}).get("file_name") or "") or None,
+        )
+    elif user and active_user_page in {"Reviewer", "Quiz"}:
+        current_reviewer = resolve_user_reviewer(int(user["id"]), latest_reviewer)
 
     if not quiz_mode:
         with st.sidebar:
@@ -5083,28 +6480,7 @@ def render_user_dashboard() -> None:
                 st.rerun()
 
             st.write("###")
-            st.markdown(
-                "<p style='font-size:11px; color:#94A3B8; font-weight:700; margin-bottom:10px; letter-spacing:1px;'>SYSTEM</p>",
-                unsafe_allow_html=True,
-            )
-            brightness = st.slider("Adjust Brightness", 10, 100, 100, key="brightness")
-            eye_protection = st.toggle("Eye Protection Mode", key="eye_protection")
-
-            brightness_opacity = (100 - brightness) / 100 * 0.8
-            eye_display = "block" if eye_protection else "none"
-            eye_opacity = 0.15 if eye_protection else 0
-
-            st.markdown(
-                f"""
-                <div style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:black; pointer-events:none; z-index:9999999; opacity:{brightness_opacity};"></div>
-                <div style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:#ff9100; pointer-events:none; z-index:9999998; display:{eye_display}; opacity:{eye_opacity};"></div>
-                """,
-                unsafe_allow_html=True,
-            )
-
-            st.write("###")
-            if st.button("Log out", use_container_width=True, key="user_logout"):
-                logout_user()
+            render_user_display_controls_fragment()
 
     show_flash()
 
@@ -5133,98 +6509,12 @@ def render_user_dashboard() -> None:
         st.write("##")
         col_engine, col_radar = st.columns([1.8, 1])
         with col_engine:
-            selected_subject = get_selected_module_subject()
-            summary_options = ["Short Summary", "Detailed Summary"]
-            if st.session_state.summary_preference not in summary_options:
-                st.session_state.summary_preference = "Short Summary"
-            st.markdown("<div class='bento-card' style='height:100%;'>", unsafe_allow_html=True)
-            st.markdown(
-                "<p style='color:#94A3B8; font-size:11px; font-weight:800; margin:0 0 14px 0;'>MODULE INPUT</p>",
-                unsafe_allow_html=True,
+            render_user_module_input_fragment(
+                user_id=int(user["id"]),
+                user_fullname=user["fullname"],
+                user_role=user["role"],
+                current_reviewer_id=int(current_reviewer["id"]) if current_reviewer else None,
             )
-            subject_left, subject_right = st.columns([1.2, 1])
-            with subject_left:
-                st.selectbox(
-                    "Module Subject",
-                    MODULE_SUBJECT_OPTIONS,
-                    key="module_subject",
-                )
-            with subject_right:
-                if st.session_state.module_subject == "Custom":
-                    st.text_input(
-                        "Custom Subject",
-                        key="custom_module_subject",
-                        placeholder="Enter subject name",
-                    )
-                else:
-                    st.markdown(
-                        f"<p style='color:#94A3B8; font-size:13px; font-weight:600; margin-top:34px;'>{'Subject ready for upload' if selected_subject else 'Choose a subject to unlock file browsing'}</p>",
-                        unsafe_allow_html=True,
-                    )
-            uploaded_file = st.file_uploader(
-                "Browse Module",
-                key="user_upload",
-                disabled=not bool(selected_subject),
-            )
-            if not selected_subject:
-                st.caption("Select the module subject first. After that, you can browse and upload the file.")
-            selected_summary_preference = st.selectbox(
-                "Summary Preference",
-                summary_options,
-                key="summary_preference",
-            )
-            if uploaded_file:
-                if is_blocked_upload(uploaded_file):
-                    st.error("MP4 files are not allowed. Please upload any other file type.")
-                else:
-                    st.info(f"File ready: {uploaded_file.name}")
-                    if st.button("Generate Module >>", key="synthesis", use_container_width=True):
-                        extracted_module_text = extract_uploaded_file_text(uploaded_file)
-                        detected_subject = selected_subject or infer_subject_from_filename(uploaded_file.name)
-                        document_id = record_user_document(
-                            int(user["id"]),
-                            uploaded_file.name,
-                            detected_subject,
-                        )
-                        try:
-                            reviewer_id, generation_mode, generation_reason = create_generated_reviewer(
-                                user_id=int(user["id"]),
-                                document_id=document_id,
-                                file_name=uploaded_file.name,
-                                subject=detected_subject,
-                                summary_preference=selected_summary_preference,
-                                module_text=extracted_module_text,
-                            )
-                        except Exception as error:
-                            log_system_activity(
-                                actor_name=user["fullname"],
-                                actor_role=user["role"],
-                                actor_id=int(user["id"]),
-                                activity="Generation failed",
-                                details=f"Live AI generation failed for {uploaded_file.name} under {detected_subject}. Reason: {error}",
-                            )
-                            set_flash("error", f"Synthesis failed for {uploaded_file.name}. {error}")
-                            st.rerun()
-
-                        append_usage(1200)
-                        st.session_state.active_reviewer_id = reviewer_id
-                        set_flash(
-                            "success",
-                            (
-                                f"Synthesis complete. AI reviewer is ready for {uploaded_file.name}."
-                                if not generation_reason
-                                else f"Synthesis complete for {uploaded_file.name}. {generation_reason}"
-                            ),
-                        )
-                        st.rerun()
-            if current_reviewer:
-                st.markdown(
-                    "<p style='color:#2DD4BF; font-size:12px; font-weight:700; margin:18px 0 10px 0;'>Latest reviewer is ready.</p>",
-                    unsafe_allow_html=True,
-                )
-                if st.button("View Reviewer >>", key="view_reviewer_action", use_container_width=True):
-                    open_reviewer_page(int(current_reviewer["id"]))
-            st.markdown("</div>", unsafe_allow_html=True)
 
         with col_radar:
             if user_documents:
@@ -5484,6 +6774,28 @@ def render_user_dashboard() -> None:
         st.write("##")
         render_grade_analytics_charts(int(user["id"]))
 
+def render_quiz_generation_loader(module_name: str, difficulty_label: str) -> None:
+    safe_module_name = html.escape(module_name)
+    safe_difficulty_label = html.escape(difficulty_label)
+    st.markdown(
+        f"""
+        <div class="quiz-generation-loader-card">
+            <div class="quiz-generation-loader-kicker">QUIZ GENERATION IN PROGRESS</div>
+            <h3 class="quiz-generation-loader-title">Building your {safe_difficulty_label} quiz</h3>
+            <p class="quiz-generation-loader-copy">
+                We are analyzing <strong>{safe_module_name}</strong>, preparing the questions, and validating the item set before opening the quiz.
+            </p>
+            <div class="quiz-generation-loader-track">
+                <div class="quiz-generation-loader-track-fill"></div>
+            </div>
+            <div class="quiz-generation-loader-dots" aria-hidden="true">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
 
 def render_reviewer_page(user: dict, latest_reviewer: dict | None) -> None:
     reviewer = resolve_user_reviewer(int(user["id"]), latest_reviewer)
@@ -5584,24 +6896,62 @@ def render_reviewer_page(user: dict, latest_reviewer: dict | None) -> None:
         "<p style='color:#94A3B8; font-size:11px; font-weight:800; margin:0 0 8px 0; letter-spacing:1px;'>QUIZ GENERATION</p>",
         unsafe_allow_html=True,
     )
-    selected_quiz_preference = st.selectbox(
-        "Quiz Difficulty",
-        quiz_options,
-        key=reviewer_quiz_widget_key,
-    )
-    if reviewer["quiz_payload"]:
-        st.caption(
-            f"Current quiz: {normalize_quiz_preference_label(str(reviewer.get('quiz_preference') or ''))}. Generating again will replace the existing quiz for this reviewer."
+    with st.form(f"reviewer_quiz_form_{current_reviewer_id}"):
+        selected_quiz_preference = st.selectbox(
+            "Quiz Difficulty",
+            quiz_options,
+            key=reviewer_quiz_widget_key,
         )
-    else:
-        st.caption("No quiz has been generated for this reviewer yet.")
+        if reviewer["quiz_payload"]:
+            st.caption(
+                f"Current quiz: {normalize_quiz_preference_label(str(reviewer.get('quiz_preference') or ''))}. Generating again will replace the existing quiz for this reviewer."
+            )
+        else:
+            st.caption("No quiz has been generated for this reviewer yet.")
 
-    if st.button("Generate Quiz >>", key="reviewer_generate_quiz", type="primary", use_container_width=True):
+        generate_quiz_clicked = st.form_submit_button(
+            "Generate Quiz >>",
+            key="reviewer_generate_quiz",
+            type="primary",
+            use_container_width=True,
+        )
+
+    if generate_quiz_clicked:
         st.session_state.reviewer_quiz_confirm_reviewer_id = int(reviewer["id"])
         st.session_state.reviewer_quiz_pending_difficulty = selected_quiz_preference
         st.rerun()
 
-    if int(st.session_state.get("reviewer_quiz_confirm_reviewer_id") or 0) == int(reviewer["id"]):
+    if int(st.session_state.get("reviewer_quiz_generating_reviewer_id") or 0) == int(reviewer["id"]):
+        pending_quiz_difficulty = st.session_state.get("reviewer_quiz_generating_difficulty") or selected_quiz_preference
+        render_quiz_generation_loader(
+            module_name=str(reviewer["file_name"]),
+            difficulty_label=pending_quiz_difficulty,
+        )
+        with st.spinner(f"Generating {pending_quiz_difficulty}..."):
+            try:
+                refreshed_reviewer, _generation_mode, generation_reason = generate_quiz_for_reviewer(
+                    reviewer_id=int(reviewer["id"]),
+                    quiz_preference=pending_quiz_difficulty,
+                )
+            except Exception as error:
+                clear_reviewer_quiz_generation_state()
+                st.session_state.reviewer_quiz_confirm_reviewer_id = int(reviewer["id"])
+                st.session_state.reviewer_quiz_pending_difficulty = pending_quiz_difficulty
+                set_flash("error", f"Quiz generation failed for {reviewer['file_name']}. {error}")
+                st.rerun()
+        clear_reviewer_quiz_generation_state()
+        st.session_state.active_reviewer_id = int(refreshed_reviewer["id"])
+        set_flash(
+            "success",
+            (
+                f"Quiz generated for {reviewer['file_name']}."
+                if not generation_reason
+                else f"Quiz generated for {reviewer['file_name']}. {generation_reason}"
+            ),
+        )
+        open_quiz_page(int(refreshed_reviewer["id"]))
+
+    elif int(st.session_state.get("reviewer_quiz_confirm_reviewer_id") or 0) == int(reviewer["id"]):
         pending_quiz_difficulty = st.session_state.get("reviewer_quiz_pending_difficulty") or selected_quiz_preference
         st.warning(
             f"Generate {pending_quiz_difficulty} for this reviewer now? The quiz will open automatically after generation."
@@ -5609,38 +6959,20 @@ def render_reviewer_page(user: dict, latest_reviewer: dict | None) -> None:
         confirm_generate_col, cancel_generate_col = st.columns(2)
         with confirm_generate_col:
             if st.button("Yes, generate quiz", key="reviewer_generate_quiz_confirm", use_container_width=True):
-                try:
-                    refreshed_reviewer, _generation_mode, generation_reason = generate_quiz_for_reviewer(
-                        reviewer_id=int(reviewer["id"]),
-                        quiz_preference=pending_quiz_difficulty,
-                    )
-                except Exception as error:
-                    st.session_state.reviewer_quiz_confirm_reviewer_id = None
-                    st.session_state.reviewer_quiz_pending_difficulty = ""
-                    set_flash("error", f"Quiz generation failed for {reviewer['file_name']}. {error}")
-                    st.rerun()
-                st.session_state.reviewer_quiz_confirm_reviewer_id = None
-                st.session_state.reviewer_quiz_pending_difficulty = ""
-                st.session_state.active_reviewer_id = int(refreshed_reviewer["id"])
-                set_flash(
-                    "success",
-                    (
-                        f"Quiz generated for {reviewer['file_name']}."
-                        if not generation_reason
-                        else f"Quiz generated for {reviewer['file_name']}. {generation_reason}"
-                    ),
-                )
-                open_quiz_page(int(refreshed_reviewer["id"]))
+                clear_reviewer_quiz_request()
+                st.session_state.reviewer_quiz_generating_reviewer_id = int(reviewer["id"])
+                st.session_state.reviewer_quiz_generating_difficulty = pending_quiz_difficulty
+                st.rerun()
         with cancel_generate_col:
             if st.button("No, keep reading", key="reviewer_generate_quiz_cancel", use_container_width=True):
-                st.session_state.reviewer_quiz_confirm_reviewer_id = None
-                st.session_state.reviewer_quiz_pending_difficulty = ""
+                clear_reviewer_quiz_request()
                 st.rerun()
 
     review_left, review_center, review_right = st.columns([1, 1.1, 1])
     with review_left:
         if st.button("Back to Overview", key="reviewer_back", use_container_width=True):
             clear_reviewer_quiz_request()
+            clear_reviewer_quiz_generation_state()
             st.session_state.user_page = "Overview"
             st.rerun()
     with review_center:
@@ -5651,6 +6983,7 @@ def render_reviewer_page(user: dict, latest_reviewer: dict | None) -> None:
     with review_right:
         if st.button("Reviewer Library", key="reviewer_library", use_container_width=True):
             clear_reviewer_quiz_request()
+            clear_reviewer_quiz_generation_state()
             st.session_state.user_page = "Library"
             st.rerun()
 
@@ -5681,42 +7014,75 @@ def build_highlighted_statement_markup(question_index: int, question: dict) -> s
     )
 
 
+def get_enumeration_blank_count(question: dict) -> int:
+    accepted_answers = question.get("accepted_answers", [])
+    return max(2, len(accepted_answers) if isinstance(accepted_answers, list) else 0)
+
+
+def get_quiz_card_expansion_variant(question_index: int, question: dict) -> str:
+    question_type = str(question.get("type", "multiple_choice")).strip().lower()
+    if question_type == "enumeration" and get_enumeration_blank_count(question) >= 4:
+        return "stacked"
+    if question_type == "modified_true_false":
+        answer_state = get_quiz_answer(question_index)
+        if isinstance(answer_state, dict) and bool(answer_state.get("highlight_mode")):
+            return "annotated"
+    return ""
+
+
 def build_quiz_question_markup(question_index: int, question: dict) -> str:
     question_number = question_index + 1
     question_type = question.get("type", "multiple_choice")
     prompt_text = str(question.get("prompt") or question.get("statement") or "").strip()
     safe_prompt = html.escape(prompt_text)
+    line_classes = ["quiz-question-line"]
+    if 11 <= question_number <= 30:
+        line_classes.append("quiz-question-line-wide")
+    line_class_attr = " ".join(line_classes)
+    number_classes = ["quiz-question-number"]
+    if 11 <= question_number <= 30:
+        number_classes.append("quiz-question-number-wide")
+    number_class_attr = " ".join(number_classes)
 
     if question_type == "multiple_choice":
-        return f"<div class='quiz-question-line'><span class='quiz-question-number'>{question_number}.</span> {safe_prompt}</div>"
+        return (
+            f"<div class='{line_class_attr}'>"
+            f"<span class='{number_class_attr}'>{question_number}.</span>"
+            f"<span class='quiz-question-copy'>{safe_prompt}</span>"
+            "</div>"
+        )
 
     if question_type == "modified_true_false":
         return (
-            "<div class='quiz-question-line'>"
-            f"<span class='quiz-question-number'>{question_number}.</span> "
-            f"{build_highlighted_statement_markup(question_index, question)}"
+            f"<div class='{line_class_attr}'>"
+            f"<span class='{number_class_attr}'>{question_number}.</span>"
+            f"<span class='quiz-question-copy'>{build_highlighted_statement_markup(question_index, question)}</span>"
             "</div>"
         )
 
     if question_type == "enumeration":
-        accepted_answers = question.get("accepted_answers", [])
-        blank_count = max(2, len(accepted_answers) if isinstance(accepted_answers, list) else 0)
+        blank_count = get_enumeration_blank_count(question)
         return (
-            "<div class='quiz-question-line'>"
-            f"<span class='quiz-question-number'>1-{blank_count}:</span> "
-            f"{safe_prompt}"
+            f"<div class='{line_class_attr}'>"
+            f"<span class='quiz-question-number'>1-{blank_count}:</span>"
+            f"<span class='quiz-question-copy'>{safe_prompt}</span>"
             "</div>"
         )
 
     if question_type in {"true_false", "identification", "matching"}:
         return (
-            "<div class='quiz-question-line'>"
-            f"<span class='quiz-question-number'>{question_number}.</span> "
-            f"{safe_prompt}"
+            f"<div class='{line_class_attr}'>"
+            f"<span class='{number_class_attr}'>{question_number}.</span>"
+            f"<span class='quiz-question-copy'>{safe_prompt}</span>"
             "</div>"
         )
 
-    return f"<div class='quiz-question-line'><span class='quiz-question-number'>{question_number}.</span> {safe_prompt}</div>"
+    return (
+        f"<div class='{line_class_attr}'>"
+        f"<span class='{number_class_attr}'>{question_number}.</span>"
+        f"<span class='quiz-question-copy'>{safe_prompt}</span>"
+        "</div>"
+    )
 
 
 def render_modified_true_false_selector(question_index: int, question: dict) -> None:
@@ -5777,21 +7143,28 @@ def render_quiz_question_input(question_index: int, question: dict, questions: l
     current_answer = get_quiz_answer(question_index)
 
     if question_type == "multiple_choice":
-        option_columns = st.columns(len(question["options"]))
-        for option_index, (column, option_label) in enumerate(zip(option_columns, question["options"])):
-            with column:
-                if st.button(
-                    option_label,
-                    key=f"quiz_mcq_option_{question_index}_{option_index}",
-                    type="primary" if current_answer == option_index else "secondary",
-                    use_container_width=True,
-                ):
-                    set_quiz_answer(question_index, option_index)
-                    st.rerun()
+        options = list(question.get("options", []))
+        columns_per_row = 2 if len(options) > 2 else max(1, len(options))
+        for row_start in range(0, len(options), columns_per_row):
+            row_options = options[row_start : row_start + columns_per_row]
+            option_columns = st.columns(len(row_options), gap="medium")
+            for column_index, (column, option_label) in enumerate(zip(option_columns, row_options)):
+                option_index = row_start + column_index
+                with column:
+                    if st.button(
+                        option_label,
+                        key=f"quiz_mcq_option_{question_index}_{option_index}",
+                        type="primary" if current_answer == option_index else "secondary",
+                        use_container_width=True,
+                    ):
+                        set_quiz_answer(question_index, option_index)
+                        st.rerun()
+            if row_start + columns_per_row < len(options):
+                st.markdown("<div class='quiz-mcq-row-gap'></div>", unsafe_allow_html=True)
         return
 
     if question_type == "true_false":
-        true_col, false_col = st.columns(2)
+        true_col, false_col = st.columns(2, gap="medium")
         with true_col:
             if st.button(
                 "True",
@@ -5840,8 +7213,7 @@ def render_quiz_question_input(question_index: int, question: dict, questions: l
         return
 
     if question_type == "enumeration":
-        accepted_answers = question.get("accepted_answers", [])
-        blank_count = max(2, len(accepted_answers) if isinstance(accepted_answers, list) else 0)
+        blank_count = get_enumeration_blank_count(question)
         existing_answers = current_answer if isinstance(current_answer, list) else []
         entries: list[str] = []
         for blank_index in range(blank_count):
@@ -5862,6 +7234,187 @@ def render_quiz_question_input(question_index: int, question: dict, questions: l
                 )
             entries.append(entry)
         set_quiz_answer(question_index, entries)
+
+
+def get_quiz_nav_layout_config(difficulty_name: str) -> tuple[str, str]:
+    if difficulty_name == "Intermediate":
+        return "quiz-action-gap quiz-action-gap-intermediate", "quiz_nav_row_intermediate"
+    if difficulty_name == "Advanced":
+        return "quiz-action-gap quiz-action-gap-advanced", "quiz_nav_row_advanced"
+    return "quiz-action-gap", "quiz_nav_row_default"
+
+
+def render_quiz_answer_area(question_index: int, question: dict, questions: list[dict]) -> None:
+    current_question_type = str(question.get("type", "multiple_choice")).strip().lower()
+    layout_variant = get_quiz_layout_variant(current_question_type)
+    answer_area_key = f"quiz_answer_area_{layout_variant.replace('-', '_')}"
+    with st.container(key="quiz_primary_card_answer_slot"):
+        with st.container(key=answer_area_key):
+            render_quiz_question_input(question_index, question, questions)
+
+
+@st.fragment
+def render_quiz_interaction_fragment(
+    reviewer: dict,
+    questions: list[dict],
+    current_index: int,
+    total_questions: int,
+) -> None:
+    difficulty_name = get_quiz_configuration(str(reviewer.get("quiz_preference") or "")).get("display_name", "")
+    nav_action_gap_class, nav_row_key = get_quiz_nav_layout_config(difficulty_name)
+
+    if st.session_state.quiz_started:
+        st.markdown(f"<div class='{nav_action_gap_class}'></div>", unsafe_allow_html=True)
+        with st.container(key=nav_row_key):
+            nav_left, nav_gap_left, nav_center, nav_gap_right, nav_right = st.columns([1, 0.12, 4, 0.12, 1])
+            with nav_left:
+                if current_index > 0 and st.button("Prev", key="quiz_prev", type="primary", use_container_width=True):
+                    move_quiz_index(-1, total_questions)
+                    st.rerun()
+            with nav_gap_left:
+                st.markdown("<div class='quiz-nav-spacer'></div>", unsafe_allow_html=True)
+            with nav_center:
+                st.markdown("<div class='quiz-nav-spacer'></div>", unsafe_allow_html=True)
+            with nav_gap_right:
+                st.markdown("<div class='quiz-nav-spacer'></div>", unsafe_allow_html=True)
+            with nav_right:
+                if current_index < total_questions - 1 and st.button("Next", key="quiz_next", type="primary", use_container_width=True):
+                    move_quiz_index(1, total_questions)
+                    st.rerun()
+
+    st.markdown("<div class='quiz-control-gap'></div>", unsafe_allow_html=True)
+    control_left, control_gap_left, control_center, control_gap_right, control_right = st.columns([1, 0.08, 1.15, 0.08, 1])
+    with control_left:
+        if st.button("View Reviewer >>", key="quiz_view_reviewer", use_container_width=True):
+            if st.session_state.quiz_started:
+                request_quiz_exit("Reviewer", "the reviewer")
+                st.rerun()
+            else:
+                open_reviewer_page(int(reviewer["id"]))
+    with control_gap_left:
+        st.markdown("<div class='quiz-nav-spacer'></div>", unsafe_allow_html=True)
+    with control_center:
+        if not st.session_state.quiz_started:
+            if st.button("Start", key="quiz_start", type="primary", use_container_width=True):
+                start_quiz_attempt(reviewer)
+                st.rerun()
+        else:
+            if st.button("Finish", key="quiz_finish", type="primary", use_container_width=True):
+                finish_quiz_attempt(reviewer)
+                st.rerun()
+    with control_gap_right:
+        st.markdown("<div class='quiz-nav-spacer'></div>", unsafe_allow_html=True)
+    with control_right:
+        if st.button("Back to Overview", key="quiz_back_overview", use_container_width=True):
+            if st.session_state.quiz_started:
+                request_quiz_exit("Overview", "System Overview")
+                st.rerun()
+            else:
+                st.session_state.user_page = "Overview"
+                reset_quiz_state()
+                st.rerun()
+
+
+def render_quiz_navigation_panel(
+    questions: list[dict],
+    current_index: int,
+    total_questions: int,
+) -> None:
+    navigation_indices = list(range(total_questions))
+    answered_count = get_answered_question_count(questions)
+    unanswered_count = max(total_questions - answered_count, 0)
+    current_flagged = is_quiz_question_flagged(current_index)
+    flag_button_label = "Flagged Question" if current_flagged else "Flag Question"
+
+    with st.container(key="quiz_navigation_panel"):
+        with st.container(key="quiz_navigation_panel_top"):
+            st.markdown(
+                f"""
+                <div class="quiz-side-title">QUESTION NAVIGATION</div>
+                <div class="quiz-side-legend">
+                    <span class="quiz-side-legend-item"><span class="quiz-dot quiz-dot-answered"></span>Answered</span>
+                    <span class="quiz-side-legend-item"><span class="quiz-dot quiz-dot-current"></span>Current</span>
+                    <span class="quiz-side-legend-item"><span class="quiz-dot quiz-dot-unanswered"></span>Not answered</span>
+                    <span class="quiz-side-legend-item"><span class="quiz-flag-mini"></span>Flagged</span>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+            st.markdown("<div class='quiz-side-chip-gap'></div>", unsafe_allow_html=True)
+
+            chip_columns = 5
+            with st.container(key="quiz_navigation_chip_scroller"):
+                for row_start in range(0, len(navigation_indices), chip_columns):
+                    row_indices = navigation_indices[row_start : row_start + chip_columns]
+                    columns = st.columns(chip_columns)
+                    for column_index, column in enumerate(columns):
+                        with column:
+                            if column_index >= len(row_indices):
+                                st.markdown("<div class='quiz-nav-empty'></div>", unsafe_allow_html=True)
+                                continue
+                            question_index = row_indices[column_index]
+                            question = questions[question_index]
+                            if question_index == current_index:
+                                chip_status = "current"
+                            elif is_quiz_question_answered(question_index, question):
+                                chip_status = "answered"
+                            else:
+                                chip_status = "unanswered"
+                            flagged_suffix = "_flagged" if is_quiz_question_flagged(question_index) else ""
+                            chip_container_key = f"quiz_nav_chip_{chip_status}_{question_index}{flagged_suffix}"
+                            with st.container(key=chip_container_key):
+                                if st.button(
+                                    str(question_index + 1),
+                                    key=f"quiz_nav_jump_{question_index}",
+                                    use_container_width=True,
+                                    type="secondary",
+                                ):
+                                    set_quiz_index(question_index, total_questions)
+                                    st.session_state.quiz_nav_jump_target = QUIZ_NAV_JUMP_PLACEHOLDER
+                                    st.rerun()
+
+            st.markdown(
+                f"""
+                    <div class="quiz-side-divider"></div>
+                    <div class="quiz-side-statline">
+                        <span>Unanswered</span>
+                        <span class="quiz-side-badge">{unanswered_count}</span>
+                    </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+        quick_jump_options = [QUIZ_NAV_JUMP_PLACEHOLDER] + [str(index + 1) for index in navigation_indices]
+        if st.session_state.get("quiz_nav_jump_target") not in quick_jump_options:
+            st.session_state.quiz_nav_jump_target = QUIZ_NAV_JUMP_PLACEHOLDER
+
+        with st.container(key="quiz_navigation_panel_bottom"):
+            st.markdown("<div class='quiz-side-caption'>Quick jump</div>", unsafe_allow_html=True)
+            jump_select_col, jump_button_col = st.columns([3.3, 1])
+            with jump_select_col:
+                st.selectbox(
+                    "Quick jump",
+                    quick_jump_options,
+                    key="quiz_nav_jump_target",
+                    label_visibility="collapsed",
+                )
+            with jump_button_col:
+                if st.button("Go", key="quiz_nav_go", use_container_width=True):
+                    selected_target = st.session_state.get("quiz_nav_jump_target", QUIZ_NAV_JUMP_PLACEHOLDER)
+                    if selected_target != QUIZ_NAV_JUMP_PLACEHOLDER:
+                        set_quiz_index(int(selected_target) - 1, total_questions)
+                        st.rerun()
+
+            with st.container(key="quiz_flag_button_area"):
+                if st.button(
+                    flag_button_label,
+                    key="quiz_flag_toggle",
+                    use_container_width=True,
+                    type="primary" if current_flagged else "secondary",
+                ):
+                    toggle_quiz_question_flag(current_index)
+                    st.rerun()
 
 
 def render_quiz_page(user: dict, latest_reviewer: dict | None) -> None:
@@ -5888,14 +7441,20 @@ def render_quiz_page(user: dict, latest_reviewer: dict | None) -> None:
     total_questions = len(questions)
     current_index = min(st.session_state.quiz_index, max(total_questions - 1, 0))
     current_question = questions[current_index]
-    progress_text = f"{current_index + 1} / {total_questions}" if total_questions else "0 / 0"
+    answered_count = get_answered_question_count(questions)
+    progress_text = f"{answered_count} / {total_questions}" if total_questions else "0 / 0"
     total_minutes = total_questions
+    progress_ratio = (answered_count / total_questions) if total_questions else 0
+    progress_percentage = int(round(progress_ratio * 100)) if total_questions else 0
+    remaining_questions = max(total_questions - answered_count, 0)
     current_question_type = current_question.get("type", "multiple_choice")
     question_direction = get_quiz_question_description(current_question_type)
     question_markup = build_quiz_question_markup(current_index, current_question)
+    item_label_markup = build_quiz_item_label_markup(current_index)
     active_quiz_config = get_quiz_configuration(reviewer["quiz_preference"])
     difficulty_label = active_quiz_config["display_name"]
     quiz_page_title = f"{difficulty_label} Quiz"
+    quiz_started = bool(st.session_state.quiz_started)
 
     st.markdown(
         """
@@ -5912,24 +7471,70 @@ def render_quiz_page(user: dict, latest_reviewer: dict | None) -> None:
             box-shadow: 0 14px 32px rgba(255, 107, 53, 0.32) !important;
             filter: brightness(1.03) !important;
         }
+        .quiz-header-gap {
+            height: 12px;
+        }
+        .quiz-exit-card {
+            padding: 14px 22px 16px 22px !important;
+        }
+        .quiz-exit-title {
+            color: #ff6b35;
+            font-size: 11px;
+            font-weight: 800;
+            margin: 0;
+        }
+        .quiz-exit-copy {
+            color: white;
+            font-size: 16px;
+            line-height: 1.45;
+            margin: 10px 0 0 0;
+        }
+        .quiz-exit-actions-gap {
+            height: 14px;
+        }
+        .quiz-idle-body-gap {
+            height: 18px;
+        }
+        .quiz-primary-gap {
+            height: 0;
+        }
+        .quiz-mcq-row-gap {
+            height: 14px;
+        }
         .quiz-shell {
             position: relative;
             background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(245,247,250,0.96) 100%);
             border-radius: 28px;
             border: 1px solid rgba(255, 255, 255, 0.18);
-            min-height: 520px;
-            padding: 30px 34px 168px 34px;
+            min-height: 500px;
+            padding: 28px 34px 152px 34px;
             box-shadow: 0 20px 60px rgba(2, 6, 23, 0.28);
             animation: quizCardFade 220ms ease;
         }
-        .quiz-shell.quiz-shell-active {
-            min-height: 410px;
-            padding-bottom: 72px;
-            margin-bottom: 18px;
+        .st-key-quiz_primary_card {
+            position: relative;
+            background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(245,247,250,0.96) 100%);
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            min-height: 462px;
+            padding: 28px 69px 34px 69px;
+            box-shadow: 0 20px 60px rgba(2, 6, 23, 0.28);
+            animation: quizCardFade 220ms ease;
+            overflow: hidden;
+            display: flex;
+            box-sizing: border-box;
         }
-        .quiz-shell.quiz-shell-active.quiz-shell-enumeration {
-            min-height: 640px;
-            padding-bottom: 228px;
+        .st-key-quiz_primary_card > div[data-testid="stVerticalBlock"] {
+            flex: 1 1 auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            min-width: 0;
+        }
+        .st-key-quiz_primary_card_answer_slot {
+            margin-top: auto;
+            padding-top: 36px;
         }
         .quiz-meta {
             display: flex;
@@ -5966,24 +7571,68 @@ def render_quiz_page(user: dict, latest_reviewer: dict | None) -> None:
             text-transform: uppercase;
             margin-bottom: 22px;
         }
+        .quiz-item-label-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+        .quiz-item-label-row .quiz-item-label {
+            margin-bottom: 0;
+        }
+        .quiz-item-flag-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(244, 63, 94, 0.10);
+            border: 1px solid rgba(244, 63, 94, 0.22);
+            color: #be123c;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.2px;
+            text-transform: none;
+        }
+        .quiz-item-flag-badge-icon {
+            font-size: 12px;
+            line-height: 1;
+        }
         .quiz-question {
             color: #334155;
             font-size: 25px;
             line-height: 1.5;
             font-weight: 500;
             text-align: left;
-            margin: 40px auto 26px auto;
+            margin: 40px auto 0 auto;
             max-width: 880px;
         }
         .quiz-question-line {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr);
+            align-items: start;
+            column-gap: 8px;
             font-size: 24px;
             line-height: 1.7;
             color: #334155;
             font-weight: 500;
         }
+        .quiz-question-line.quiz-question-line-wide {
+            column-gap: 38px;
+        }
+        .quiz-question-copy {
+            display: block;
+            min-width: 0;
+        }
         .quiz-question-number {
+            display: block;
             font-weight: 800;
-            margin-right: 8px;
+            min-width: 0;
+            margin-right: 0;
+        }
+        .quiz-question-number.quiz-question-number-wide {
+            min-width: 0;
         }
         .quiz-blank-prefix {
             display: inline-block;
@@ -6018,7 +7667,7 @@ def render_quiz_page(user: dict, latest_reviewer: dict | None) -> None:
             background: rgba(15, 23, 42, 0.92);
             border-radius: 999px;
             overflow: visible;
-            margin: 10px 0 20px 0;
+            margin: 8px 0 14px 0;
         }
         .quiz-timer-fill {
             position: absolute;
@@ -6064,33 +7713,44 @@ def render_quiz_page(user: dict, latest_reviewer: dict | None) -> None:
             border-radius: 18px;
             background: transparent;
         }
-        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor) {
-            height: 0 !important;
-            margin: 0 !important;
+        .quiz-answer-slot.quiz-answer-slot-expanded.quiz-answer-slot-expanded-stacked {
+            min-height: 250px;
         }
-        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor-enumeration) {
+        .quiz-answer-slot.quiz-answer-slot-expanded.quiz-answer-slot-expanded-annotated {
+            min-height: 230px;
+        }
+        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor) {
             height: 0 !important;
             margin: 0 !important;
         }
         [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor) + div {
             max-width: 980px;
-            margin: -188px auto 28px auto !important;
+            margin: -208px auto 18px auto !important;
             position: relative;
             z-index: 6;
         }
-        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor-enumeration) + div {
-            max-width: 980px;
-            margin: -238px auto 28px auto !important;
-            position: relative;
-            z-index: 6;
+        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor.quiz-answer-anchor-buttons) + div {
+            margin-top: -228px !important;
+        }
+        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor.quiz-answer-anchor-multiple-choice) + div {
+            margin-top: -228px !important;
+        }
+        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor.quiz-answer-anchor-field) + div {
+            margin-top: -228px !important;
+        }
+        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor.quiz-answer-anchor-annotated) + div {
+            margin-top: -228px !important;
+        }
+        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor.quiz-answer-anchor-stacked) + div {
+            margin-top: -228px !important;
+        }
+        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor.quiz-answer-anchor-annotated.quiz-answer-anchor-expanded-annotated) + div {
+            margin-top: -386px !important;
+        }
+        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor.quiz-answer-anchor-stacked.quiz-answer-anchor-expanded-stacked) + div {
+            margin-top: -406px !important;
         }
         [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor) + div > div {
-            background: transparent;
-            border: none;
-            border-radius: 0;
-            padding: 0 8px;
-        }
-        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor-enumeration) + div > div {
             background: transparent;
             border: none;
             border-radius: 0;
@@ -6099,7 +7759,7 @@ def render_quiz_page(user: dict, latest_reviewer: dict | None) -> None:
         [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor) + div [data-testid="stVerticalBlock"] {
             gap: 0.65rem;
         }
-        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor-enumeration) + div [data-testid="stVerticalBlock"] {
+        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor.quiz-answer-anchor-stacked) + div [data-testid="stVerticalBlock"] {
             gap: 0.45rem;
         }
         [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor) + div label,
@@ -6108,19 +7768,8 @@ def render_quiz_page(user: dict, latest_reviewer: dict | None) -> None:
         [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor) + div div {
             color: #334155 !important;
         }
-        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor-enumeration) + div label,
-        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor-enumeration) + div p,
-        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor-enumeration) + div span,
-        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor-enumeration) + div div {
-            color: #334155 !important;
-        }
         [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor) + div input,
         [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor) + div textarea {
-            background: rgba(255,255,255,0.92) !important;
-            color: #0f172a !important;
-        }
-        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor-enumeration) + div input,
-        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor-enumeration) + div textarea {
             background: rgba(255,255,255,0.92) !important;
             color: #0f172a !important;
         }
@@ -6129,20 +7778,15 @@ def render_quiz_page(user: dict, latest_reviewer: dict | None) -> None:
             background: rgba(255,255,255,0.92) !important;
             border-radius: 14px !important;
         }
-        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor-enumeration) + div [data-baseweb="input"],
-        [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor-enumeration) + div [data-baseweb="select"] > div {
-            background: rgba(255,255,255,0.92) !important;
-            border-radius: 14px !important;
-        }
         [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor) + div div.stButton > button {
             width: 100% !important;
             min-height: 56px !important;
             height: 56px !important;
             border-radius: 14px !important;
-            justify-content: flex-start !important;
-            padding: 0 16px !important;
+            justify-content: center !important;
+            padding: 0 18px !important;
             white-space: normal !important;
-            text-align: left !important;
+            text-align: center !important;
             box-shadow: none !important;
             font-size: 15px !important;
             font-weight: 600 !important;
@@ -6171,6 +7815,85 @@ def render_quiz_page(user: dict, latest_reviewer: dict | None) -> None:
             border: 1px solid rgba(255,107,53,0.62) !important;
             color: #9a3412 !important;
         }
+        [class*="st-key-quiz_answer_area_"] > div[data-testid="stVerticalBlock"] {
+            gap: 0.75rem;
+        }
+        .st-key-quiz_answer_area_stacked > div[data-testid="stVerticalBlock"] {
+            gap: 0.45rem;
+        }
+        [class*="st-key-quiz_answer_area_"] label,
+        [class*="st-key-quiz_answer_area_"] p,
+        [class*="st-key-quiz_answer_area_"] span,
+        [class*="st-key-quiz_answer_area_"] div {
+            color: #334155 !important;
+        }
+        [class*="st-key-quiz_answer_area_"] input,
+        [class*="st-key-quiz_answer_area_"] textarea {
+            background: rgba(255,255,255,0.94) !important;
+            color: #0f172a !important;
+        }
+        [class*="st-key-quiz_answer_area_"] [data-baseweb="input"],
+        [class*="st-key-quiz_answer_area_"] [data-baseweb="select"] > div {
+            background: rgba(255,255,255,0.94) !important;
+            border-radius: 16px !important;
+            border: 1px solid rgba(203, 213, 225, 0.86) !important;
+        }
+        [class*="st-key-quiz_answer_area_"] [data-testid="stHorizontalBlock"] {
+            align-items: stretch;
+        }
+        [class*="st-key-quiz_answer_area_"] [data-testid="column"] > div {
+            height: 100%;
+        }
+        [class*="st-key-quiz_answer_area_"] div.stButton > button {
+            width: 100% !important;
+            min-height: 56px !important;
+            height: 56px !important;
+            border-radius: 18px !important;
+            justify-content: center !important;
+            padding: 0 20px !important;
+            white-space: normal !important;
+            text-align: center !important;
+            line-height: 1.35 !important;
+            box-shadow: none !important;
+            font-size: 15px !important;
+            font-weight: 700 !important;
+            transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease, color 0.16s ease !important;
+        }
+        [class*="st-key-quiz_answer_area_"] div.stButton > button[kind="secondary"] {
+            background: rgba(255,255,255,0.80) !important;
+            color: #334155 !important;
+            border: 1px solid rgba(148,163,184,0.34) !important;
+        }
+        [class*="st-key-quiz_answer_area_"] div.stButton > button[kind="primary"] {
+            background: linear-gradient(180deg, rgba(24,36,58,0.98) 0%, rgba(15,23,42,0.98) 100%) !important;
+            color: #f8fafc !important;
+            border: 1px solid rgba(255,107,53,0.72) !important;
+            box-shadow: inset 0 0 0 1px rgba(255,107,53,0.10), 0 12px 24px rgba(15, 23, 42, 0.12) !important;
+        }
+        [class*="st-key-quiz_answer_area_"] div.stButton > button:hover {
+            transform: translateY(-1px) !important;
+            box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08) !important;
+        }
+        [class*="st-key-quiz_answer_area_"] div.stButton > button[kind="secondary"]:hover {
+            background: rgba(255,255,255,0.96) !important;
+            border: 1px solid rgba(148,163,184,0.42) !important;
+        }
+        [class*="st-key-quiz_answer_area_"] div.stButton > button[kind="primary"]:hover {
+            background: linear-gradient(180deg, rgba(31,41,67,0.98) 0%, rgba(15,23,42,0.98) 100%) !important;
+            border: 1px solid rgba(255,107,53,0.82) !important;
+            color: white !important;
+        }
+        .st-key-quiz_answer_area_multiple_choice > div[data-testid="stVerticalBlock"] {
+            gap: 0.9rem;
+        }
+        .st-key-quiz_answer_area_multiple_choice div.stButton > button {
+            min-height: 54px !important;
+            height: 54px !important;
+            font-size: 16px !important;
+        }
+        .st-key-quiz_answer_area_multiple_choice [data-testid="stHorizontalBlock"] {
+            gap: 1rem;
+        }
         .quiz-mtf-note {
             color: #64748B;
             font-size: 12px;
@@ -6180,14 +7903,501 @@ def render_quiz_page(user: dict, latest_reviewer: dict | None) -> None:
         .quiz-nav-spacer {
             height: 1px;
         }
+        .st-key-quiz_prev,
+        .st-key-quiz_next {
+            margin-top: 0;
+        }
+        .st-key-quiz_nav_row_default,
+        .st-key-quiz_nav_row_advanced,
+        .st-key-quiz_nav_row_intermediate {
+            margin-top: -15px;
+        }
+        .st-key-quiz_nav_row_intermediate .st-key-quiz_prev,
+        .st-key-quiz_nav_row_intermediate .st-key-quiz_next {
+            margin-top: 0;
+        }
+        .quiz-action-gap,
+        .quiz-action-gap.quiz-action-gap-advanced,
+        .quiz-action-gap.quiz-action-gap-intermediate {
+            height: 0;
+        }
         .quiz-nav-gap {
-            height: 12px;
+            height: 6px;
         }
         .quiz-answer-follow-gap {
-            height: 72px;
+            height: 48px;
+        }
+        .quiz-answer-follow-gap.quiz-answer-follow-gap-buttons {
+            height: 20px;
+        }
+        .quiz-answer-follow-gap.quiz-answer-follow-gap-multiple-choice {
+            height: 20px;
+        }
+        .quiz-answer-follow-gap.quiz-answer-follow-gap-field {
+            height: 20px;
+        }
+        .quiz-answer-follow-gap.quiz-answer-follow-gap-annotated {
+            height: 20px;
+        }
+        .quiz-answer-follow-gap.quiz-answer-follow-gap-stacked {
+            height: 20px;
         }
         .quiz-control-gap {
-            height: 18px;
+            height: 16px;
+        }
+        .quiz-progress-card {
+            background: rgba(15, 23, 42, 0.74);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 22px;
+            padding: 16px 20px 18px 20px;
+            box-shadow: 0 16px 36px rgba(2, 6, 23, 0.16);
+        }
+        .quiz-progress-title {
+            color: #cbd5e1;
+            font-size: 11px;
+            font-weight: 800;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        .quiz-progress-value {
+            color: white;
+            font-size: 22px;
+            font-weight: 800;
+            margin: 10px 0 12px 0;
+        }
+        .quiz-progress-track {
+            width: 100%;
+            height: 10px;
+            border-radius: 999px;
+            background: rgba(51, 65, 85, 0.78);
+            overflow: hidden;
+        }
+        .quiz-progress-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #ff6b35, #f97316);
+        }
+        .quiz-progress-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            color: #cbd5e1;
+            font-size: 13px;
+        }
+        .quiz-progress-card.quiz-progress-card-idle {
+            min-height: 118px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 22px 26px;
+        }
+        .quiz-progress-card.quiz-progress-card-idle .quiz-progress-title {
+            text-align: center;
+        }
+        .quiz-progress-card.quiz-progress-card-idle .quiz-progress-value {
+            margin: 14px 0 0 0;
+            font-size: 28px;
+            text-align: center;
+        }
+        .quiz-progress-card.quiz-progress-card-active {
+            width: 100%;
+        }
+        .st-key-quiz_page_body {
+            margin-top: -56px;
+        }
+        .quiz-content-grid {
+            align-items: start;
+        }
+        .st-key-quiz_content_area [data-testid="stHorizontalBlock"] {
+            align-items: stretch;
+        }
+        .st-key-quiz_content_area [data-testid="column"] {
+            display: flex;
+        }
+        .st-key-quiz_content_area [data-testid="column"] > div {
+            width: 100%;
+            height: 100%;
+        }
+        .st-key-quiz_navigation_panel {
+            background: rgba(15, 23, 42, 0.74);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 22px;
+            height: 100%;
+            padding: 18px 20px 18px 20px;
+            box-shadow: 0 16px 36px rgba(2, 6, 23, 0.16);
+        }
+        .st-key-quiz_navigation_panel > div[data-testid="stVerticalBlock"] {
+            gap: 0;
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+            min-height: 100%;
+        }
+        .st-key-quiz_navigation_panel .st-key-quiz_navigation_panel_top > div[data-testid="stVerticalBlock"] {
+            gap: 0;
+        }
+        .st-key-quiz_navigation_panel .st-key-quiz_navigation_panel_bottom {
+            margin-top: auto;
+            padding-top: 22px;
+        }
+        .st-key-quiz_navigation_panel .st-key-quiz_navigation_panel_bottom > div[data-testid="stVerticalBlock"] {
+            gap: 0;
+        }
+        .quiz-side-card {
+            background: rgba(15, 23, 42, 0.74);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 20px 22px 18px 22px;
+            box-shadow: 0 16px 36px rgba(2, 6, 23, 0.16);
+            position: relative;
+            overflow: visible;
+        }
+        .quiz-side-card.quiz-side-card-active {
+            padding: 22px 24px 18px 24px;
+        }
+        .quiz-side-title {
+            color: white;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .quiz-side-card.quiz-side-card-active .quiz-side-title {
+            margin-bottom: 16px;
+        }
+        .quiz-side-scope {
+            color: #cbd5e1;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+        .quiz-side-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 12px;
+            margin-bottom: 14px;
+        }
+        .quiz-side-card.quiz-side-card-active .quiz-side-legend {
+            gap: 12px 16px;
+            margin-bottom: 18px;
+        }
+        .quiz-side-legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: #cbd5e1;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .quiz-side-card.quiz-side-card-active .quiz-side-legend-item {
+            font-size: 14px;
+        }
+        .quiz-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 999px;
+        }
+        .quiz-dot-answered {
+            background: linear-gradient(90deg, #ff6b35, #f97316);
+        }
+        .quiz-dot-current {
+            box-sizing: border-box;
+            background: transparent;
+            border: 2px solid rgba(241, 245, 249, 0.92);
+        }
+        .quiz-dot-unanswered {
+            background: rgba(100, 116, 139, 0.72);
+        }
+        .quiz-flag-mini {
+            position: relative;
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+        }
+        .quiz-flag-mini::before {
+            content: "";
+            position: absolute;
+            left: 1px;
+            top: 0;
+            width: 2px;
+            height: 12px;
+            border-radius: 1px;
+            background: rgba(226, 232, 240, 0.94);
+        }
+        .quiz-flag-mini::after {
+            content: "";
+            position: absolute;
+            left: 3px;
+            top: 1px;
+            width: 8px;
+            height: 6px;
+            background: #f43f5e;
+            clip-path: polygon(0 0, 100% 20%, 0 100%);
+            border-radius: 1px;
+        }
+        .quiz-side-chip-gap {
+            height: 2px;
+        }
+        .st-key-quiz_navigation_chip_scroller > div[data-testid="stVerticalBlock"] {
+            height: 184px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding-right: 4px;
+        }
+        .st-key-quiz_navigation_chip_scroller > div[data-testid="stVerticalBlock"]::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+            display: none;
+        }
+        .quiz-side-divider {
+            height: 1px;
+            background: rgba(148, 163, 184, 0.18);
+            margin: 12px 0 12px 0;
+        }
+        .quiz-side-card.quiz-side-card-active .quiz-side-divider {
+            margin: 12px 0 18px 0;
+        }
+        .quiz-side-statline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #cbd5e1;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+        .quiz-side-card.quiz-side-card-active .quiz-side-statline {
+            margin-bottom: 18px;
+        }
+        .quiz-side-badge {
+            min-width: 26px;
+            height: 26px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 8px;
+            border-radius: 999px;
+            color: white;
+            font-size: 12px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ff6b35, #f97316);
+        }
+        .quiz-side-card.quiz-side-card-active .quiz-side-badge {
+            background: linear-gradient(90deg, #fb7185, #ef4444);
+        }
+        .quiz-side-caption {
+            color: #cbd5e1;
+            font-size: 14px;
+            font-weight: 700;
+            margin: 0 0 6px 0;
+        }
+        .quiz-side-card.quiz-side-card-active .quiz-side-caption {
+            margin: 0 0 10px 0;
+        }
+        .quiz-nav-empty {
+            height: 46px;
+        }
+        .quiz-flag-helper {
+            color: #a9b6c8;
+            font-size: 13px;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+        .st-key-quiz_navigation_panel [class*="st-key-quiz_nav_filter_"] div.stButton > button {
+            min-height: 38px !important;
+            height: 38px !important;
+            border-radius: 14px !important;
+            justify-content: center !important;
+            padding: 0 12px !important;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            box-shadow: none !important;
+        }
+        .st-key-quiz_navigation_panel [class*="st-key-quiz_nav_filter_"] div.stButton > button[kind="secondary"] {
+            background: rgba(24, 36, 58, 0.86) !important;
+            color: #cbd5e1 !important;
+            border: 1px solid rgba(71, 85, 105, 0.82) !important;
+        }
+        .st-key-quiz_navigation_panel [class*="st-key-quiz_nav_filter_"] div.stButton > button[kind="primary"] {
+            background: rgba(255, 107, 53, 0.16) !important;
+            color: white !important;
+            border: 1px solid rgba(255, 107, 53, 0.72) !important;
+        }
+        .st-key-quiz_navigation_panel [class*="st-key-quiz_nav_chip_"] {
+            position: relative;
+            isolation: isolate;
+        }
+        .st-key-quiz_navigation_panel [class*="st-key-quiz_nav_chip_"] div.stButton > button {
+            min-height: 48px !important;
+            height: 48px !important;
+            border-radius: 15px !important;
+            justify-content: center !important;
+            padding: 0 !important;
+            font-size: 15px !important;
+            font-weight: 800 !important;
+            box-shadow: none !important;
+            transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background 0.16s ease !important;
+        }
+        .st-key-quiz_navigation_panel [class*="st-key-quiz_nav_chip_unanswered_"] div.stButton > button {
+            background: rgba(24, 36, 58, 0.88) !important;
+            color: #cbd5e1 !important;
+            border: 1px solid rgba(71, 85, 105, 0.68) !important;
+        }
+        .st-key-quiz_navigation_panel [class*="st-key-quiz_nav_chip_answered_"] div.stButton > button {
+            background: linear-gradient(90deg, rgba(255, 107, 53, 0.96), rgba(249, 115, 22, 0.96)) !important;
+            color: white !important;
+            border: 1px solid rgba(255, 140, 92, 0.9) !important;
+        }
+        .st-key-quiz_navigation_panel [class*="st-key-quiz_nav_chip_current_"] div.stButton > button {
+            background: rgba(24, 36, 58, 0.92) !important;
+            color: white !important;
+            border: 1px solid rgba(255, 107, 53, 0.82) !important;
+            box-shadow: inset 0 0 0 1px rgba(255, 107, 53, 0.16) !important;
+        }
+        .st-key-quiz_navigation_panel [class*="st-key-quiz_nav_chip_"] div.stButton > button:hover {
+            transform: translateY(-1px) !important;
+        }
+        .st-key-quiz_navigation_panel [class*="st-key-quiz_nav_chip_"][class*="_flagged"]::after {
+            content: "🚩";
+            position: absolute;
+            top: -6px;
+            right: -2px;
+            font-size: 13px;
+            line-height: 1;
+            z-index: 3;
+        }
+        .st-key-quiz_navigation_panel [data-testid="stSelectbox"] > div {
+            margin-bottom: 0 !important;
+        }
+        .st-key-quiz_navigation_panel [data-testid="stSelectbox"] [data-baseweb="select"] > div {
+            background: rgba(24, 36, 58, 0.88) !important;
+            color: #e2e8f0 !important;
+            border-radius: 14px !important;
+            border: 1px solid rgba(71, 85, 105, 0.72) !important;
+            min-height: 40px !important;
+        }
+        .st-key-quiz_navigation_panel .st-key-quiz_nav_go div.stButton > button {
+            min-height: 40px !important;
+            height: 40px !important;
+            border-radius: 14px !important;
+        }
+        .st-key-quiz_flag_button_area {
+            position: relative;
+            margin-top: 14px;
+        }
+        .st-key-quiz_flag_button_area .quiz-flag-tooltip {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: calc(100% + 12px);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(6px);
+            transition: opacity 0.16s ease, transform 0.16s ease;
+            background: rgba(25, 36, 58, 0.98);
+            border: 1px solid rgba(71, 85, 105, 0.94);
+            border-radius: 14px;
+            padding: 12px 14px;
+            box-shadow: 0 16px 34px rgba(2, 6, 23, 0.34);
+            z-index: 12;
+        }
+        .st-key-quiz_flag_button_area .quiz-flag-tooltip::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -7px;
+            width: 14px;
+            height: 14px;
+            background: rgba(25, 36, 58, 0.98);
+            border-right: 1px solid rgba(71, 85, 105, 0.94);
+            border-bottom: 1px solid rgba(71, 85, 105, 0.94);
+            transform: translateX(-50%) rotate(45deg);
+        }
+        .st-key-quiz_flag_button_area:hover .quiz-flag-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .quiz-flag-tooltip-title-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            font-size: 15px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        .quiz-flag-tooltip-copy {
+            color: #cbd5e1;
+            font-size: 13px;
+            line-height: 1.55;
+        }
+        .quiz-flag-tooltip-icon {
+            position: relative;
+            width: 13px;
+            height: 13px;
+            display: inline-block;
+        }
+        .quiz-flag-tooltip-icon::before {
+            content: "";
+            position: absolute;
+            left: 1px;
+            top: 0;
+            width: 2px;
+            height: 13px;
+            border-radius: 1px;
+            background: rgba(226, 232, 240, 0.94);
+        }
+        .quiz-flag-tooltip-icon::after {
+            content: "";
+            position: absolute;
+            left: 3px;
+            top: 1px;
+            width: 9px;
+            height: 6px;
+            background: #f43f5e;
+            clip-path: polygon(0 0, 100% 20%, 0 100%);
+            border-radius: 1px;
+        }
+        .st-key-quiz_flag_button_area div.stButton > button {
+            min-height: 40px !important;
+            height: 40px !important;
+            border-radius: 14px !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            font-size: 15px !important;
+            font-weight: 800 !important;
+        }
+        .st-key-quiz_flag_button_area div.stButton > button::before {
+            content: "🚩";
+            font-size: 13px;
+            line-height: 1;
+        }
+        .st-key-quiz_flag_button_area div.stButton > button[kind="secondary"] {
+            background: rgba(34, 48, 72, 0.88) !important;
+            color: #f8fafc !important;
+            border: 1px solid rgba(71, 85, 105, 0.82) !important;
+            box-shadow: none !important;
+        }
+        .st-key-quiz_flag_button_area div.stButton > button[kind="primary"] {
+            background: rgba(255, 107, 53, 0.16) !important;
+            color: white !important;
+            border: 1px solid rgba(255, 107, 53, 0.76) !important;
+            box-shadow: none !important;
+        }
+        .st-key-quiz_navigation_panel [class*="st-key-quiz_nav_chip_"][class*="_flagged"]::after {
+            content: "\\1F6A9" !important;
+            color: #fb7185 !important;
+        }
+        .st-key-quiz_flag_button_area div.stButton > button::before {
+            content: "\\1F6A9" !important;
+            color: #f97316 !important;
         }
         @keyframes quizCardFade {
             from {
@@ -6199,202 +8409,415 @@ def render_quiz_page(user: dict, latest_reviewer: dict | None) -> None:
                 transform: translateY(0);
             }
         }
+        @media (max-width: 900px) {
+            .quiz-header-gap {
+                height: 8px;
+            }
+            .quiz-exit-card {
+                padding: 12px 16px 14px 16px !important;
+            }
+            .quiz-exit-copy {
+                font-size: 15px;
+                margin-top: 8px;
+            }
+            .quiz-exit-actions-gap {
+                height: 12px;
+            }
+            .quiz-idle-body-gap {
+                height: 12px;
+            }
+            .quiz-primary-gap {
+                height: 0;
+            }
+            .quiz-mcq-row-gap {
+                height: 10px;
+            }
+            .quiz-shell {
+                border-radius: 22px;
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+            .st-key-quiz_primary_card {
+                border-radius: 22px;
+                min-height: 462px;
+                padding: 24px 53px 24px 53px;
+            }
+            .st-key-quiz_primary_card > div[data-testid="stVerticalBlock"] {
+                flex: 1 1 auto;
+                width: 100%;
+                min-width: 0;
+            }
+            .st-key-quiz_primary_card_answer_slot {
+                padding-top: 28px;
+            }
+            .quiz-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            .quiz-meta-left,
+            .quiz-meta-pill,
+            .quiz-direction,
+            .quiz-item-label {
+                font-size: 12px;
+            }
+            .quiz-item-label-row {
+                justify-content: center;
+            }
+            .quiz-question {
+                font-size: 20px;
+                line-height: 1.45;
+                margin: 26px auto 20px auto;
+                overflow-wrap: anywhere;
+            }
+            .quiz-question-line {
+                font-size: 20px;
+                line-height: 1.55;
+            }
+            .quiz-progress-card,
+            .quiz-side-card {
+                border-radius: 20px;
+                padding: 16px 16px 14px 16px;
+            }
+            .st-key-quiz_navigation_panel {
+                min-height: auto;
+                height: auto;
+            }
+            .st-key-quiz_navigation_panel .st-key-quiz_navigation_panel_bottom {
+                margin-top: 14px;
+                padding-top: 14px;
+            }
+            .quiz-side-legend {
+                gap: 8px 12px;
+            }
+            .st-key-quiz_navigation_chip_scroller > div[data-testid="stVerticalBlock"] {
+                height: 184px;
+            }
+            .st-key-quiz_navigation_panel [class*="st-key-quiz_nav_chip_"] div.stButton > button {
+                min-height: 46px !important;
+                height: 46px !important;
+                font-size: 15px !important;
+            }
+            .st-key-quiz_flag_button_area .quiz-flag-tooltip {
+                left: auto;
+                right: 0;
+            }
+            .quiz-blank-prefix {
+                display: block;
+                min-width: 0;
+                margin-bottom: 8px;
+            }
+            .quiz-enum-answer-label {
+                text-align: left;
+                line-height: 1.2;
+                font-size: 16px;
+                padding-right: 0;
+            }
+            .quiz-result-score {
+                font-size: 48px;
+            }
+            .quiz-timer-bubble {
+                top: -32px;
+                font-size: 10px;
+                padding: 5px 8px;
+            }
+            [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor.quiz-answer-anchor-multiple-choice) + div {
+                margin-top: -212px !important;
+            }
+            [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor.quiz-answer-anchor-buttons) + div,
+            [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor.quiz-answer-anchor-field) + div,
+            [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor.quiz-answer-anchor-annotated) + div,
+            [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor.quiz-answer-anchor-stacked) + div {
+                margin-top: -212px !important;
+            }
+            [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor.quiz-answer-anchor-annotated.quiz-answer-anchor-expanded-annotated) + div {
+                margin-top: -314px !important;
+            }
+            [data-testid="stVerticalBlock"] > div:has(.quiz-answer-anchor.quiz-answer-anchor-stacked.quiz-answer-anchor-expanded-stacked) + div {
+                margin-top: -354px !important;
+            }
+            .st-key-quiz_answer_area_multiple_choice > div[data-testid="stVerticalBlock"] {
+                gap: 0.7rem;
+            }
+            .quiz-answer-slot.quiz-answer-slot-expanded.quiz-answer-slot-expanded-stacked {
+                min-height: 214px;
+            }
+            .quiz-answer-slot.quiz-answer-slot-expanded.quiz-answer-slot-expanded-annotated {
+                min-height: 170px;
+            }
+            .st-key-quiz_answer_area_multiple_choice div.stButton > button {
+                min-height: 52px !important;
+                height: 52px !important;
+                font-size: 15px !important;
+            }
+            [data-testid="column"]:has(.quiz-nav-spacer) {
+                display: none !important;
+            }
+            .st-key-quiz_prev,
+            .st-key-quiz_next {
+                margin-top: 0;
+            }
+            .st-key-quiz_nav_row_default,
+            .st-key-quiz_nav_row_advanced,
+            .st-key-quiz_nav_row_intermediate {
+                margin-top: -15px;
+            }
+            .st-key-quiz_nav_row_intermediate .st-key-quiz_prev,
+            .st-key-quiz_nav_row_intermediate .st-key-quiz_next {
+                margin-top: 0;
+            }
+            .quiz-action-gap,
+            .quiz-action-gap.quiz-action-gap-advanced,
+            .quiz-action-gap.quiz-action-gap-intermediate {
+                height: 0;
+            }
+            .quiz-answer-follow-gap {
+                height: 28px;
+            }
+            .quiz-answer-follow-gap.quiz-answer-follow-gap-buttons {
+                height: 14px;
+            }
+            .quiz-answer-follow-gap.quiz-answer-follow-gap-multiple-choice {
+                height: 14px;
+            }
+            .quiz-answer-follow-gap.quiz-answer-follow-gap-field {
+                height: 14px;
+            }
+            .quiz-answer-follow-gap.quiz-answer-follow-gap-annotated {
+                height: 14px;
+            }
+            .quiz-answer-follow-gap.quiz-answer-follow-gap-stacked {
+                height: 14px;
+            }
+            .quiz-nav-gap {
+                height: 4px;
+            }
+            .quiz-control-gap {
+                height: 11px;
+            }
+            .st-key-quiz_page_body {
+                margin-top: -36px;
+            }
+        }
         </style>
         """,
         unsafe_allow_html=True,
     )
 
-    quiz_top_left, quiz_top_right = st.columns([4.9, 1.15])
-    with quiz_top_left:
-        st.markdown(
-            f"<h1 style='color:white; font-size:42px; font-weight:800; margin-bottom:0;'>{quiz_page_title}</h1>",
-            unsafe_allow_html=True,
-        )
-        st.markdown(
-            f"<p style='color:#94A3B8; font-size:18px;'>Timed quiz for <b>{reviewer['file_name']}</b>. Total time is based on item count: <b>{total_minutes} minute(s)</b> for <b>{total_questions}</b> item(s).</p>",
-            unsafe_allow_html=True,
-        )
-    with quiz_top_right:
-        st.markdown(
-            f"""
-            <div class="bento-card" style="text-align:center; margin-top:0;">
-                <p style="color:#94A3B8; font-size:11px; font-weight:800; margin:0;">PROGRESS</p>
-                <p style="color:white; font-size:24px; font-weight:800; margin:12px 0 0 0;">{progress_text}</p>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    st.write("##")
-
-    if st.session_state.quiz_started and st.session_state.quiz_exit_target:
-        st.markdown(
-            f"""
-            <div class="bento-card" style="border-color:rgba(255,107,53,0.32);">
-                <p style="color:#ff6b35; font-size:11px; font-weight:800; margin:0;">SUBMIT QUIZ?</p>
-                <p style="color:white; font-size:16px; margin:12px 0 0 0;">You are still taking this quiz. Submit and grade your current answers before opening {st.session_state.quiz_exit_label}?</p>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-        prompt_left, prompt_right = st.columns(2)
-        with prompt_left:
-            if st.button("Yes, submit quiz", key="quiz_exit_submit", type="primary", use_container_width=True):
-                finish_quiz_attempt(reviewer)
-                exit_target = st.session_state.quiz_exit_target
-                clear_quiz_exit_request()
-                set_flash("success", "Quiz submitted and graded.")
-                reset_quiz_state()
-                st.session_state.user_page = exit_target
-                st.rerun()
-        with prompt_right:
-            if st.button("No, continue quiz", key="quiz_exit_cancel", use_container_width=True):
-                clear_quiz_exit_request()
-                st.rerun()
-        st.write("")
-
-    if st.session_state.quiz_finished and st.session_state.quiz_last_result:
-        last_result = st.session_state.quiz_last_result
-        recommendation = (
-            f"Review {reviewer['file_name']} again before retaking the quiz."
-            if float(last_result["percentage"]) < 80
-            else "Strong work. Open the reviewer one more time, then try another module."
-        )
-        st.markdown(
-            f"""
-            <div class="bento-card">
-                <p style="color:#2DD4BF; font-size:11px; font-weight:800; margin:0;">QUIZ COMPLETE</p>
-                <p class="quiz-result-score">{int(last_result['score'])}/{int(last_result['total_questions'])}</p>
-                <p style="color:#cbd5e1; font-size:17px; margin:0 0 16px 0;">Final score: {float(last_result['percentage']):.0f}%</p>
-                <p style="color:#94A3B8; font-size:14px; margin:0;">{recommendation}</p>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-        st.write("")
-        result_left, result_center, result_right = st.columns([1, 1.15, 1])
-        with result_left:
-            if st.button("View Reviewer >>", key="quiz_result_reviewer", use_container_width=True):
-                open_reviewer_page(int(reviewer["id"]))
-        with result_center:
-            if st.button("Retake Quiz", key="quiz_restart", type="primary", use_container_width=True):
-                reset_quiz_state()
-                start_quiz_attempt(reviewer)
-                st.rerun()
-        with result_right:
-            if st.button("Back to Overview", key="quiz_result_overview", use_container_width=True):
-                st.session_state.user_page = "Overview"
-                st.rerun()
-        return
-
-    st.markdown(
-        f"""
-        <div style="padding-left:8px; color:#94A3B8; font-size:14px; font-weight:600;">
-            {reviewer['file_name']}
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-    if st.session_state.quiz_started:
-        render_quiz_timer_fragment(reviewer)
-    else:
+    if not quiz_started:
         st.markdown(
             """
-            <div class="quiz-timer-line">
-                <div class="quiz-timer-fill" style="width:100%;"></div>
-                <div class="quiz-timer-bubble" style="left:calc(100% - 28px);">READY</div>
-            </div>
+            <style>
+            .st-key-quiz_page_body {
+                margin-top: 0 !important;
+            }
+            body,
+            [data-testid="stAppViewContainer"],
+            [data-testid="stMain"] {
+                height: 100vh !important;
+                overflow: hidden !important;
+            }
+            [data-testid="block-container"] {
+                max-height: 100vh !important;
+                overflow: hidden !important;
+                padding-bottom: 0 !important;
+            }
+            </style>
             """,
             unsafe_allow_html=True,
         )
 
-    quiz_shell_classes = ["quiz-shell"]
-    if st.session_state.quiz_started:
-        quiz_shell_classes.append("quiz-shell-active")
-        if current_question.get("type") == "enumeration":
-            quiz_shell_classes.append("quiz-shell-enumeration")
-    quiz_shell_class = " ".join(quiz_shell_classes)
+    if not quiz_started:
+        st.markdown("<div class='quiz-idle-body-gap'></div>", unsafe_allow_html=True)
 
-    st.markdown(
-        f"""
-        <div class="{quiz_shell_class}">
-            <div class="quiz-meta">
-                <div class="quiz-meta-left">
-                    <div class="quiz-direction">{question_direction}</div>
-                    <div class="quiz-item-label">Item {current_index + 1}</div>
-                </div>
-                <div class="quiz-meta-pill">Difficulty: {difficulty_label}</div>
-            </div>
-            <div class="quiz-question">{question_markup}</div>
-            <div class="quiz-answer-slot"></div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    st.write("")
-
-    if st.session_state.quiz_started:
-        answer_anchor_class = "quiz-answer-anchor-enumeration" if current_question.get("type") == "enumeration" else "quiz-answer-anchor"
-        st.markdown(f"<div class='{answer_anchor_class}'></div>", unsafe_allow_html=True)
-        render_quiz_question_input(current_index, current_question, questions)
-        if current_question.get("type") not in {"modified_true_false", "enumeration"}:
-            st.markdown("<div class='quiz-answer-follow-gap'></div>", unsafe_allow_html=True)
-        st.markdown("<div class='quiz-nav-gap'></div>", unsafe_allow_html=True)
-        nav_left, nav_gap_left, nav_center, nav_gap_right, nav_right = st.columns([1, 0.12, 4, 0.12, 1])
-        with nav_left:
-            if current_index > 0 and st.button("Prev", key="quiz_prev", type="primary", use_container_width=True):
-                move_quiz_index(-1, total_questions)
-                st.rerun()
-        with nav_gap_left:
-            st.markdown("<div class='quiz-nav-spacer'></div>", unsafe_allow_html=True)
-        with nav_center:
-            st.markdown("<div class='quiz-nav-spacer'></div>", unsafe_allow_html=True)
-        with nav_gap_right:
-            st.markdown("<div class='quiz-nav-spacer'></div>", unsafe_allow_html=True)
-        with nav_right:
-            if current_index < total_questions - 1 and st.button("Next", key="quiz_next", type="primary", use_container_width=True):
-                move_quiz_index(1, total_questions)
-                st.rerun()
-
-    st.markdown("<div class='quiz-control-gap'></div>", unsafe_allow_html=True)
-    control_left, control_gap_left, control_center, control_gap_right, control_right = st.columns([1, 0.08, 1.15, 0.08, 1])
-    with control_left:
-        if st.button("View Reviewer >>", key="quiz_view_reviewer", use_container_width=True):
-            if st.session_state.quiz_started:
-                request_quiz_exit("Reviewer", "the reviewer")
-                st.rerun()
-            else:
-                open_reviewer_page(int(reviewer["id"]))
-    with control_gap_left:
-        st.markdown("<div class='quiz-nav-spacer'></div>", unsafe_allow_html=True)
-    with control_center:
-        if not st.session_state.quiz_started:
-            if st.button("Start", key="quiz_start", type="primary", use_container_width=True):
-                start_quiz_attempt(reviewer)
-                st.rerun()
+    with st.container(key="quiz_page_body"):
+        if quiz_started:
+            quiz_top_left, quiz_top_right = st.columns([4.8, 1.95], gap="large")
         else:
-            if st.button("Finish", key="quiz_finish", type="primary", use_container_width=True):
-                finish_quiz_attempt(reviewer)
-                st.rerun()
-    with control_gap_right:
-        st.markdown("<div class='quiz-nav-spacer'></div>", unsafe_allow_html=True)
-    with control_right:
-        if st.button("Back to Overview", key="quiz_back_overview", use_container_width=True):
-            if st.session_state.quiz_started:
-                request_quiz_exit("Overview", "System Overview")
-                st.rerun()
+            quiz_top_left = st.container()
+
+        with quiz_top_left:
+            st.markdown(
+                f"<h1 style='color:white; font-size:42px; font-weight:800; margin-bottom:0;'>{quiz_page_title}</h1>",
+                unsafe_allow_html=True,
+            )
+            st.markdown(
+                f"<p style='color:#94A3B8; font-size:18px;'>Timed quiz for <b>{reviewer['file_name']}</b>. Total time is based on item count: <b>{total_minutes} minute(s)</b> for <b>{total_questions}</b> item(s).</p>",
+                unsafe_allow_html=True,
+            )
+
+        if quiz_started:
+            with quiz_top_right:
+                st.markdown(
+                    f"""
+                    <div class="quiz-progress-card quiz-progress-card-active">
+                        <p class="quiz-progress-title">PROGRESS</p>
+                        <p class="quiz-progress-value">{progress_text}</p>
+                        <div class="quiz-progress-track">
+                            <div class="quiz-progress-fill" style="width:{max(0, min(progress_percentage, 100))}%;"></div>
+                        </div>
+                        <div class="quiz-progress-meta">
+                            <span>{progress_percentage}% Complete</span>
+                            <span>{remaining_questions} left</span>
+                        </div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+        st.markdown("<div class='quiz-header-gap'></div>", unsafe_allow_html=True)
+
+        if quiz_started and st.session_state.quiz_exit_target:
+            st.markdown(
+                f"""
+                <div class="bento-card quiz-exit-card" style="border-color:rgba(255,107,53,0.32);">
+                    <p class="quiz-exit-title">SUBMIT QUIZ?</p>
+                    <p class="quiz-exit-copy">You are still taking this quiz. Submit and grade your current answers before opening {st.session_state.quiz_exit_label}?</p>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+            st.markdown("<div class='quiz-exit-actions-gap'></div>", unsafe_allow_html=True)
+            prompt_left, prompt_right = st.columns(2, gap="medium")
+            with prompt_left:
+                if st.button("Yes, submit quiz", key="quiz_exit_submit", type="primary", use_container_width=True):
+                    finish_quiz_attempt(reviewer)
+                    exit_target = st.session_state.quiz_exit_target
+                    clear_quiz_exit_request()
+                    set_flash("success", "Quiz submitted and graded.")
+                    reset_quiz_state()
+                    st.session_state.user_page = exit_target
+                    st.rerun()
+            with prompt_right:
+                if st.button("No, continue quiz", key="quiz_exit_cancel", use_container_width=True):
+                    clear_quiz_exit_request()
+                    st.rerun()
+            st.write("")
+
+        if st.session_state.quiz_finished and st.session_state.quiz_last_result:
+            last_result = st.session_state.quiz_last_result
+            recommendation = (
+                f"Review {reviewer['file_name']} again before retaking the quiz."
+                if float(last_result["percentage"]) < 80
+                else "Strong work. Open the reviewer one more time, then try another module."
+            )
+            st.markdown(
+                f"""
+                <div class="bento-card">
+                    <p style="color:#2DD4BF; font-size:11px; font-weight:800; margin:0;">QUIZ COMPLETE</p>
+                    <p class="quiz-result-score">{int(last_result['score'])}/{int(last_result['total_questions'])}</p>
+                    <p style="color:#cbd5e1; font-size:17px; margin:0 0 16px 0;">Final score: {float(last_result['percentage']):.0f}%</p>
+                    <p style="color:#94A3B8; font-size:14px; margin:0;">{recommendation}</p>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+            st.write("")
+            result_left, result_center, result_right = st.columns([1, 1.15, 1])
+            with result_left:
+                if st.button("View Reviewer >>", key="quiz_result_reviewer", use_container_width=True):
+                    open_reviewer_page(int(reviewer["id"]))
+            with result_center:
+                if st.button("Retake Quiz", key="quiz_restart", type="primary", use_container_width=True):
+                    reset_quiz_state()
+                    start_quiz_attempt(reviewer)
+                    st.rerun()
+            with result_right:
+                if st.button("Back to Overview", key="quiz_result_overview", use_container_width=True):
+                    st.session_state.user_page = "Overview"
+                    st.rerun()
+            return
+
+        if quiz_started:
+            timer_left, timer_right = st.columns([4.8, 1.95], gap="large")
+            with timer_left:
+                st.markdown(
+                    f"""
+                    <div style="padding-left:8px; color:#94A3B8; font-size:14px; font-weight:600;">
+                        {reviewer['file_name']}
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+                render_quiz_timer_fragment(reviewer)
+            with timer_right:
+                st.markdown("<div class='quiz-nav-spacer'></div>", unsafe_allow_html=True)
+        else:
+            st.markdown(
+                f"""
+                <div style="padding-left:8px; color:#94A3B8; font-size:14px; font-weight:600;">
+                    {reviewer['file_name']}
+                </div>
+                <div class="quiz-timer-line">
+                    <div class="quiz-timer-fill" style="width:100%;"></div>
+                    <div class="quiz-timer-bubble" style="left:calc(100% - 28px);">READY</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+        def render_quiz_primary_panel() -> None:
+            if quiz_started:
+                with st.container(key="quiz_primary_card"):
+                    st.markdown(
+                        f"""
+                        <div class="quiz-meta">
+                            <div class="quiz-meta-left">
+                                <div class="quiz-direction">{question_direction}</div>
+                                {item_label_markup}
+                            </div>
+                            <div class="quiz-meta-pill">Difficulty: {difficulty_label}</div>
+                        </div>
+                        <div class="quiz-question">{question_markup}</div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
+                    render_quiz_answer_area(current_index, current_question, questions)
             else:
-                st.session_state.user_page = "Overview"
-                reset_quiz_state()
-                st.rerun()
+                st.markdown(
+                    f"""
+                    <div class="quiz-shell">
+                        <div class="quiz-meta">
+                            <div class="quiz-meta-left">
+                                <div class="quiz-direction">{question_direction}</div>
+                                {item_label_markup}
+                            </div>
+                            <div class="quiz-meta-pill">Difficulty: {difficulty_label}</div>
+                        </div>
+                        <div class="quiz-question">{question_markup}</div>
+                        <div class="quiz-answer-slot"></div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+            st.markdown("<div class='quiz-primary-gap'></div>", unsafe_allow_html=True)
+            render_quiz_interaction_fragment(
+                reviewer=reviewer,
+                questions=questions,
+                current_index=current_index,
+                total_questions=total_questions,
+            )
+
+        if quiz_started:
+            with st.container(key="quiz_content_area"):
+                content_left, content_right = st.columns([4.8, 1.95], gap="large")
+                with content_left:
+                    render_quiz_primary_panel()
+                with content_right:
+                    render_quiz_navigation_panel(
+                        questions=questions,
+                        current_index=current_index,
+                        total_questions=total_questions,
+                    )
+        else:
+            render_quiz_primary_panel()
 
 
 def inject_admin_dashboard_css() -> None:
     st.markdown(
         """
         <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
         :root {
             --primary-orange: #ff6b35;
             --bg-obsidian: #020617;
@@ -6403,10 +8826,11 @@ def inject_admin_dashboard_css() -> None:
             --text-white: #f8fafc;
             --border-glass: rgba(255, 255, 255, 0.08);
         }
-        * { font-family: 'Plus Jakarta Sans', sans-serif; }
         .stApp { background: radial-gradient(circle at 0% 100%, #1e293b, #020617); color: var(--text-white); }
-        header[data-testid="stHeader"],
-        [data-testid="stToolbar"],
+        header[data-testid="stHeader"] {
+            background: transparent !important;
+        }
+        [data-testid="stStatusWidget"],
         [data-testid="stDecoration"],
         .stDeployButton,
         #MainMenu,
@@ -6436,9 +8860,12 @@ def inject_admin_dashboard_css() -> None:
             border-radius: 0 10px 10px 0 !important;
             top: 10px !important;
         }
-        [data-testid="stSidebar"] {
+        section[data-testid="stSidebar"] {
             background-color: var(--sidebar-navy) !important;
             border-right: 1px solid var(--border-glass);
+        }
+        [data-testid="stSidebarUserContent"] {
+            background-color: var(--sidebar-navy) !important;
         }
         .admin-identity {
             background: linear-gradient(135deg, #ff6b35 0%, #f97316 100%);
@@ -6502,6 +8929,63 @@ def inject_admin_dashboard_css() -> None:
             transform: translateY(-1px) !important;
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 10px 24px rgba(255, 107, 53, 0.16) !important;
         }
+        @media (max-width: 900px) {
+            [data-testid="block-container"] {
+                padding: 0.75rem 0.9rem 4.5rem 0.9rem !important;
+            }
+            [data-testid="stSidebarCollapsedControl"] {
+                top: 12px !important;
+                min-width: 44px !important;
+                min-height: 44px !important;
+                border-radius: 12px !important;
+            }
+            [data-testid="stHorizontalBlock"] {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 0.85rem !important;
+            }
+            [data-testid="stHorizontalBlock"] > [data-testid="column"] {
+                width: 100% !important;
+                min-width: 0 !important;
+                flex: 1 1 100% !important;
+            }
+            [data-testid="stMarkdownContainer"] h1 {
+                font-size: clamp(2rem, 8vw, 2.6rem) !important;
+                line-height: 1.05 !important;
+            }
+            [data-testid="stMarkdownContainer"] h2 {
+                font-size: clamp(1.4rem, 6vw, 1.9rem) !important;
+                line-height: 1.15 !important;
+            }
+            [data-testid="stMarkdownContainer"] h3 {
+                font-size: clamp(1.1rem, 5vw, 1.5rem) !important;
+                line-height: 1.2 !important;
+            }
+            .admin-card {
+                padding: 18px !important;
+                border-radius: 20px !important;
+                overflow-wrap: anywhere;
+            }
+            .admin-card:hover {
+                transform: none;
+            }
+            .admin-identity {
+                padding: 18px;
+                border-radius: 18px;
+            }
+            .status-badge {
+                display: inline-block;
+            }
+            div.stButton > button {
+                min-height: 46px !important;
+            }
+            div.stButton > button[kind="primary"],
+            div.stButton > button[kind="secondary"] {
+                width: 100% !important;
+                min-width: 0 !important;
+                white-space: normal !important;
+            }
+        }
         </style>
         """,
         unsafe_allow_html=True,
@@ -6510,10 +8994,17 @@ def inject_admin_dashboard_css() -> None:
 
 def render_admin_dashboard() -> None:
     inject_admin_dashboard_css()
+    if st.session_state.get("post_login_mask_pending"):
+        inject_post_login_dashboard_mask()
+        st.session_state.post_login_mask_pending = False
+    ensure_dashboard_sidebar_open()
     user = st.session_state.current_user
-    scholar_users = load_users(include_admin=False)
-    all_users = load_users(include_admin=True)
-    scholar_count = len(scholar_users)
+    current_admin_nav = st.session_state.admin_nav
+    all_users: list[dict] = []
+    scholar_count = 0
+    if current_admin_nav in {"System Overview", "User Database"}:
+        all_users = load_users(include_admin=True)
+        scholar_count = sum(1 for account in all_users if account["role"] != "admin")
 
     with st.sidebar:
         render_sidebar_brand(
@@ -6541,7 +9032,7 @@ def render_admin_dashboard() -> None:
             "System Overview",
             use_container_width=True,
             key="admin_overview",
-            type="primary" if st.session_state.admin_nav == "System Overview" else "secondary",
+            type="primary" if current_admin_nav == "System Overview" else "secondary",
         ):
             st.session_state.admin_nav = "System Overview"
             st.rerun()
@@ -6549,7 +9040,7 @@ def render_admin_dashboard() -> None:
             "User Database",
             use_container_width=True,
             key="admin_users",
-            type="primary" if st.session_state.admin_nav == "User Database" else "secondary",
+            type="primary" if current_admin_nav == "User Database" else "secondary",
         ):
             st.session_state.admin_nav = "User Database"
             st.rerun()
@@ -6557,7 +9048,7 @@ def render_admin_dashboard() -> None:
             "API Settings",
             use_container_width=True,
             key="admin_api",
-            type="primary" if st.session_state.admin_nav == "API Settings" else "secondary",
+            type="primary" if current_admin_nav == "API Settings" else "secondary",
         ):
             st.session_state.admin_nav = "API Settings"
             st.rerun()
@@ -6565,7 +9056,7 @@ def render_admin_dashboard() -> None:
             "Audit Logs",
             use_container_width=True,
             key="admin_logs",
-            type="primary" if st.session_state.admin_nav == "Audit Logs" else "secondary",
+            type="primary" if current_admin_nav == "Audit Logs" else "secondary",
         ):
             st.session_state.admin_nav = "Audit Logs"
             st.rerun()
@@ -6579,7 +9070,7 @@ def render_admin_dashboard() -> None:
     head_col1, head_col2 = st.columns([3, 1])
     with head_col1:
         st.markdown(
-            f"<h1 style='color:white; font-size:42px; font-weight:800; margin-bottom:0;'>{st.session_state.admin_nav}</h1>",
+            f"<h1 style='color:white; font-size:42px; font-weight:800; margin-bottom:0;'>{current_admin_nav}</h1>",
             unsafe_allow_html=True,
         )
         st.markdown(
@@ -6598,7 +9089,7 @@ def render_admin_dashboard() -> None:
 
     st.write("##")
 
-    if st.session_state.admin_nav == "System Overview":
+    if current_admin_nav == "System Overview":
         usage_data = get_actual_usage()
         total_tokens = int(usage_data["Tokens"].sum())
         total_documents = get_total_document_count()
@@ -6646,7 +9137,7 @@ def render_admin_dashboard() -> None:
         st.plotly_chart(usage_fig, use_container_width=True, config={"displayModeBar": False})
         st.markdown("</div>", unsafe_allow_html=True)
 
-    elif st.session_state.admin_nav == "User Database":
+    elif current_admin_nav == "User Database":
         st.markdown('<div class="admin-card">', unsafe_allow_html=True)
         st.subheader("Registered Accounts")
         if all_users:
@@ -6673,7 +9164,6 @@ def render_admin_dashboard() -> None:
                     with row_history:
                         if st.button("View Activity", key=f"admin_user_activity_{account['id']}", use_container_width=True):
                             st.session_state.admin_selected_user_activity_id = int(account["id"])
-                            st.rerun()
                     with row_action:
                         st.caption("Protected")
                     with row_delete:
@@ -6739,9 +9229,14 @@ def render_admin_dashboard() -> None:
             st.info("No user records yet. New sign-ups will appear here automatically.")
         st.markdown("</div>", unsafe_allow_html=True)
 
-    elif st.session_state.admin_nav == "API Settings":
-        active_prompt = sync_system_prompt_state()
-        current_saved_email = load_gmail_sender_email_permanently()
+    elif current_admin_nav == "API Settings":
+        current_saved_api_key = load_key_permanently()
+        if current_saved_api_key and not st.session_state.get("saved_api_key"):
+            st.session_state.saved_api_key = current_saved_api_key
+        if not st.session_state.get("api_key_field"):
+            st.session_state.api_key_field = st.session_state.get("saved_api_key", "")
+        active_prompt = st.session_state.get("saved_system_prompt") or sync_system_prompt_state()
+        current_saved_email = st.session_state.get("saved_gmail_sender_email", "")
         current_saved_app_password = load_gmail_app_password_permanently()
         api_key_managed_by_env = bool(os.getenv(API_KEY_ENV, "").strip())
         gmail_password_managed_by_env = bool(os.getenv(GMAIL_APP_PASSWORD_ENV, "").replace(" ", "").strip())
@@ -6752,25 +9247,33 @@ def render_admin_dashboard() -> None:
         brain_col, prompt_col = st.columns([1, 1.2])
         with brain_col:
             st.markdown('<div class="admin-card" style="height:100%;">', unsafe_allow_html=True)
-            st.subheader("Neural Engine Config")
-            api_input = st.text_input(
-                "Enter API Key",
-                value=st.session_state.saved_api_key,
-                type="password",
-                key="api_key_field",
-            )
-            if api_key_managed_by_env:
-                st.caption(f"The active API key is currently managed by {API_KEY_ENV}.")
-            elif not plaintext_secret_storage_enabled:
-                st.caption(build_secret_storage_error(API_KEY_ENV))
-            if st.button("Save Config", key="save_api", use_container_width=True):
-                if api_input.strip():
+            with st.form("admin_api_key_form"):
+                st.subheader("Neural Engine Config")
+                api_input = st.text_input(
+                    "Enter API Key",
+                    key="api_key_field",
+                )
+                if api_key_managed_by_env:
+                    st.caption(f"The active API key is currently managed by {API_KEY_ENV}.")
+                elif st.session_state.get("saved_api_key") and not plaintext_secret_storage_enabled:
+                    st.caption(
+                        "Recovered the active API key from existing local storage. "
+                        f"Set {API_KEY_ENV} as an environment variable, or set "
+                        f"{ALLOW_INSECURE_SECRET_STORAGE_ENV}=true to update plaintext secret storage."
+                    )
+                elif not plaintext_secret_storage_enabled:
+                    st.caption(build_secret_storage_error(API_KEY_ENV))
+                save_api_clicked = st.form_submit_button("Save Config", key="save_api", use_container_width=True)
+            if save_api_clicked:
+                normalized_api_input = api_input.strip()
+                if normalized_api_input:
                     try:
-                        save_key_permanently(api_input)
+                        save_key_permanently(normalized_api_input)
                     except RuntimeError as error:
                         st.error(str(error))
                     else:
-                        st.session_state.saved_api_key = api_input.strip()
+                        st.session_state.saved_api_key = normalized_api_input
+                        st.session_state.api_key_field = normalized_api_input
                         log_system_activity(
                             actor_name=user["fullname"],
                             actor_role="admin",
@@ -6782,33 +9285,39 @@ def render_admin_dashboard() -> None:
                 else:
                     st.warning("Please enter an API key before saving.")
             st.write("")
-            st.subheader("Welcome Email Config")
-            gmail_sender_input = st.text_input(
-                "Sender Gmail Address",
-                key="gmail_sender_email_field",
-            )
-            gmail_password_input = st.text_input(
-                "Gmail App Password",
-                key="gmail_app_password_field",
-                type="password",
-                placeholder="Leave blank to keep the current saved password",
-            )
-            password_status = "Configured" if current_saved_app_password else "Not configured"
-            st.caption(
-                f"Current sender: {current_saved_email or 'Not configured'}"
-            )
-            if gmail_password_managed_by_env:
-                st.caption(
-                    f"Gmail app password: {password_status}. The active password is currently managed by {GMAIL_APP_PASSWORD_ENV}."
+            with st.form("admin_email_delivery_form"):
+                st.subheader("Welcome Email Config")
+                gmail_sender_input = st.text_input(
+                    "Sender Gmail Address",
+                    key="gmail_sender_email_field",
                 )
-            elif plaintext_secret_storage_enabled:
-                st.caption(
-                    "Gmail app password: "
-                    f"{password_status}. Environment variables override values saved here."
+                gmail_password_input = st.text_input(
+                    "Gmail App Password",
+                    key="gmail_app_password_field",
+                    type="password",
+                    placeholder="Leave blank to keep the current saved password",
                 )
-            else:
-                st.caption(build_secret_storage_error(GMAIL_APP_PASSWORD_ENV))
-            if st.button("Save Email Delivery", key="save_email_delivery", use_container_width=True):
+                password_status = "Configured" if current_saved_app_password else "Not configured"
+                st.caption(
+                    f"Current sender: {current_saved_email or 'Not configured'}"
+                )
+                if gmail_password_managed_by_env:
+                    st.caption(
+                        f"Gmail app password: {password_status}. The active password is currently managed by {GMAIL_APP_PASSWORD_ENV}."
+                    )
+                elif plaintext_secret_storage_enabled:
+                    st.caption(
+                        "Gmail app password: "
+                        f"{password_status}. Environment variables override values saved here."
+                    )
+                else:
+                    st.caption(build_secret_storage_error(GMAIL_APP_PASSWORD_ENV))
+                save_email_clicked = st.form_submit_button(
+                    "Save Email Delivery",
+                    key="save_email_delivery",
+                    use_container_width=True,
+                )
+            if save_email_clicked:
                 normalized_sender = gmail_sender_input.strip().lower()
                 normalized_password = gmail_password_input.replace(" ", "").strip()
                 password_to_store = normalized_password or current_saved_app_password
@@ -6840,18 +9349,26 @@ def render_admin_dashboard() -> None:
             st.markdown("</div>", unsafe_allow_html=True)
         with prompt_col:
             st.markdown('<div class="admin-card" style="height:100%;">', unsafe_allow_html=True)
-            st.subheader("Master System Prompt")
-            st.text_area(
-                "Instructions",
-                height=210,
-                key="system_prompt_field",
-                on_change=persist_system_prompt,
-            )
-            st.caption("This exact prompt is the one used for new reviewer and quiz generations. If the admin edits it here, the system adopts the new prompt automatically.")
-            st.caption(f"Active prompt length: {len(active_prompt)} characters")
+            with st.form("admin_system_prompt_form"):
+                st.subheader("Master System Prompt")
+                st.text_area(
+                    "Instructions",
+                    height=210,
+                    key="system_prompt_field",
+                )
+                st.caption("This exact prompt is the one used for new reviewer and quiz generations. If the admin edits it here, the system adopts the new prompt automatically.")
+                st.caption(f"Active prompt length: {len(active_prompt)} characters")
+                save_prompt_clicked = st.form_submit_button(
+                    "Save Prompt",
+                    key="save_system_prompt",
+                    use_container_width=True,
+                )
+            if save_prompt_clicked:
+                persist_system_prompt()
+                st.success("System prompt saved.")
             st.markdown("</div>", unsafe_allow_html=True)
 
-    elif st.session_state.admin_nav == "Audit Logs":
+    elif current_admin_nav == "Audit Logs":
         st.markdown('<div class="admin-card">', unsafe_allow_html=True)
         st.subheader("System Audit Trail")
         usage_data = get_actual_usage()
@@ -6875,16 +9392,16 @@ def render_admin_dashboard() -> None:
 
 
 def main() -> None:
+    init_session()
+    inject_fixed_dark_theme_css()
     try:
-        initialize_database()
+        ensure_runtime_ready()
     except RuntimeError as error:
         st.error(f"Startup configuration failed: {error}")
         st.stop()
     except mysql.connector.Error as error:
         st.error(f"Database connection failed: {error}")
         st.stop()
-
-    init_session()
 
     route = st.session_state.route
     current_user = st.session_state.current_user
